@@ -108,9 +108,12 @@
         width: 100%;
         background-color: var(--surface);
         flex-direction: column;
-        padding: 1rem;
+        padding: 1.5rem;
+        /* Increased padding */
         gap: 1.5rem;
         border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        /* Added shadow for better visibility */
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
         transition: clip-path 0.3s ease-in-out;
     }
@@ -119,13 +122,28 @@
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
+    .nav-link {
+        font-size: 1.1rem;
+        /* Larger font for easier tapping */
+        width: 100%;
+        display: block;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--surface-alt);
+    }
+
     .nav-actions {
         margin-left: 0;
         flex-direction: column;
         width: 100%;
+        gap: 1rem;
+        margin-top: 1rem;
     }
 
     .nav-actions button {
         width: 100%;
+        justify-content: center;
+        /* Center text in buttons */
+        padding: 0.8rem;
+        /* Larger touch target */
     }
 }
