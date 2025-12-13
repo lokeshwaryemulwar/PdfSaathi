@@ -32,8 +32,8 @@ app.use('/api/auth', require('./routes/auth'));
 const clientBuildPath = path.join(__dirname, '../client/dist');
 if (fs.existsSync(clientBuildPath)) {
     app.use(express.static(clientBuildPath));
-    app.get('*', (req, res) => {
-        // Don't intercept API routes
+    app.get(/(.*)/, (req, res) => {
+        // Don't intercept API routes (though they should be handled above)
         if (req.url.startsWith('/api')) return res.status(404).json({ error: 'API route not found' });
         res.sendFile(path.join(clientBuildPath, 'index.html'));
     });
