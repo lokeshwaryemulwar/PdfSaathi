@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../layout/SEO';
 import API_BASE_URL from '../../config';
 import { ArrowLeft, Download, AlertCircle, FileText, CheckCircle, RotateCw, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -212,6 +213,11 @@ const GenericTool = ({
 
     return (
         <div className="container tool-page">
+            <SEO
+                title={title}
+                description={description}
+                url={`https://pdfsaathi.in/tools/${endpoint}`}
+            />
             <div className="tool-header">
                 <Button variant="ghost" onClick={() => navigate('/tools')} className="back-btn">
                     <ArrowLeft size={20} /> Back to Tools
