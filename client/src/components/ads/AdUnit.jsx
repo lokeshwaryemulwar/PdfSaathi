@@ -14,7 +14,7 @@ const AdUnit = ({ slot, format = 'auto', responsive = 'true', style = {} }) => {
             <span style={{ display: 'block', fontSize: '10px', color: '#ccc', marginBottom: '5px' }}>Advertisement</span>
             <ins className="adsbygoogle"
                 style={{ display: 'block' }}
-                data-ad-client="ca-pub-YOUR_PUBLISHER_ID" // REPLACE THIS LATER
+                data-ad-client="ca-pub-3315474783468485"
                 data-ad-slot={slot}
                 data-ad-format={format}
                 data-full-width-responsive={responsive}>
