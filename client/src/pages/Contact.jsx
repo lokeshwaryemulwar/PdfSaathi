@@ -4,6 +4,7 @@ import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import './ContentPage.css';
 import ContactAnimation from '../components/contact/ContactAnimation';
+import SEO from '../components/layout/SEO';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -14,6 +15,13 @@ const Contact = () => {
     });
     const [status, setStatus] = useState({ type: '', message: '' });
     const [loading, setLoading] = useState(false);
+
+    const contactSchema = {
+        "@type": "ContactPage",
+        "name": "Contact PDF Saathi",
+        "description": "Contact support for PDF Saathi PDF tools.",
+        "url": "https://pdfsaathi.in/contact"
+    };
 
     const handleChange = (e) => {
         setFormData({
@@ -51,6 +59,12 @@ const Contact = () => {
 
     return (
         <div className="container content-page">
+            <SEO
+                title="Contact Us"
+                description="Have questions? Contact PDF Saathi support team."
+                url="https://pdfsaathi.in/contact"
+                schema={contactSchema}
+            />
             <section className="contact-hero">
                 <h1 className="page-title">How can we help you?</h1>
                 <p className="page-subtitle">

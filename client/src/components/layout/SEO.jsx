@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-export default function SEO({ title, description, url = 'https://pdfsaathi.in', breadcrumbs = null }) {
+export default function SEO({ title, description, url = 'https://pdfsaathi.in', breadcrumbs = null, schema = null }) {
     const siteTitle = 'PDF Saathi - Free PDF Converter & Editor';
     const finalTitle = title ? `${title} | PDF Saathi` : siteTitle;
     const finalDescription = description || 'Free online PDF tools to merge, split, compress, and convert PDF files. Easy, fast, and secure.';
@@ -37,7 +37,9 @@ export default function SEO({ title, description, url = 'https://pdfsaathi.in', 
                                 "name": item.name,
                                 "item": item.url
                             }))
-                        } : null
+                        } : null,
+                        // Custom Schema (e.g., AboutPage, ContactPage)
+                        schema || null
                     ].filter(Boolean)
                 })}
             </script>

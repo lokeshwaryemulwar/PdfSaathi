@@ -2,9 +2,24 @@ import React from 'react';
 import AboutAnimation from '../components/about/AboutAnimation';
 import './ContentPage.css';
 
+import SEO from '../components/layout/SEO';
+
 const About = () => {
+    const aboutSchema = {
+        "@type": "AboutPage",
+        "name": "About PDF Saathi",
+        "description": "Information about PDF Saathi, its mission, and its creator.",
+        "url": "https://pdfsaathi.in/about"
+    };
+
     return (
         <div className="container content-page">
+            <SEO
+                title="About Us"
+                description="Learn about PDF Saathi's mission makes document tools accessible for everyone."
+                url="https://pdfsaathi.in/about"
+                schema={aboutSchema}
+            />
             <section className="about-hero">
                 <h1 className="page-title">Making document tools accessible for everyone.</h1>
                 <p className="page-subtitle">
