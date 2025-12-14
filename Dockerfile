@@ -1,7 +1,10 @@
 FROM node:18-slim
 
 # Install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-pip && apt-get clean && ln -s /usr/bin/python3 /usr/bin/python
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip libreoffice default-jre libgl1 && \
+    apt-get clean && \
+    ln -s /usr/bin/python3 /usr/bin/python
 
 WORKDIR /app
 

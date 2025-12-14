@@ -1,3 +1,7 @@
 pdfplumber
 pandas
 openpyxl
+pypdf
+pdf2docx
+opencv-python-headless
+Pillow
