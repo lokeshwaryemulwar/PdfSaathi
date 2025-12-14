@@ -5,6 +5,7 @@ import Benefits from '../components/home/Benefits';
 import CoreValues from '../components/home/CoreValues';
 import CallToAction from '../components/home/CallToAction';
 import SEO from '../components/layout/SEO';
+import AdUnit from '../components/ads/AdUnit';
 
 const Home = () => {
     return (
@@ -23,6 +24,11 @@ const Home = () => {
                         Everything you need to be productive with your documents.
                     </p>
                     <FeatureGrid limit={12} /> {/* Show top 12 or all */}
+
+                    {/* Homepage Ad Banner */}
+                    <div style={{ maxWidth: '728px', margin: '0 auto' }}>
+                        <AdUnit slot="1234567890" style={{ marginBottom: '2rem' }} />
+                    </div>
                 </div>
             </div>
             <Benefits />
