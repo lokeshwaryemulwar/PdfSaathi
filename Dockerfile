@@ -14,7 +14,7 @@ COPY client/package*.json ./client/
 
 # Install Node dependencies
 RUN cd server && npm install
-RUN cd client && npm install
+RUN cd client && npm install --legacy-peer-deps
 
 # Copy Python requirements and install
 COPY server/requirements.txt ./server/
