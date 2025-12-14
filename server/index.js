@@ -25,6 +25,7 @@ require('./database');
 app.use('/api', mergeRoutes);
 app.use('/api', require('./routes/toolRoutes'));
 app.use('/api/admin', require('./routes/admin'));
+app.get('/health', (req, res) => res.status(200).send('OK'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/auth', require('./routes/auth'));
 
