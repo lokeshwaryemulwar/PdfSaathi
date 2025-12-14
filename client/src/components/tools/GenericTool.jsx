@@ -362,15 +362,17 @@ const GenericTool = ({
                             isLoading={isProcessing}
                         >
                             {isProcessing ? processingLabel : actionLabel}
-                )}
+                        </Button>
                     </div>
+                )}
+            </div>
 
             {/* Tool Page Ad Banner */}
-                <div style={{ marginTop: '3rem', maxWidth: '100%', overflow: 'hidden' }}>
-                    <AdUnit slot="0987654321" style={{ marginBottom: '1rem' }} />
-                </div>
+            <div style={{ marginTop: '3rem', maxWidth: '100%', overflow: 'hidden' }}>
+                <AdUnit slot="0987654321" style={{ marginBottom: '1rem' }} />
             </div>
-            );
+        </div>
+    );
 };
 
-            export default GenericTool;
+export default GenericTool;
