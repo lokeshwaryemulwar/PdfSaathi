@@ -32,6 +32,14 @@ app.use('/api/auth', require('./routes/auth'));
 const clientBuildPath = path.join(__dirname, '../client/dist');
 if (fs.existsSync(clientBuildPath)) {
     app.use(express.static(clientBuildPath));
+
+    // SEO Files - Explicit serving
+    app.get('/sitemap.xml', (req, res) => {
+        res.sendFile(path.join(clientBuildPath, 'sitemap.xml'));
+    });
+    app.get('/robots.txt', (req, res) => {
+        res.sendFile(path.join(clientBuildPath, 'robots.txt'));
+    });
     app.get(/(.*)/, (req, res) => {
         // Don't intercept API routes (though they should be handled above)
         if (req.url.startsWith('/api')) return res.status(404).json({ error: 'API route not found' });

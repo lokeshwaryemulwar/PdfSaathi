@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-export default function SEO({ title, description, url = 'https://pdfsaathi.in' }) {
+export default function SEO({ title, description, url = 'https://pdfsaathi.in', breadcrumbs = null }) {
     const siteTitle = 'PDF Saathi - Free PDF Converter & Editor';
     const finalTitle = title ? `${title} | PDF Saathi` : siteTitle;
     const finalDescription = description || 'Free online PDF tools to merge, split, compress, and convert PDF files. Easy, fast, and secure.';
@@ -22,6 +22,45 @@ export default function SEO({ title, description, url = 'https://pdfsaathi.in' }
             <meta property="twitter:url" content={url} />
             <meta property="twitter:title" content={finalTitle} />
             <meta property="twitter:description" content={finalDescription} />
+
+            {/* Structured Data (JSON-LD) for Google Sitelinks */}
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "WebSite",
+                            "name": "PDF Saathi",
+                            "url": "https://pdfsaathi.in",
+                            "potentialAction": {
+                                "@type": "SearchAction",
+                                "target": "https://pdfsaathi.in/tools?q={search_term_string}",
+                                "query-input": "required name=search_term_string"
+                            }
+                        },
+                        {
+                            "@type": "Organization",
+                            "name": "PDF Saathi",
+                            "url": "https://pdfsaathi.in",
+                            "logo": "https://pdfsaathi.in/logo.png",
+                            "sameAs": [
+                                "https://twitter.com/pdfsaathi",
+                                "https://facebook.com/pdfsaathi"
+                            ]
+                        },
+                        // Breadcrumb Schema
+                        breadcrumbs ? {
+                            "@type": "BreadcrumbList",
+                            "itemListElement": breadcrumbs.map((item, index) => ({
+                                "@type": "ListItem",
+                                "position": index + 1,
+                                "name": item.name,
+                                "item": item.url
+                            }))
+                        } : null
+                    ].filter(Boolean)
+                })}
+            </script>
         </Helmet>
     );
 }
