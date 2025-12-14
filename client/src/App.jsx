@@ -21,9 +21,12 @@ import { tools } from './data/tools';
 
 const NotFound = () => <div className="container" style={{ padding: '2rem', textAlign: 'center' }}><h1>404 - Page Not Found</h1></div>;
 
+import ScrollToTop from './components/layout/ScrollToTop';
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <CookieBanner />
       <Routes>
         <Route path="/" element={<Layout />}>

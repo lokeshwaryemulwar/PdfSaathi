@@ -74,7 +74,8 @@ export const tools = [
         icon: FileImage,
         path: '/jpg-to-pdf',
         color: '#F59E0B', // Amber
-        category: 'convert-to'
+        category: 'convert-to',
+        accept: 'image/*'
     },
     {
         id: 'html-to-pdf',
