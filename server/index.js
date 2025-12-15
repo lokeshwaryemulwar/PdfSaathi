@@ -5,6 +5,7 @@ const path = require('path');
 const mergeRoutes = require('./routes/mergeRoutes');
 
 const app = express();
+app.disable('x-powered-by'); // Hide X-Powered-By header for security
 const PORT = process.env.PORT || 3000;
 
 // Middleware
