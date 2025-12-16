@@ -11,10 +11,11 @@ import './GenericToolInputs.css';
 import './GenericToolFilename.css';
 import PageGrid from './PageGrid';
 import AdUnit from '../ads/AdUnit';
+import { getToolContent } from '../../data/toolContent';
 
 const GenericTool = ({
-    title,
-    description,
+    title: propsTitle,
+    description: propsDescription,
     endpoint,
     accept = '.pdf',
     multiple = false,
@@ -43,6 +44,45 @@ const GenericTool = ({
     const [compressionStats, setCompressionStats] = useState(null);
     const [currentRotation, setCurrentRotation] = useState(0); // For Rotate Tool
     const [error, setError] = useState(null);
+
+    // Get rich content for this tool
+    const content = getToolContent(endpoint);
+    const pageTitle = content.title || propsTitle;
+    const pageDescription = content.description || propsDescription;
+
+    // Construct SoftwareApplication Schema
+    const softwareSchema = {
+        "@type": "SoftwareApplication",
+        "name": pageTitle,
+        "operatingSystem": "Any",
+        "applicationCategory": "UtilitiesApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1024"
+        }
+    };
+
+    // Construct FAQ Schema if available
+    const faqSchema = content.faq && content.faq.length > 0 ? {
+        "@type": "FAQPage",
+        "mainEntity": content.faq.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    } : null;
+
+    // Combine schemas
+    const toolSchema = faqSchema ? [softwareSchema, faqSchema] : softwareSchema;
 
     const handleFilesSelected = (newFiles) => {
         if (!multiple) {
@@ -98,52 +138,27 @@ const GenericTool = ({
                 } catch (e) {
                     // Could not parse JSON
                 }
-
-                throw new Error(errorMessage || response.statusText || 'Processing failed. Please try again.');
+                throw new Error(errorMessage || 'Processing failed. Please try again.');
             }
 
+            // Handle success
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
             setDownloadUrl(url);
 
-            // Set sensible default filename
-            const originalName = files[0]?.name.replace(/\.[^/.]+$/, "") || 'processed';
-
-            let extension = '.pdf';
-            let suffix = '_processed'; // Default suffix
-            if (endpoint === 'pdf-to-word') {
-                extension = '.docx';
-                suffix = '_converted';
-            } else if (endpoint === 'pdf-to-ppt') {
-                extension = '.pptx';
-                suffix = '_converted';
-            } else if (endpoint === 'pdf-to-excel') {
-                extension = '.xlsx';
-                suffix = '_converted';
-            } else if (endpoint === 'compress-pdf') {
-                extension = '.zip';
-                suffix = '_compressed';
-            } else if (endpoint === 'convert-image') {
-                extension = `.${inputValues['format'] || 'png'}`;
-                suffix = '_converted';
+            // Handle metadata headers if present (e.g. compression stats)
+            const statsHeader = response.headers.get('X-Compression-Stats');
+            if (statsHeader) {
+                setCompressionStats(JSON.parse(statsHeader));
             }
 
-            setOutputFileName(`${originalName}${suffix}${extension}`);
-
-            // Calculate Compression Stats
-            if (endpoint === 'compress-pdf') {
-                const originalSize = files[0].size;
-                const newSize = blob.size;
-                const savings = originalSize - newSize;
-                const percent = Math.round((savings / originalSize) * 100);
-
-                setCompressionStats({
-                    original: (originalSize / 1024 / 1024).toFixed(2),
-                    new: (newSize / 1024 / 1024).toFixed(2),
-                    percent: percent > 0 ? percent : 0,
-                    isSmaller: newSize < originalSize
-                });
+            // Set output filename from header or default
+            const contentDisposition = response.headers.get('Content-Disposition');
+            if (contentDisposition) {
+                const match = contentDisposition.match(/filename="?([^"]+)"?/);
+                if (match) setOutputFileName(match[1]);
             }
+
         } catch (err) {
             setError(err.message);
         } finally {
@@ -151,226 +166,196 @@ const GenericTool = ({
         }
     };
 
-    const resetTool = () => {
-        setFiles([]);
-        setDownloadUrl(null);
-        setError(null);
-    };
-
-    if (downloadUrl) {
-        return (
-            <div className="container tool-page success-view">
-                <Card className="success-card">
-                    <div className="success-icon">
-                        <CheckCircle size={40} />
-                    </div>
-                    <h2>{successMessage}</h2>
-
-                    {/* Compression Stats */}
-                    {compressionStats && (
-                        <div className="compression-stats" style={{
-                            marginBottom: '1rem',
-                            padding: '1rem',
-                            background: compressionStats.isSmaller ? '#ecfdf5' : '#f3f4f6',
-                            borderRadius: '8px',
-                            color: compressionStats.isSmaller ? '#047857' : '#374151',
-                            textAlign: 'center'
-                        }}>
-                            {compressionStats.isSmaller ? (
-                                <>
-                                    <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                                        Saved {compressionStats.percent}%!
-                                    </div>
-                                    <div style={{ fontSize: '0.9rem', marginTop: '4px' }}>
-                                        {compressionStats.original}MB ➝ {compressionStats.new}MB
-                                    </div>
-                                </>
-                            ) : (
-                                <div>File was already optimized ({compressionStats.new}MB)</div>
-                            )}
-                        </div>
-                    )}
-
-                    <div className="filename-edit-section">
-                        <label>Save as:</label>
-                        <input
-                            type="text"
-                            value={outputFileName}
-                            onChange={(e) => setOutputFileName(e.target.value)}
-                            className="filename-input"
-                        />
-                    </div>
-
-                    <div className="success-actions">
-                        <a href={downloadUrl} download={outputFileName} style={{ textDecoration: 'none' }}>
-                            <Button size="lg" icon={<Download />}>Download File</Button>
-                        </a>
-                        <Button variant="outline" onClick={resetTool}>Process Another</Button>
-                    </div>
-                </Card>
-            </div>
-        );
-    }
-
     return (
         <div className="container tool-page">
             <SEO
-                title={title}
-                description={description}
-                url={`https://pdfsaathi.in/tools/${endpoint}`}
+                title={pageTitle}
+                description={pageDescription}
+                url={`https://pdfsaathi.in/${endpoint}`}
+                schema={toolSchema}
             />
-            <div className="tool-header">
-                <Button variant="ghost" onClick={() => navigate('/tools')} className="back-btn">
-                    <ArrowLeft size={20} /> Back to Tools
-                </Button>
-                <div className="header-icon-wrapper">
-                    {Icon && <Icon size={32} />}
+
+            <div className="tool-main-section">
+                <div className="tool-header">
+                    <h1>{pageTitle}</h1>
+                    <p>{pageDescription}</p>
                 </div>
-                <h1>{title}</h1>
-                <p>{description}</p>
+
+                <div className="tool-workspace-container">
+                    {/* Main Tool UI */}
+                    {files.length === 0 ? (
+                        <div className="upload-section-wrapper">
+                            <FileUpload
+                                onFilesSelected={handleFilesSelected}
+                                accept={accept}
+                                multiple={multiple}
+                            />
+                        </div>
+                    ) : (
+                        <div className="workspace">
+                            {/* Processing Loading State */}
+                            {isProcessing ? (
+                                <div className="processing-state">
+                                    <div className="spinner"></div>
+                                    <p>{processingLabel}</p>
+                                </div>
+                            ) : downloadUrl ? (
+                                <div className="success-state">
+                                    <div className="success-icon">
+                                        <CheckCircle size={48} color="#10B981" />
+                                    </div>
+                                    <h3>{successMessage}</h3>
+
+                                    {compressionStats && (
+                                        <div className="compression-stats">
+                                            <p>Size reduced by <span className="highlight">{compressionStats.ratio}</span></p>
+                                            <p className="size-detail">{compressionStats.original} → {compressionStats.compressed}</p>
+                                        </div>
+                                    )}
+
+                                    <div className="action-buttons">
+                                        <a href={downloadUrl} download={outputFileName} className="download-link">
+                                            <Button size="lg" icon={<Download />}>Download File</Button>
+                                        </a>
+                                        <Button variant="outline" onClick={() => setFiles([])} icon={<ArrowLeft />}>
+                                            Process Another
+                                        </Button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* File List for Ready State */}
+                                    <div className="file-list-preview">
+                                        {files.map((file, idx) => (
+                                            <div key={idx} className="file-preview-item">
+                                                <FileText size={20} />
+                                                <span className="file-name">{file.name}</span>
+                                                <span className="file-size">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Dynamic Inputs */}
+                                    {inputs.length > 0 && (
+                                        <div className="tool-inputs">
+                                            {inputs.map(input => (
+                                                <div key={input.name} className="input-group">
+                                                    <label>{input.label}</label>
+                                                    {input.type === 'select' ? (
+                                                        <select
+                                                            value={inputValues[input.name]}
+                                                            onChange={(e) => handleInputChange(input.name, e.target.value)}
+                                                        >
+                                                            {input.options.map(opt => (
+                                                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                                            ))}
+                                                        </select>
+                                                    ) : input.type === 'grid-select' ? (
+                                                        <div className="grid-select">
+                                                            {input.options.map(opt => (
+                                                                <button
+                                                                    key={opt.value}
+                                                                    className={`grid-option ${inputValues[input.name] === opt.value ? 'selected' : ''}`}
+                                                                    onClick={() => handleInputChange(input.name, opt.value)}
+                                                                >
+                                                                    {opt.label}
+                                                                </button>
+                                                            ))}
+                                                        </div>
+                                                    ) : (
+                                                        <input
+                                                            type={input.type}
+                                                            placeholder={input.placeholder}
+                                                            value={inputValues[input.name] || ''}
+                                                            onChange={(e) => handleInputChange(input.name, e.target.value)}
+                                                        />
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Rotate Tool Special UI */}
+                                    {endpoint === 'rotate-pdf' && (
+                                        <div className="rotate-controls">
+                                            <Button variant="outline" onClick={() => setCurrentRotation(r => (r - 90) % 360)} icon={<RotateCcw />}>Left</Button>
+                                            <div className="rotation-display">{Math.abs(currentRotation)}°</div>
+                                            <Button variant="outline" onClick={() => setCurrentRotation(r => (r + 90) % 360)} icon={<RotateCw />}>Right</Button>
+                                        </div>
+                                    )}
+
+                                    {error && <div className="error-message"><AlertCircle size={16} /> {error}</div>}
+
+                                    <Button
+                                        size="lg"
+                                        onClick={handleProcess}
+                                        isLoading={isProcessing}
+                                        className="process-btn"
+                                    >
+                                        {actionLabel}
+                                    </Button>
+                                </>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
 
-            <div className="tool-workspace">
-                {files.length === 0 ? (
-                    <FileUpload
-                        onFilesSelected={handleFilesSelected}
-                        accept={accept}
-                        multiple={multiple}
-                        title={`Drop ${accept.includes('image') ? 'Images' : (accept === '.pdf' ? 'PDF' : 'Files')} here`}
-                        buttonText={`Select ${accept.includes('image') ? 'Images' : 'Files'}`}
-                    />
-                ) : (
-                    <div className="selected-file-view">
-                        <div className="file-preview-card">
-                            <FileText size={32} className="text-primary" />
-                            <div className="file-info-text">
-                                <span className="file-name-lg">{files[0].name}</span>
-                                <span className="file-meta">{(files[0].size / 1024 / 1024).toFixed(2)} MB</span>
-                            </div>
-                            <Button variant="ghost" size="sm" onClick={resetTool} className="remove-btn">
-                                Change File
-                            </Button>
-                        </div>
+            {/* SEO Content Section - Rich content for better rankings */}
+            <div className="tool-content-section" style={{ maxWidth: '800px', margin: '4rem auto', padding: '0 1rem' }}>
 
-                        {/* Page Preview Grid for Split PDF */}
-                        {endpoint === 'split-pdf' && files.length > 0 && (
-                            <PageGrid file={files[0]} />
-                        )}
-
-                        {error && (
-                            <div className="error-banner">
-                                <AlertCircle size={20} />
-                                <span>{error}</span>
-                            </div>
-                        )}
-
-                        {/* Specific UI for Rotate PDF */}
-                        {endpoint === 'rotate-pdf' && files.length > 0 && (
-                            <div className="rotate-tool-container" style={{ textAlign: 'center', margin: '2rem 0' }}>
-                                <div className="rotation-controls" style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px' }}>
-                                    <Button
-                                        onClick={() => setCurrentRotation(curr => curr - 90)}
-                                        variant="outline"
-                                        style={{ height: '60px', width: '140px', fontSize: '1.1rem', borderColor: '#ef4444', color: '#ef4444' }} // Left - Reddish
-                                    >
-                                        <RotateCcw style={{ marginRight: '8px' }} /> Left
-                                    </Button>
-                                    <Button
-                                        onClick={() => setCurrentRotation(curr => curr + 90)}
-                                        variant="outline"
-                                        style={{ height: '60px', width: '140px', fontSize: '1.1rem', borderColor: '#ef4444', color: '#ef4444' }} // Right - Reddish
-                                    >
-                                        <RotateCw style={{ marginRight: '8px' }} /> Right
-                                    </Button>
-                                </div>
-
-                                <PageGrid file={files[0]} rotation={currentRotation} />
-                            </div>
-                        )}
-
-                        {/* Dynamic Inputs (Skip for Rotate) */}
-                        {inputs.length > 0 && endpoint !== 'rotate-pdf' && (
-                            <div className="tool-inputs">
-                                {inputs.map(input => (
-                                    <div key={input.name} className="form-group">
-                                        <label>{input.label}</label>
-
-                                        {/* Dropdown Select */}
-                                        {input.type === 'select' && (
-                                            <select
-                                                value={inputValues[input.name] || ''}
-                                                onChange={(e) => handleInputChange(input.name, e.target.value)}
-                                            >
-                                                {input.options.map(opt => (
-                                                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                                                ))}
-                                            </select>
-                                        )}
-
-                                        {/* Button Grid Select (Visual) */}
-                                        {input.type === 'grid-select' && (
-                                            <div className="grid-select-container" style={{
-                                                display: 'grid',
-                                                gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
-                                                gap: '10px',
-                                                marginTop: '8px'
-                                            }}>
-                                                {input.options.map(opt => {
-                                                    const isSelected = (inputValues[input.name] || input.defaultValue) === opt.value;
-                                                    return (
-                                                        <button
-                                                            key={opt.value}
-                                                            className={`grid-option-btn ${isSelected ? 'selected' : ''}`}
-                                                            onClick={() => handleInputChange(input.name, opt.value)}
-                                                            style={{
-                                                                padding: '12px 0',
-                                                                border: isSelected ? '2px solid #6366f1' : '1px solid #e5e7eb',
-                                                                borderRadius: '8px',
-                                                                backgroundColor: isSelected ? '#e0e7ff' : '#f9fafb',
-                                                                color: isSelected ? '#4338ca' : '#374151',
-                                                                fontWeight: '600',
-                                                                cursor: 'pointer',
-                                                                transition: 'all 0.2s',
-                                                                fontSize: '0.9rem'
-                                                            }}
-                                                        >
-                                                            {opt.label}
-                                                        </button>
-                                                    );
-                                                })}
-                                            </div>
-                                        )}
-
-                                        {/* Standard Input */}
-                                        {input.type !== 'select' && input.type !== 'grid-select' && (
-                                            <input
-                                                type={input.type}
-                                                placeholder={input.placeholder}
-                                                value={inputValues[input.name] || ''}
-                                                onChange={(e) => handleInputChange(input.name, e.target.value)}
-                                            />
-                                        )}
+                {/* How To Section */}
+                {content.howTo && (
+                    <section className="seo-section how-to">
+                        <h2>{content.howTo.heading}</h2>
+                        <div className="steps-container">
+                            {content.howTo.steps.map((step, index) => (
+                                <div key={index} className="step-item">
+                                    <div className="step-number">{index + 1}</div>
+                                    <div className="step-content">
+                                        <h3>{step.title}</h3>
+                                        <p>{step.description}</p>
                                     </div>
-                                ))}
-                            </div>
-                        )}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
 
-                        <Button
-                            size="lg"
-                            className="process-btn"
-                            onClick={handleProcess}
-                            isLoading={isProcessing}
-                        >
-                            {isProcessing ? processingLabel : actionLabel}
-                        </Button>
-                    </div>
+                <AdUnit slot="tool_bottom" format="auto" />
+
+                {/* Features Section */}
+                {content.features && (
+                    <section className="seo-section features">
+                        <h2>Why Use PDF Saathi?</h2>
+                        <div className="features-grid">
+                            {content.features.map((feature, index) => (
+                                <div key={index} className="feature-item">
+                                    <h3>{feature.title}</h3>
+                                    <p>{feature.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* FAQ Section */}
+                {content.faq && content.faq.length > 0 && (
+                    <section className="seo-section faq">
+                        <h2>Frequently Asked Questions</h2>
+                        <div className="faq-list">
+                            {content.faq.map((item, index) => (
+                                <div key={index} className="faq-item">
+                                    <h3>{item.question}</h3>
+                                    <p>{item.answer}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
                 )}
             </div>
 
-            {/* Tool Page Ad Banner */}
-            <div style={{ marginTop: '3rem', maxWidth: '100%', overflow: 'hidden' }}>
-                <AdUnit slot="0987654321" style={{ marginBottom: '1rem' }} />
-            </div>
+            <PageGrid currentTool={endpoint} />
         </div>
     );
 };

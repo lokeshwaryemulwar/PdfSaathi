@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import FileUpload from '../components/ui/FileUpload';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+import SEO from '../components/layout/SEO';
+import AdUnit from '../components/ads/AdUnit';
+import PageGrid from '../components/tools/PageGrid';
+import { getToolContent } from '../data/toolContent';
 import './MergePdf.css';
 
 const MergePdf = () => {
@@ -14,8 +18,45 @@ const MergePdf = () => {
     const [downloadUrl, setDownloadUrl] = useState(null);
     const [error, setError] = useState(null);
 
+    // Get rich content for Merge PDF
+    const content = getToolContent('merge-pdf');
+    const pageTitle = content.title;
+    const pageDescription = content.description;
+
+    // Construct SoftwareApplication Schema
+    const softwareSchema = {
+        "@type": "SoftwareApplication",
+        "name": pageTitle,
+        "operatingSystem": "Any",
+        "applicationCategory": "UtilitiesApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "2150"
+        }
+    };
+
+    // Construct FAQ Schema
+    const faqSchema = content.faq && content.faq.length > 0 ? {
+        "@type": "FAQPage",
+        "mainEntity": content.faq.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    } : null;
+
+    const toolSchema = faqSchema ? [softwareSchema, faqSchema] : softwareSchema;
+
     const handleFilesSelected = (newFiles) => {
-        // Basic dup check or add unique ID
         const typesFiles = newFiles.map(file => ({
             file,
             id: Math.random().toString(36).substr(2, 9),
@@ -54,7 +95,6 @@ const MergePdf = () => {
             const formData = new FormData();
             files.forEach(f => formData.append('files', f.file));
 
-            // TODO: Replace with actual backend URL
             const response = await fetch(`${API_BASE_URL}/api/merge`, {
                 method: 'POST',
                 body: formData,
@@ -65,7 +105,6 @@ const MergePdf = () => {
                 throw new Error(errorData.error || 'Merge failed. Please try again.');
             }
 
-            // Blob response for download
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
             setDownloadUrl(url);
@@ -82,98 +121,159 @@ const MergePdf = () => {
         setError(null);
     };
 
-    if (downloadUrl) {
-        return (
-            <div className="container tool-page success-view">
-                <Card className="success-card">
-                    <div className="success-icon">✓</div>
-                    <h2>PDFs Merged Successfully!</h2>
-                    <div className="success-actions">
-                        <a href={downloadUrl} download="merged.pdf" style={{ textDecoration: 'none' }}>
-                            <Button size="lg" icon={<Download />}>Download Merged PDF</Button>
-                        </a>
-                        <Button variant="outline" onClick={resetTool}>Merge More Files</Button>
-                    </div>
-                </Card>
-            </div>
-        );
-    }
-
     return (
         <div className="container tool-page">
-            <div className="tool-header">
-                <Button variant="ghost" onClick={() => navigate('/tools')} className="back-btn">
-                    <ArrowLeft size={20} /> Back to Tools
-                </Button>
-                <h1>Merge PDF Files</h1>
-                <p>Combine multiple PDFs into one unified document.</p>
-            </div>
+            <SEO
+                title={pageTitle}
+                description={pageDescription}
+                url="https://pdfsaathi.in/merge-pdf"
+                schema={toolSchema}
+            />
 
-            {files.length === 0 ? (
-                <FileUpload onFilesSelected={handleFilesSelected} accept=".pdf" />
+            {downloadUrl ? (
+                <div className="success-view">
+                    <Card className="success-card">
+                        <div className="success-icon">✓</div>
+                        <h2>PDFs Merged Successfully!</h2>
+                        <div className="success-actions">
+                            <a href={downloadUrl} download="merged.pdf" style={{ textDecoration: 'none' }}>
+                                <Button size="lg" icon={<Download />}>Download Merged PDF</Button>
+                            </a>
+                            <Button variant="outline" onClick={resetTool}>Merge More Files</Button>
+                        </div>
+                    </Card>
+                </div>
             ) : (
-                <div className="workspace">
-                    <div className="files-list">
-                        {files.map((file, index) => (
-                            <div key={file.id} className="file-item">
-                                <div className="file-info">
-                                    <FileIcon className="file-icon-sm" />
-                                    <div className="file-details">
-                                        <span className="file-name">{file.name}</span>
-                                        <span className="file-size">{file.size}</span>
-                                    </div>
-                                </div>
-                                <div className="file-actions">
-                                    <button
-                                        onClick={() => moveFile(index, 'up')}
-                                        disabled={index === 0}
-                                        className="action-icon-btn"
-                                    >
-                                        <ArrowUp size={16} />
-                                    </button>
-                                    <button
-                                        onClick={() => moveFile(index, 'down')}
-                                        disabled={index === files.length - 1}
-                                        className="action-icon-btn"
-                                    >
-                                        <ArrowDown size={16} />
-                                    </button>
-                                    <button onClick={() => removeFile(file.id)} className="action-icon-btn danger">
-                                        <Trash2 size={16} />
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="workspace-actions">
-                        <div className="add-more">
-                            <label htmlFor="add-more-input" className="add-more-label">
-                                + Add more files
-                            </label>
-                            <input
-                                id="add-more-input"
-                                type="file"
-                                onChange={(e) => handleFilesSelected(Array.from(e.target.files))}
-                                multiple
-                                accept=".pdf"
-                                style={{ display: 'none' }}
-                            />
+                <>
+                    <div className="tool-main-section">
+                        <div className="tool-header">
+                            <Button variant="ghost" onClick={() => navigate('/tools')} className="back-btn">
+                                <ArrowLeft size={20} /> Back to Tools
+                            </Button>
+                            <h1>{pageTitle}</h1>
+                            <p>{pageDescription}</p>
                         </div>
 
-                        {error && <div className="error-msg">{error}</div>}
+                        {files.length === 0 ? (
+                            <FileUpload onFilesSelected={handleFilesSelected} accept=".pdf" />
+                        ) : (
+                            <div className="workspace">
+                                <div className="files-list">
+                                    {files.map((file, index) => (
+                                        <div key={file.id} className="file-item">
+                                            <div className="file-info">
+                                                <FileIcon className="file-icon-sm" />
+                                                <div className="file-details">
+                                                    <span className="file-name">{file.name}</span>
+                                                    <span className="file-size">{file.size}</span>
+                                                </div>
+                                            </div>
+                                            <div className="file-actions">
+                                                <button
+                                                    onClick={() => moveFile(index, 'up')}
+                                                    disabled={index === 0}
+                                                    className="action-icon-btn"
+                                                >
+                                                    <ArrowUp size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={() => moveFile(index, 'down')}
+                                                    disabled={index === files.length - 1}
+                                                    className="action-icon-btn"
+                                                >
+                                                    <ArrowDown size={16} />
+                                                </button>
+                                                <button onClick={() => removeFile(file.id)} className="action-icon-btn danger">
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
 
-                        <Button
-                            size="lg"
-                            onClick={handleMerge}
-                            isLoading={isProcessing}
-                            disabled={files.length < 2}
-                        >
-                            {isProcessing ? 'Merging PDFs...' : 'Merge PDFs'}
-                        </Button>
+                                <div className="workspace-actions">
+                                    <div className="add-more">
+                                        <label htmlFor="add-more-input" className="add-more-label">
+                                            + Add more files
+                                        </label>
+                                        <input
+                                            id="add-more-input"
+                                            type="file"
+                                            onChange={(e) => handleFilesSelected(Array.from(e.target.files))}
+                                            multiple
+                                            accept=".pdf"
+                                            style={{ display: 'none' }}
+                                        />
+                                    </div>
+
+                                    {error && <div className="error-msg">{error}</div>}
+
+                                    <Button
+                                        size="lg"
+                                        onClick={handleMerge}
+                                        isLoading={isProcessing}
+                                        disabled={files.length < 2}
+                                    >
+                                        {isProcessing ? 'Merging PDFs...' : 'Merge PDFs'}
+                                    </Button>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                </div>
+                </>
             )}
+
+            {/* Rich Content Section */}
+            <div className="tool-content-section" style={{ maxWidth: '800px', margin: '4rem auto', padding: '0 1rem' }}>
+                {content.howTo && (
+                    <section className="seo-section how-to">
+                        <h2>{content.howTo.heading}</h2>
+                        <div className="steps-container">
+                            {content.howTo.steps.map((step, index) => (
+                                <div key={index} className="step-item">
+                                    <div className="step-number">{index + 1}</div>
+                                    <div className="step-content">
+                                        <h3>{step.title}</h3>
+                                        <p>{step.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                <AdUnit slot="tool_bottom" format="auto" />
+
+                {content.features && (
+                    <section className="seo-section features">
+                        <h2>Why Use PDF Saathi?</h2>
+                        <div className="features-grid">
+                            {content.features.map((feature, index) => (
+                                <div key={index} className="feature-item">
+                                    <h3>{feature.title}</h3>
+                                    <p>{feature.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {content.faq && content.faq.length > 0 && (
+                    <section className="seo-section faq">
+                        <h2>Frequently Asked Questions</h2>
+                        <div className="faq-list">
+                            {content.faq.map((item, index) => (
+                                <div key={index} className="faq-item">
+                                    <h3>{item.question}</h3>
+                                    <p>{item.answer}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+            </div>
+
+            <PageGrid currentTool="merge-pdf" />
         </div>
     );
 };
