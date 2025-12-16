@@ -23,6 +23,8 @@ const NotFound = () => <div className="container" style={{ padding: '2rem', text
 
 import ScrollToTop from './components/layout/ScrollToTop';
 
+import PdfEditor from './pages/PdfEditor';
+
 function App() {
   return (
     <Router>
@@ -33,8 +35,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="tools" element={<AllTools />} />
           <Route path="merge-pdf" element={<MergePdf />} />
+          <Route path="edit-pdf" element={<PdfEditor />} />
 
-          {tools.filter(t => t.id !== 'merge-pdf').map(tool => {
+          {tools.filter(t => t.id !== 'merge-pdf' && t.id !== 'edit-pdf').map(tool => {
             // Define specific inputs for tools
             let specificInputs = tool.inputs || [];
             if (specificInputs.length === 0) {

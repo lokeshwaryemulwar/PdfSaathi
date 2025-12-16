@@ -30,6 +30,7 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'All Tools', path: '/tools' },
     { name: 'Merge PDF', path: '/merge-pdf' },
+    { name: 'PDF Editor', path: '/edit-pdf' },
     { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },

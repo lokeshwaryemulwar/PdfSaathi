@@ -7,6 +7,7 @@ export default defineConfig({
   build: {
     // Use default esbuild minification (faster and built-in)
     minify: 'esbuild',
+    target: 'esnext', // Required for Top-level await used in PDF.js
     // Code splitting for better caching
     rollupOptions: {
       output: {
@@ -17,5 +18,10 @@ export default defineConfig({
     },
     // Optimize chunk size
     chunkSizeWarningLimit: 1000,
+  },
+  esbuild: {
+    supported: {
+      'top-level-await': true //browsers can handle top-level-await features
+    },
   },
 })

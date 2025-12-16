@@ -205,6 +205,29 @@ export const toolContent = {
             }
         ]
     },
+    'edit-pdf': {
+        title: "Free Online PDF Editor",
+        description: "Edit PDF files online for free. Add text, images, shapes, and highlights to your PDF documents directly in your browser. No software installation required.",
+        howTo: {
+            heading: "How to Edit a PDF Online",
+            steps: [
+                { title: "Upload PDF", description: "Drag and drop your PDF file into the editor." },
+                { title: "Select Tool", description: "Choose simple tools like Add Text, Pencil, Eraser, or Image from the toolbar." },
+                { title: "Edit Document", description: "Click anywhere on the PDF to add text or draw. Resize and move elements as needed." },
+                { title: "Download", description: "Click 'Done' or 'Download' to save your edited PDF file instantly." }
+            ]
+        },
+        features: [
+            { title: "Add Text & Images", description: "Easily type text or insert images anywhere on your PDF pages." },
+            { title: "Drawing Tools", description: "Use the pencil to draw freehand or the highlighter to mark important text." },
+            { title: "Secure Editing", description: "All editing happens in your browser. Your files are never uploaded to a server for editing." }
+        ],
+        faq: [
+            { question: "Is this PDF editor free?", answer: "Yes, PDF Saathi's editor is 100% free with no limits." },
+            { question: "Can I edit existing text?", answer: "This tool allows you to add new text and cover existing text (using whiteout), but it cannot change the original underlying text directly." },
+            { question: "Is it secure?", answer: "Yes, all processing is done locally in your browser using secure web technologies." }
+        ]
+    },
     'default': {
         title: "Free Online PDF Tool",
         description: "Fast, secure, and easy-to-use PDF utility.",

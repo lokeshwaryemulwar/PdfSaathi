@@ -1,9 +1,18 @@
 import {
     Merge, Split, RotateCw, Lock, Unlock, Trash2,
-    FileImage, FileType, FileText, FileSpreadsheet, FileCode
+    FileImage, FileType, FileText, FileSpreadsheet, FileCode, FilePenLine
 } from 'lucide-react';
 
 export const tools = [
+    {
+        id: 'edit-pdf',
+        title: 'Edit PDF',
+        description: 'Add text, images, and shapes to your PDF files online.',
+        icon: FilePenLine,
+        path: '/edit-pdf',
+        color: '#f43f5e', // Rose
+        category: 'utility'
+    },
     {
         id: 'merge-pdf',
         title: 'Merge PDF',
