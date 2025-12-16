@@ -44,11 +44,16 @@ const GenericTool = ({
     const [compressionStats, setCompressionStats] = useState(null);
     const [currentRotation, setCurrentRotation] = useState(0); // For Rotate Tool
     const [error, setError] = useState(null);
+    const [openFaqIndex, setOpenFaqIndex] = useState(null); // Accordion State
 
     // Get rich content for this tool
     const content = getToolContent(endpoint);
     const pageTitle = content.title || propsTitle;
     const pageDescription = content.description || propsDescription;
+
+    const toggleFaq = (index) => {
+        setOpenFaqIndex(openFaqIndex === index ? null : index);
+    };
 
     // Construct SoftwareApplication Schema
     const softwareSchema = {
@@ -177,6 +182,9 @@ const GenericTool = ({
 
             <div className="tool-main-section">
                 <div className="tool-header">
+                    <Button variant="ghost" onClick={() => navigate('/tools')} className="back-btn" icon={<ArrowLeft size={16} />}>
+                        Back to Tools
+                    </Button>
                     <h1>{pageTitle}</h1>
                     <p>{pageDescription}</p>
                 </div>
@@ -345,9 +353,17 @@ const GenericTool = ({
                         <h2>Frequently Asked Questions</h2>
                         <div className="faq-list">
                             {content.faq.map((item, index) => (
-                                <div key={index} className="faq-item">
-                                    <h3>{item.question}</h3>
-                                    <p>{item.answer}</p>
+                                <div
+                                    key={index}
+                                    className={`faq-item ${openFaqIndex === index ? 'active' : ''}`}
+                                >
+                                    <button className="faq-question" onClick={() => toggleFaq(index)}>
+                                        {item.question}
+                                        <span className="faq-icon">▼</span>
+                                    </button>
+                                    <div className="faq-answer">
+                                        <p>{item.answer}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>

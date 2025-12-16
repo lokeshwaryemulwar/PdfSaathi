@@ -29,7 +29,7 @@ const Blog = () => {
 
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
                 gap: '2rem',
                 marginTop: '3rem'
             }}>

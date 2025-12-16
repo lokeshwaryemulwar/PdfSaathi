@@ -27,10 +27,10 @@ const Hero = () => {
                         </Button>
                     </div>
                     <div className="hero-features">
-                        <span className="feature-item">
+                        <span className="hero-feature-item">
                             <span className="check-icon">✓</span> No installation required
                         </span>
-                        <span className="feature-item">
+                        <span className="hero-feature-item">
                             <span className="check-icon">✓</span> 256-bit SSL Encryption
                         </span>
                     </div>

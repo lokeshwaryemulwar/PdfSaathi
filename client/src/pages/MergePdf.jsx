@@ -9,6 +9,7 @@ import SEO from '../components/layout/SEO';
 import AdUnit from '../components/ads/AdUnit';
 import PageGrid from '../components/tools/PageGrid';
 import { getToolContent } from '../data/toolContent';
+import '../components/tools/GenericTool.css'; // Import shared styles for rich content
 import './MergePdf.css';
 
 const MergePdf = () => {
@@ -17,11 +18,16 @@ const MergePdf = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [downloadUrl, setDownloadUrl] = useState(null);
     const [error, setError] = useState(null);
+    const [openFaqIndex, setOpenFaqIndex] = useState(null); // Accordion State
 
     // Get rich content for Merge PDF
     const content = getToolContent('merge-pdf');
     const pageTitle = content.title;
     const pageDescription = content.description;
+
+    const toggleFaq = (index) => {
+        setOpenFaqIndex(openFaqIndex === index ? null : index);
+    };
 
     // Construct SoftwareApplication Schema
     const softwareSchema = {
@@ -147,8 +153,8 @@ const MergePdf = () => {
                 <>
                     <div className="tool-main-section">
                         <div className="tool-header">
-                            <Button variant="ghost" onClick={() => navigate('/tools')} className="back-btn">
-                                <ArrowLeft size={20} /> Back to Tools
+                            <Button variant="ghost" onClick={() => navigate('/tools')} className="back-btn" icon={<ArrowLeft size={16} />}>
+                                Back to Tools
                             </Button>
                             <h1>{pageTitle}</h1>
                             <p>{pageDescription}</p>
@@ -263,9 +269,17 @@ const MergePdf = () => {
                         <h2>Frequently Asked Questions</h2>
                         <div className="faq-list">
                             {content.faq.map((item, index) => (
-                                <div key={index} className="faq-item">
-                                    <h3>{item.question}</h3>
-                                    <p>{item.answer}</p>
+                                <div
+                                    key={index}
+                                    className={`faq-item ${openFaqIndex === index ? 'active' : ''}`}
+                                >
+                                    <button className="faq-question" onClick={() => toggleFaq(index)}>
+                                        {item.question}
+                                        <span className="faq-icon">▼</span>
+                                    </button>
+                                    <div className="faq-answer">
+                                        <p>{item.answer}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>

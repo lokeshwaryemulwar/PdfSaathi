@@ -10,9 +10,9 @@
 }
 
 .back-btn {
-    position: absolute;
-    left: 0;
-    top: 0;
+    display: inline-flex;
+    margin-bottom: 1rem;
+    align-self: flex-start;
 }
 
 .tool-header h1 {
