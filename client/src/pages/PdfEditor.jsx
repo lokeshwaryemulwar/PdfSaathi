@@ -343,7 +343,11 @@ export default function PdfEditor() {
 
             const c = fabricCanvasRef.current;
             const originalBg = c.backgroundImage;
+            const originalBgColor = c.backgroundColor;
+
+            // Hide background image and color to capture ONLY drawings
             c.backgroundImage = null;
+            c.backgroundColor = null;
             c.renderAll();
 
             // Export canvas as image (overlay layer)
@@ -351,6 +355,7 @@ export default function PdfEditor() {
 
             // Restore bg
             c.backgroundImage = originalBg;
+            c.backgroundColor = originalBgColor;
             c.renderAll();
 
             // Embed overlay into PDF
