@@ -210,7 +210,7 @@ const GenericTool = ({
                             ) : downloadUrl ? (
                                 <div className="success-state">
                                     <div className="success-icon">
-                                        <CheckCircle size={48} color="#10B981" />
+                                        <CheckCircle size={48} color="white" fill="#10B981" />
                                     </div>
                                     <h3>{successMessage}</h3>
 
