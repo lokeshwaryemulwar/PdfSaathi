@@ -28,6 +28,24 @@ export default function SEO({ title, description, url = 'https://pdfsaathi.in', 
                 {JSON.stringify({
                     "@context": "https://schema.org",
                     "@graph": [
+                        // Organization Schema (for logo in search results)
+                        {
+                            "@type": "Organization",
+                            "@id": "https://pdfsaathi.in/#organization",
+                            "name": "PDF Saathi",
+                            "url": "https://pdfsaathi.in",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://pdfsaathi.in/logo.png",
+                                "width": 512,
+                                "height": 512
+                            },
+                            "description": "Free online PDF tools to merge, split, compress, convert, and edit PDF files. Fast, secure, and no watermarks.",
+                            "sameAs": [
+                                "https://www.linkedin.com/company/pdfsaathi",
+                                "https://twitter.com/pdfsaathi"
+                            ]
+                        },
                         // Breadcrumb Schema
                         breadcrumbs ? {
                             "@type": "BreadcrumbList",
