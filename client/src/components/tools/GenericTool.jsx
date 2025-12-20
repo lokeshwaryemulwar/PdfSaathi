@@ -229,6 +229,12 @@ const GenericTool = ({
                                             Process Another
                                         </Button>
                                     </div>
+
+                                    <div style={{ marginTop: '1.5rem' }}>
+                                        <a href="/pricing" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                                            <span>⚡</span> Upgrade to Pro for unlimited conversions
+                                        </a>
+                                    </div>
                                 </div>
                             ) : (
                                 <>

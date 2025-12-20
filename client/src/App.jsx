@@ -22,7 +22,7 @@ import { tools } from './data/tools';
 const NotFound = () => <div className="container" style={{ padding: '2rem', textAlign: 'center' }}><h1>404 - Page Not Found</h1></div>;
 
 import ScrollToTop from './components/layout/ScrollToTop';
-
+import Pricing from './pages/Pricing';
 import PdfEditor from './pages/PdfEditor';
 
 function App() {
@@ -97,6 +97,7 @@ function App() {
           <Route path="cookies" element={<CookiePolicy />} />
           <Route path="admin" element={<AdminLogin />} />
           <Route path="admin/dashboard" element={<AdminDashboard />} />
+          <Route path="pricing" element={<Pricing />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

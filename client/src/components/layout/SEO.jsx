@@ -57,7 +57,7 @@ export default function SEO({ title, description, url = 'https://pdfsaathi.in', 
                             }))
                         } : null,
                         // Custom Schema (e.g., AboutPage, ContactPage)
-                        schema || null
+                        ...(Array.isArray(schema) ? schema : [schema])
                     ].filter(Boolean)
                 })}
             </script>
