@@ -55,7 +55,23 @@ export const toolContent = {
                 question: "Do I need to install any software?",
                 answer: "No. PDF Saathi is a 100% cloud-based tool. You only need a web browser."
             }
-        ]
+        ],
+        longDescription: `
+            <h3>Why Merge PDF Files?</h3>
+            <p>Managing multiple PDF files can be chaotic. Whether you are a student compiling assignment chapters, a professional organizing invoices, or just trying to keep your personal documents in order, having unrelated files scattered across your desktop is inefficient.</p>
+            <p>Merging PDFs brings order to this chaos. By combining multiple documents into a single file, you ensure that your information stays together, is easier to share via email (one attachment instead of ten!), and is ready for printing without hassle.</p>
+            
+            <h3>How Our Merge Tool Works</h3>
+            <p>PDF Saathi offers a seamless, drag-and-drop experience. Our client-side first approach means your files are processed quickly. The process is simple:</p>
+            <ul>
+                <li><strong>Upload:</strong> Select files from your computer or mobile device.</li>
+                <li><strong>Rearrange:</strong> Use our visual grid to drag pages into the perfect order.</li>
+                <li><strong>Merge:</strong> One click combines them instantly.</li>
+            </ul>
+            
+            <h3>Security First</h3>
+            <p>We understand that your documents may contain sensitive information. That is why PDF Saathi prioritizes security. We use <strong>256-bit SSL encryption</strong> for all data transfer. Furthermore, our automated cleanup scripts ensure that your files are permanently deleted from our servers after 1 hour. We do not look at, copy, or share your data.</p>
+        `
     },
     'split-pdf': {
         title: "Split PDF Online - Extract Pages Free",
@@ -92,7 +108,22 @@ export const toolContent = {
                 question: "Can I split a password-protected PDF?",
                 answer: "Yes, but you will need to unlock it first using our Unlock PDF tool, or enter the password if prompted."
             }
-        ]
+        ],
+        longDescription: `
+            <h3>Extract Pages with Precision</h3>
+            <p>Large PDF documents often contain more information than you need to share. Maybe you have a 50-page contract but only need to send the signature page, or a massive ebook where you only want to save one chapter.</p>
+            <p>Our Split PDF tool gives you granular control over your documents. You do not need to print headers and footers or re-scan pages just to isolate them. Digital splitting is cleaner, faster, and maintains higher quality.</p>
+            
+            <h3>Flexible Splitting Options</h3>
+            <p>PDF Saathi provides two powerful ways to split:</p>
+            <ul>
+                <li><strong>Select Pages:</strong> Simply click on the thumbnails of the pages you want to keep.</li>
+                <li><strong>Range Mode:</strong> Type in a range like "1-5, 10-12" to extract specific sections instantly.</li>
+            </ul>
+            
+            <h3>Preserve Your Formatting</h3>
+            <p>Unlike copy-pasting text, splitting a PDF preserves the original layout, fonts, images, and formatting perfectly. The pages you extract will look exactly as they did in the original document, ensuring a professional presentation every time.</p>
+        `
     },
     'compress-pdf': {
         title: "Compress PDF Online - Reduce File Size",
@@ -129,7 +160,23 @@ export const toolContent = {
                 question: "Will my document look blurry?",
                 answer: "No. We use smart compression techniques that maintain excellent visual quality for reading and printing."
             }
-        ]
+        ],
+        longDescription: `
+            <h3>Why Compress Your PDF?</h3>
+            <p>High-quality PDFs are great, but they can be large. High-resolution images and embedded fonts can easily balloon a simple report to 20MB or more. This causes problems when:</p>
+            <ul>
+                <li>Trying to email attachments (Gmail limits you to 25MB).</li>
+                <li>Uploading forms to government or job portals (often capped at 2MB or 5MB).</li>
+                <li>Saving storage space on your phone or computer.</li>
+            </ul>
+            
+            <h3>Smart Compression Technology</h3>
+            <p>PDF Saathi uses an intelligent compression engine. Instead of just "lowering quality," we optimize the internal structure of the file.</p>
+            <p>We re-encode images to efficient formats, remove duplicate data streams, and strip unused fonts. The result? A file that typically looks <strong>identical</strong> to the human eye but is 50-80% smaller in file size.</p>
+            
+            <h3>Is it Safe?</h3>
+            <p>Absolutely. Your document's text remains fully searchable and legible. We do not alter the content itself, only the way it is stored digitially. And like all our tools, your files are processed securely and deleted automatically.</p>
+        `
     },
     'pdf-to-word': {
         title: "Convert PDF to Word Online (DOCX)",
@@ -166,7 +213,22 @@ export const toolContent = {
                 question: "Does it work with scanned PDFs?",
                 answer: "Yes, our advanced OCR technology can recognize text even in scanned images."
             }
-        ]
+        ],
+        longDescription: `
+             <h3>Convert Static PDFs to Editable Word Docs</h3>
+             <p>PDFs are designed to be "read-only," which makes them terrible for editing. If you have ever tried to copy text from a PDF and paste it into Word, you know the frustration: broken lines, weird characters, and misplaced images.</p>
+             <p>Our <strong>PDF to Word Converter</strong> solves this. It rebuilds the document from scratch in Microsoft Word (.docx) format.</p>
+             
+             <h3>What Gets Converted?</h3>
+             <ul>
+                 <li><strong>Text Layout:</strong> Paragraphs are recognized as paragraphs, not individual lines.</li>
+                 <li><strong>Tables:</strong> Excel and Word tables are reconstructed so you can add or remove rows easily.</li>
+                 <li><strong>Images:</strong> Graphics are placed in their correct positions.</li>
+             </ul>
+             
+             <h3>Scanned Documents? No Problem.</h3>
+             <p>We use basic OCR (Optical Character Recognition) to detect text even in simplified scans, making them editable again. This is perfect for digitizing old contracts or lecture notes.</p>
+        `
     },
     'word-to-pdf': {
         title: "Word to PDF Converter Online",
@@ -203,7 +265,23 @@ export const toolContent = {
                 question: "Does it support .doc and .docx?",
                 answer: "Yes, we support both the older .doc format and the newer .docx format."
             }
-        ]
+        ],
+        longDescription: `
+            <h3>Create Professional PDFs from Word</h3>
+            <p>Microsoft Word is the standard for drafting documents, but it is not great for sharing. Fonts changes, formatting breaks, and version compatibility issues are common headaches.</p>
+            <p>Converting your DOC or DOCX file to PDF is the best way to "freeze" your document. It ensures that what you see on your screen is exactly what your boss, professor, or client sees on theirs.</p>
+            
+            <h3>What Our Converter Does</h3>
+            <ul>
+                <li><strong>Fonts & Styles:</strong> We embed the fonts so typography remains sharp.</li>
+                <li><strong>Layouts:</strong> Margins, columns, and page breaks are respected perfectly.</li>
+                <li><strong>Compatibility:</strong> The resulting file works on any PDF viewer, browser, or operating system.</li>
+            </ul>
+            
+            <h3>How to Convert</h3>
+            <p>1. Upload your Word document.<br>2. Wait for our conversion engine to process the file.<br>3. Download your high-quality PDF.</p>
+            <p>It is fast, free, and secure.</p>
+        `
     },
     'edit-pdf': {
         title: "Free Online PDF Editor",

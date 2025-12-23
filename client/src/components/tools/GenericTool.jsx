@@ -371,6 +371,13 @@ const GenericTool = ({
                         </div>
                     </section>
                 )}
+
+                {/* Long Form Publisher Content (New for AdSense) */}
+                {content.longDescription && (
+                    <section className="seo-section long-description" style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem' }}>
+                        <div dangerouslySetInnerHTML={{ __html: content.longDescription }} />
+                    </section>
+                )}
             </div>
 
             <PageGrid currentTool={endpoint} />
