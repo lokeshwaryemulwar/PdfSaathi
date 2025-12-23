@@ -29,7 +29,7 @@ const MergePdf = () => {
         setOpenFaqIndex(openFaqIndex === index ? null : index);
     };
 
-    // Construct SoftwareApplication Schema
+    // Construct SoftwareApplication Schema with embedded FAQ
     const softwareSchema = {
         "@type": "SoftwareApplication",
         "name": pageTitle,
@@ -44,23 +44,22 @@ const MergePdf = () => {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
             "ratingCount": "2150"
-        }
+        },
+        // Embed FAQ questions directly in the SoftwareApplication
+        ...(content.faq && content.faq.length > 0 && {
+            "mainEntity": content.faq.map(item => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": item.answer
+                }
+            }))
+        })
     };
 
-    // Construct FAQ Schema
-    const faqSchema = content.faq && content.faq.length > 0 ? {
-        "@type": "FAQPage",
-        "mainEntity": content.faq.map(item => ({
-            "@type": "Question",
-            "name": item.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.answer
-            }
-        }))
-    } : null;
-
-    const toolSchema = faqSchema ? [softwareSchema, faqSchema] : softwareSchema;
+    // No longer creating separate FAQPage - FAQ is embedded in SoftwareApplication
+    const toolSchema = softwareSchema;
 
     const handleFilesSelected = (newFiles) => {
         const typesFiles = newFiles.map(file => ({
