@@ -1,11 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Card from '../ui/Card';
 import { tools } from '../../data/tools';
 import './FeatureGrid.css';
 
 const FeatureGrid = ({ limit }) => {
-    const navigate = useNavigate();
     const displayTools = limit ? tools.slice(0, limit) : tools;
 
     return (
@@ -13,18 +12,23 @@ const FeatureGrid = ({ limit }) => {
             {displayTools.map((tool) => {
                 const Icon = tool.icon;
                 return (
-                    <Card
+                    <Link
                         key={tool.id}
-                        hoverable
-                        className="tool-card"
-                        onClick={() => navigate(tool.path)}
+                        to={tool.path}
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                        aria-label={`${tool.title} - ${tool.description}`}
                     >
-                        <div className="tool-icon-wrapper" style={{ backgroundColor: `${tool.color}15`, color: tool.color }}>
-                            <Icon size={28} />
-                        </div>
-                        <h3 className="tool-title">{tool.title}</h3>
-                        <p className="tool-desc">{tool.description}</p>
-                    </Card>
+                        <Card
+                            hoverable
+                            className="tool-card"
+                        >
+                            <div className="tool-icon-wrapper" style={{ backgroundColor: `${tool.color}15`, color: tool.color }}>
+                                <Icon size={28} />
+                            </div>
+                            <h3 className="tool-title">{tool.title}</h3>
+                            <p className="tool-desc">{tool.description}</p>
+                        </Card>
+                    </Link>
                 );
             })}
         </div>

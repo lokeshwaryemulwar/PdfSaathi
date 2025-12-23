@@ -1,8 +1,8 @@
 
 export const toolContent = {
     'merge-pdf': {
-        title: "Merge PDF Files Online - Free, Secure & Fast",
-        description: "Combine multiple PDF files into one single document in seconds. No installation required. 100% free and secure.",
+        title: "Merge PDF Files Online Free - No Watermark, No Limits",
+        description: "Combine multiple PDF files into one single document in seconds. No installation, no watermarks, 100% free and secure. Unlimited merges.",
         howTo: {
             heading: "How to Merge PDF Files Online",
             steps: [
@@ -74,8 +74,8 @@ export const toolContent = {
         `
     },
     'split-pdf': {
-        title: "Split PDF Online - Extract Pages Free",
-        description: "Separate specific pages or range of pages from your PDF file. Fast, free, and easy to use.",
+        title: "Split PDF Online Free - Extract Pages Without Losing Quality",
+        description: "Separate specific pages or range of pages from your PDF file. Fast, free, and maintains original quality. No software needed.",
         howTo: {
             heading: "How to Split a PDF File",
             steps: [
@@ -126,8 +126,8 @@ export const toolContent = {
         `
     },
     'compress-pdf': {
-        title: "Compress PDF Online - Reduce File Size",
-        description: "Reduce PDF file size up to 90% without losing quality. Perfect for email attachments and web uploads.",
+        title: "Compress PDF Online Free - Reduce File Size Up to 90%",
+        description: "Reduce PDF file size up to 90% without losing quality. Perfect for email attachments and web uploads. No file size limits.",
         howTo: {
             heading: "How to Compress PDF Files",
             steps: [
@@ -179,8 +179,8 @@ export const toolContent = {
         `
     },
     'pdf-to-word': {
-        title: "Convert PDF to Word Online (DOCX)",
-        description: "Turn uneditable PDFs into easy-to-edit Word documents. Best accuracy and formatting preservation.",
+        title: "PDF to Word Converter Free - Maintain Formatting 100%",
+        description: "Turn uneditable PDFs into easy-to-edit Word documents. Best accuracy and formatting preservation. Works with scanned PDFs too.",
         howTo: {
             heading: "How to Convert PDF to Word",
             steps: [
@@ -231,8 +231,8 @@ export const toolContent = {
         `
     },
     'word-to-pdf': {
-        title: "Word to PDF Converter Online",
-        description: "Convert DOC and DOCX files to PDF instantly. Preserve your document layout and fonts perfectly.",
+        title: "Word to PDF Converter Free - Perfect Layout Preservation",
+        description: "Convert DOC and DOCX files to PDF instantly. Preserve your document layout and fonts perfectly. No quality loss.",
         howTo: {
             heading: "How to Convert Word to PDF",
             steps: [
