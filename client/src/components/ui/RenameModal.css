@@ -1,0 +1,71 @@
+.rename-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.rename-modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.rename-modal-header {
+    margin-bottom: 1.5rem;
+}
+
+.rename-modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #1a1a1a;
+}
+
+.rename-modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.rename-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 0.5rem;
+    transition: border-color 0.2s;
+}
+
+.rename-input-group:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.rename-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    background: transparent;
+}
+
+.rename-extension {
+    color: #888;
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+    user-select: none;
+}
+
+.rename-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}

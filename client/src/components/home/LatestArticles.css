@@ -1,0 +1,29 @@
+/* LatestArticles.css */
+
+.latest-articles-section {
+    position: relative;
+    width: 100%;
+}
+
+.articles-grid {
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.75rem !important;
+    }
+
+    .article-image {
+        height: 180px !important;
+    }
+
+    .articles-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.article-card:hover .article-image img {
+    transform: scale(1.05);
+}

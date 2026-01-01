@@ -1,0 +1,28 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const AdminUser = require('./models/AdminUser');
+require('dotenv').config();
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pdfsaathi');
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+
+    // Create default admin if not exists
+    const adminExists = await AdminUser.findOne({ username: 'admin' });
+    if (!adminExists) {
+      const hashedPassword = bcrypt.hashSync('admin123', 10);
+      await AdminUser.create({
+        username: 'admin',
+        password_hash: hashedPassword
+      });
+      console.log('Default admin user created: admin/admin123');
+    }
+
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;

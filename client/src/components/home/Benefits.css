@@ -1,0 +1,99 @@
+.benefits-section {
+    padding: 5rem 0;
+    background-color: var(--background);
+}
+
+.section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Enhanced Card Styling */
+.benefit-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover::before {
+    transform: scaleX(1);
+}
+
+.benefit-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    /* Remove distinct color overrides here since inline styles handle text color */
+    background-color: var(--surface-alt) !important;
+    /* Force uniform bg initially */
+}
+
+/* On hover, flip the icon and fill with brand color */
+.benefit-card:hover .benefit-icon {
+    background-color: var(--primary) !important;
+    color: white !important;
+    transform: rotateY(180deg);
+}
+
+/* Ensure the icon content itself doesn't look mirrored when flipped? 
+   Actually rotateY(180deg) mirrors it. If we want just the bg to flip, we need a container. 
+   But the user said "same animation". The previous one rotated the container. 
+*/
+
+.benefit-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    color: var(--text-main);
+}
+
+.benefit-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}

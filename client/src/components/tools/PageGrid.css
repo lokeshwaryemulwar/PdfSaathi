@@ -1,0 +1,81 @@
+.page-grid-container {
+    margin: 2rem 0;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+}
+
+.page-grid-container h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 1rem;
+    background: var(--surface-alt);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+.page-thumbnail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-preview-wrapper {
+    background: white;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.page-canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.page-number {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.page-grid-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    padding: 2rem;
+    justify-content: center;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
