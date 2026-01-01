@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Twitter, Github, Linkedin } from 'lucide-react';
+import { FileText, Linkedin } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
@@ -44,8 +44,9 @@ const Footer = () => {
                 <div className="footer-bottom">
                     <p>&copy; {new Date().getFullYear()} PDF Saathi. All rights reserved.</p>
                     <div className="social-links">
-                        <a href="#" aria-label="Twitter"><Twitter size={20} /></a>
-                        <a href="#" aria-label="GitHub"><Github size={20} /></a>
+                        {/* Hide temporary profiles until ready */}
+                        {/* <a href="#" aria-label="Twitter"><Twitter size={20} /></a> */}
+                        {/* <a href="#" aria-label="GitHub"><Github size={20} /></a> */}
                         <a href="https://www.linkedin.com/in/lokeshwar-yemulwar-97924a257" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={20} /></a>
                     </div>
                 </div>
