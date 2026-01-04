@@ -99,24 +99,30 @@ const MergePdf = () => {
         setError(null);
 
         try {
-            const formData = new FormData();
-            files.forEach(f => formData.append('files', f.file));
+            // Import pdf-lib dynamically
+            const { PDFDocument } = await import('pdf-lib');
 
-            const response = await fetch(`${API_BASE_URL}/api/merge`, {
-                method: 'POST',
-                body: formData,
-            });
+            // Create a new PDF document
+            const mergedPdf = await PDFDocument.create();
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || 'Merge failed. Please try again.');
+            // Process each file
+            for (const fileObj of files) {
+                const fileBuffer = await fileObj.file.arrayBuffer();
+                const pdf = await PDFDocument.load(fileBuffer);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach((page) => mergedPdf.addPage(page));
             }
 
-            const blob = await response.blob();
+            // Save the merged PDF
+            const pdfBytes = await mergedPdf.save();
+
+            // Create blob and URL
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             setDownloadUrl(url);
         } catch (err) {
-            setError(err.message);
+            console.error('Merge error:', err);
+            setError(err.message || 'Failed to merge PDFs. Please try again.');
         } finally {
             setIsProcessing(false);
         }

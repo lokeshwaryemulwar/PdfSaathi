@@ -47,7 +47,8 @@ export const tools = [
         icon: FileText,
         path: '/pdf-to-word',
         color: '#3B82F6', // Blue
-        category: 'convert-from'
+        category: 'convert-from',
+        outputExtension: '.docx'
     },
     {
         id: 'pdf-to-ppt',
@@ -56,7 +57,8 @@ export const tools = [
         icon: FileType,
         path: '/pdf-to-ppt',
         color: '#F97316', // Orange
-        category: 'convert-from'
+        category: 'convert-from',
+        outputExtension: '.pptx'
     },
     {
         id: 'pdf-to-excel',
@@ -65,7 +67,8 @@ export const tools = [
         icon: FileSpreadsheet,
         path: '/pdf-to-excel',
         color: '#22C55E', // Green
-        category: 'convert-from'
+        category: 'convert-from',
+        outputExtension: '.xlsx'
     },
     {
         id: 'word-to-pdf',

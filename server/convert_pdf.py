@@ -6,16 +6,27 @@ def word_to_pdf(input_docx, output_pdf):
     try:
         # Resolve absolute paths
         input_abs = os.path.abspath(input_docx)
-        output_dir = os.path.dirname(os.path.abspath(output_pdf))
+        output_abs = os.path.abspath(output_pdf)
         
         # Ensure output directory exists
+        output_dir = os.path.dirname(output_abs)
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
-        # Build LibreOffice command
-        # --headless: Run without GUI
-        # --convert-to pdf: Target format
-        # --outdir: Output directory
+        # Try using docx2pdf (Best for Windows with MS Word)
+        try:
+            from docx2pdf import convert
+            # convert() handles the conversion
+            # On Windows it uses COM, on Mac it uses JXA
+            convert(input_abs, output_abs)
+            print("Conversion Successful")
+            return
+        except ImportError:
+            print("docx2pdf not installed, falling back to LibreOffice", file=sys.stderr)
+        except Exception as e:
+            print(f"docx2pdf failed: {e}, falling back to LibreOffice", file=sys.stderr)
+
+        # Build LibreOffice command (Fallback for Linux/Servers)
         cmd = [
             'libreoffice', 
             '--headless', 
@@ -24,24 +35,23 @@ def word_to_pdf(input_docx, output_pdf):
             input_abs
         ]
         
-        # Execute command
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         
         if result.returncode != 0:
-            raise Exception(f"LibreOffice failed: {result.stderr}")
+            # Try 'soffice' as well
+            cmd[0] = 'soffice'
+            result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            if result.returncode != 0:
+                raise Exception("Both docx2pdf and LibreOffice failed.")
             
         # LibreOffice saves the file with the same basename but .pdf extension in outdir
-        # We need to rename it to the requested output_pdf path if it's different
-        
         base_name = os.path.splitext(os.path.basename(input_docx))[0]
         generated_pdf = os.path.join(output_dir, base_name + ".pdf")
         
-        # Rename if necessary (and if generated file exists)
-        if os.path.exists(generated_pdf) and os.path.abspath(generated_pdf) != os.path.abspath(output_pdf):
-            # If target exists, remove it first
-            if os.path.exists(output_pdf):
-                os.remove(output_pdf)
-            os.rename(generated_pdf, output_pdf)
+        if os.path.exists(generated_pdf) and os.path.abspath(generated_pdf) != output_abs:
+            if os.path.exists(output_abs):
+                os.remove(output_abs)
+            os.rename(generated_pdf, output_abs)
             
         print("Conversion Successful")
         

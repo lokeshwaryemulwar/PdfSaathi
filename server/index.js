@@ -9,7 +9,9 @@ app.disable('x-powered-by'); // Hide X-Powered-By header for security
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    exposedHeaders: ['Content-Disposition', 'X-Compression-Stats']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

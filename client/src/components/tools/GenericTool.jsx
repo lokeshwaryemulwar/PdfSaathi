@@ -117,6 +117,117 @@ const GenericTool = ({
         setError(null);
 
         try {
+            // Client-side processing for split-pdf
+            if (endpoint === 'split-pdf') {
+                const { PDFDocument } = await import('pdf-lib');
+
+                const startPage = parseInt(inputValues.startPage);
+                const endPage = parseInt(inputValues.endPage);
+
+                if (isNaN(startPage) || isNaN(endPage)) {
+                    throw new Error('Please enter valid page numbers');
+                }
+
+                if (startPage < 1 || endPage < startPage) {
+                    throw new Error('Invalid page range. End page must be greater than or equal to start page.');
+                }
+
+                // Load the PDF
+                const fileBuffer = await files[0].arrayBuffer();
+                const pdfDoc = await PDFDocument.load(fileBuffer);
+                const totalPages = pdfDoc.getPageCount();
+
+                if (endPage > totalPages) {
+                    throw new Error(`PDF only has ${totalPages} pages. Please enter a valid range.`);
+                }
+
+                // Create new PDF with selected pages
+                const newPdf = await PDFDocument.create();
+                const pagesToCopy = [];
+                for (let i = startPage - 1; i < endPage; i++) {
+                    pagesToCopy.push(i);
+                }
+
+                const copiedPages = await newPdf.copyPages(pdfDoc, pagesToCopy);
+                copiedPages.forEach(page => newPdf.addPage(page));
+
+                // Save and create download
+                const pdfBytes = await newPdf.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = window.URL.createObjectURL(blob);
+                setDownloadUrl(url);
+                setOutputFileName(`split-pages-${startPage}-to-${endPage}.pdf`);
+                setIsProcessing(false);
+                return;
+            }
+
+            // Client-side processing for compress-pdf
+            if (endpoint === 'compress-pdf') {
+                const { PDFDocument } = await import('pdf-lib');
+
+                // Load the PDF
+                const fileBuffer = await files[0].arrayBuffer();
+                const pdfDoc = await PDFDocument.load(fileBuffer);
+
+                // Save with compression options
+                const pdfBytes = await pdfDoc.save({
+                    useObjectStreams: true,
+                    addDefaultPage: false,
+                    objectsPerTick: 50
+                });
+
+                const originalSize = files[0].size;
+                const compressedSize = pdfBytes.length;
+                const savedBytes = originalSize - compressedSize;
+                const savedPercentage = ((savedBytes / originalSize) * 100).toFixed(1);
+
+                // Create blob and URL
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = window.URL.createObjectURL(blob);
+                setDownloadUrl(url);
+                setOutputFileName('compressed.pdf');
+
+                // Format file sizes intelligently (KB for small files, MB for large)
+                const formatSize = (bytes) => {
+                    const mb = bytes / 1024 / 1024;
+                    if (mb >= 0.1) {
+                        return mb.toFixed(2) + ' MB';
+                    } else {
+                        return (bytes / 1024).toFixed(2) + ' KB';
+                    }
+                };
+
+                // Set compression stats
+                setCompressionStats({
+                    ratio: savedPercentage + '%',
+                    original: formatSize(originalSize),
+                    compressed: formatSize(compressedSize)
+                });
+
+                setIsProcessing(false);
+                return;
+            }
+
+            // Client-side processing for rotate-pdf
+            if (endpoint === 'rotate-pdf') {
+                const { PDFDocument, degrees } = await import('pdf-lib');
+                const fileBuffer = await files[0].arrayBuffer();
+                const pdfDoc = await PDFDocument.load(fileBuffer);
+                const pages = pdfDoc.getPages();
+                pages.forEach(page => {
+                    const current = page.getRotation().angle;
+                    page.setRotation(degrees(current + currentRotation));
+                });
+                const pdfBytes = await pdfDoc.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = window.URL.createObjectURL(blob);
+                setDownloadUrl(url);
+                setOutputFileName('rotated.pdf');
+                setIsProcessing(false);
+                return;
+            }
+
+            // Server-side processing for other tools
             const formData = new FormData();
             files.forEach(f => formData.append('files', f));
 
@@ -165,7 +276,19 @@ const GenericTool = ({
             }
 
         } catch (err) {
-            setError(err.message);
+            console.error('Processing error:', err);
+
+            // Provide helpful error messages for server-dependent tools
+            if (err.message.includes('fetch')) {
+                const serverDependentTools = ['pdf-to-word', 'pdf-to-ppt', 'pdf-to-excel', 'word-to-pdf', 'html-to-pdf', 'rotate-pdf', 'unlock-pdf', 'protect-pdf'];
+                if (serverDependentTools.includes(endpoint)) {
+                    setError(`Server required for this tool. Try our instant client-side tools: Merge, Split, or Compress PDF.`);
+                } else {
+                    setError('Unable to connect to server. Please check your connection.');
+                }
+            } else {
+                setError(err.message);
+            }
         } finally {
             setIsProcessing(false);
         }
@@ -280,16 +403,20 @@ const GenericTool = ({
                                 </div>
                             ) : (
                                 <>
-                                    {/* File List for Ready State */}
-                                    <div className="file-list-preview">
-                                        {files.map((file, idx) => (
-                                            <div key={idx} className="file-preview-item">
-                                                <FileText size={20} />
-                                                <span className="file-name">{file.name}</span>
-                                                <span className="file-size">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
-                                            </div>
-                                        ))}
-                                    </div>
+                                    {/* File Preview Grid */}
+                                    {endpoint === 'rotate-pdf' ? (
+                                        <PageGrid file={files[0]} rotation={currentRotation} />
+                                    ) : (
+                                        <div className="file-list-preview">
+                                            {files.map((file, idx) => (
+                                                <div key={idx} className="file-preview-item">
+                                                    <FileText size={20} />
+                                                    <span className="file-name">{file.name}</span>
+                                                    <span className="file-size">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
 
                                     {/* Dynamic Inputs */}
                                     {inputs.length > 0 && (
@@ -334,9 +461,9 @@ const GenericTool = ({
                                     {/* Rotate Tool Special UI */}
                                     {endpoint === 'rotate-pdf' && (
                                         <div className="rotate-controls">
-                                            <Button variant="outline" onClick={() => setCurrentRotation(r => (r - 90) % 360)} icon={<RotateCcw />}>Left</Button>
-                                            <div className="rotation-display">{Math.abs(currentRotation)}°</div>
-                                            <Button variant="outline" onClick={() => setCurrentRotation(r => (r + 90) % 360)} icon={<RotateCw />}>Right</Button>
+                                            <Button variant="outline" onClick={() => setCurrentRotation(r => (r - 90 + 360) % 360)} icon={<RotateCcw />}>Rotate Left</Button>
+                                            <div className="rotation-display" style={{ fontWeight: 600, color: 'var(--primary)' }}>{currentRotation}°</div>
+                                            <Button variant="outline" onClick={() => setCurrentRotation(r => (r + 90) % 360)} icon={<RotateCw />}>Rotate Right</Button>
                                         </div>
                                     )}
 

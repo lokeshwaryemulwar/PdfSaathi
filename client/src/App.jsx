@@ -44,16 +44,6 @@ function App() {
                   { name: 'startPage', label: 'Start Page', type: 'number', placeholder: 'e.g. 1', required: true },
                   { name: 'endPage', label: 'End Page', type: 'number', placeholder: 'e.g. 5', required: true }
                 ];
-              } else if (tool.id === 'rotate-pdf') {
-                specificInputs = [
-                  {
-                    name: 'angle', label: 'Rotation Angle', type: 'select', options: [
-                      { value: '90', label: '90 Degrees' },
-                      { value: '180', label: '180 Degrees' },
-                      { value: '270', label: '270 Degrees' }
-                    ]
-                  }
-                ];
               } else if (tool.id === 'protect-pdf') {
                 specificInputs = [
                   { name: 'password', label: 'Set Password', type: 'password', placeholder: 'Enter password', required: true }
@@ -78,6 +68,7 @@ function App() {
                     multiple={tool.id === 'img-to-pdf'}
                     icon={tool.icon}
                     inputs={specificInputs}
+                    downloadFileName={`processed${tool.outputExtension || '.pdf'}`}
                   />
                 }
               />
