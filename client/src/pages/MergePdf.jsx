@@ -299,6 +299,10 @@ const MergePdf = () => {
                         </div>
                     </section>
                 )}
+
+                {content.longDescription && (
+                    <div className="seo-section long-description" dangerouslySetInnerHTML={{ __html: content.longDescription }} />
+                )}
             </div>
 
             <PageGrid currentTool="merge-pdf" />

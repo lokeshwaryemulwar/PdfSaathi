@@ -340,7 +340,8 @@ export const toolContent = {
         features: [
             { title: "Add Text & Images", description: "Easily type text or insert images anywhere on your PDF pages." },
             { title: "Drawing Tools", description: "Use the pencil to draw freehand or the highlighter to mark important text." },
-            { title: "Secure Editing", description: "All editing happens in your browser. Your files are never uploaded to a server for editing." }
+            { title: "Secure Editing", description: "All editing happens in your browser. Your files are never uploaded to a server for editing." },
+            { title: "No Sign-up Needed", description: "Start editing immediately. We do not ask for your email or credit card details." }
         ],
         faq: [
             { question: "Is this PDF editor free?", answer: "Yes, PDF Saathi's editor is 100% free with no limits." },
@@ -348,19 +349,30 @@ export const toolContent = {
             { question: "Is it secure?", answer: "Yes, all processing is done locally in your browser using secure web technologies. Efficiency and Privacy combined." }
         ],
         longDescription: `
-            <h3>The Power of On-Demand PDF Editing</h3>
-            <p>Need to fill out a form, sign a document, or annotate a lecture slide? You shouldn't have to print it out or buy expensive software. PDF Saathi's <strong>Online PDF Editor</strong> brings essential editing tools to your browser.</p>
-
-            <h3>Key Capabilities</h3>
+            <h3>Comprehensive PDF Editing Suite</h3>
+            <p>PDF Saathi's <strong>Online PDF Editor</strong> is more than just a quick fix tool. It is a full-featured workspace designed to handle all your document modification needs without the hassle of installing software. Whether you are a student annotating research papers or a professional signing contracts, our editor adapts to your workflow.</p>
+            
+            <h3>Powerful Editing Capabilities</h3>
+            <p>Our editor puts a wide range of tools at your fingertips:</p>
             <ul>
-                <li><strong>Add Text:</strong> Fill in non-interactive forms by typing directly over the fields. Change font size and color to match.</li>
-                <li><strong>Insert Images:</strong> Add your logo, a digital stamp, or a photo to any document.</li>
-                <li><strong>Annotate:</strong> Use the highlighter to emphasize key points or the pencil tool for freehand notes.</li>
-                <li><strong>Whiteout:</strong> Made a mistake? Use the eraser/whiteout tool to cover up errors before adding the correct info.</li>
+                <li><strong>Text Manipulation:</strong> Insert new text anywhere on the page. Customize font size, color, and style to match the original document seamlessly.</li>
+                <li><strong>Visual Elements:</strong> Add images, logos, or digital stamps to your PDFs. Perfect for branding documents or adding headshots to application forms.</li>
+                <li><strong>Drawing & Annotation:</strong> Use the freehand pencil tool for signatures or sketches. Highlight key paragraphs in vibrant colors to emphasize important information.</li>
+                <li><strong>Eraser & Whiteout:</strong> Made a mistake or need to redact sensitive info? Use the whiteout tool to cover existing content cleanly.</li>
             </ul>
 
-            <h3>Privacy-First Editing</h3>
-            <p>Unlike other online editors, our tool runs <strong>entirely in your browser</strong>. This means your document isn't uploaded to a remote server for processing. This architectural decision ensures maximum speed and complete data privacy.</p>
+            <h3>Why Choose Our Online Editor?</h3>
+            <p>Traditional desktop software is expensive and heavy. PDF Saathi offers a lightweight, cloud-ready alternative that works instantly on any device.</p>
+            <ul>
+                <li><strong>Cross-Platform:</strong> Works perfectly on Windows, Mac, Linux, Chromebooks, and even tablets.</li>
+                <li><strong>Privacy Guaranteed:</strong> Your files are processed locally in your browser for maximum security. We do not store your sensitive documents.</li>
+                <li><strong>Zero Installation:</strong> No need to download large installer files or wait for updates. The latest version is always ready in your browser.</li>
+            </ul>
+
+            <h3>Common Use Cases</h3>
+            <p><strong>For Business:</strong> Fill out non-interactive PDF forms, sign agreements, and redact confidential data.</p>
+            <p><strong>For Education:</strong> Grade assignments digitally, add feedback notes, and highlight study material.</p>
+            <p><strong>For Personal Use:</strong> Fill out government forms, sign leases, or add photos to your CV.</p>
         `
     },
     'default': {
@@ -433,6 +445,333 @@ export const toolContent = {
 
             <h3>Quality Commitment</h3>
             <p>We don't just change the file extension. Our backend properly re-encodes your image data, handling alpha channels (transparency) and color profiles to ensure your converted image looks just as good as the original.</p>
+        `
+    },
+    'pdf-to-ppt': {
+        title: "PDF to PowerPoint Converter - Editable Slides",
+        description: "Convert your PDF files to editable PowerPoint (PPT/PPTX) presentations. accurate formatting preservation for professional use.",
+        howTo: {
+            heading: "How to Convert PDF to PowerPoint",
+            steps: [
+                {
+                    title: "Upload PDF",
+                    description: "Select the PDF file you wish to convert."
+                },
+                {
+                    title: "Convert",
+                    description: "Click 'Convert to PPT'. Our engine will recreate your slides."
+                },
+                {
+                    title: "Download",
+                    description: "Download your new PowerPoint presentation."
+                }
+            ]
+        },
+        features: [
+            {
+                title: "Editable Slides",
+                description: "Text boxes, shapes, and images are preserved so you can edit them in PowerPoint."
+            },
+            {
+                title: "Layout Preservation",
+                description: "We keep your original slide layout, backgrounds, and fonts intact."
+            }
+        ],
+        faq: [
+            {
+                question: "Can I edit the text after conversion?",
+                answer: "Yes, the resulting PPTX file contains editable text boxes, not just images of slides."
+            },
+            {
+                question: "Does it work with scanned PDFs?",
+                answer: "Scanned PDFs will be converted as images on slides unless you use OCR (coming soon)."
+            }
+        ],
+        longDescription: `
+            <h3>Turn PDFs into Presentations</h3>
+            <p>Recreating a presentation from a PDF file is a tedious task. You have to copy text, take screenshots of images, and manually align everything. Our <strong>PDF to PowerPoint Converter</strong> does the heavy lifting for you.</p>
+            <p>We analyze the PDF structure and map it directly to PowerPoint slides, converting static pages into editable elements.</p>
+            <h3>Why Use This Tool?</h3>
+            <ul>
+                <li><strong>Teachers:</strong> Convert lecture notes PDF back to slides for class.</li>
+                <li><strong>Business:</strong>Recover lost presentation files from the PDF handouts.</li>
+            </ul>
+`
+    },
+    'pdf-to-excel': {
+        title: "PDF to Excel Converter - Extract Data to Spreadsheets",
+        description: "Convert PDF tables to Excel spreadsheets (XLSX, CSV). Extract data accurately for analysis.",
+        howTo: {
+            heading: "How to Convert PDF to Excel",
+            steps: [
+                { title: "Upload PDF", description: "Upload the PDF containing data tables." },
+                { title: "Process", description: "Our tool detects tables and grid structures automatically." },
+                { title: "Download", description: "Get your Excel file with organized rows and columns." }
+            ]
+        },
+        features: [
+            { title: "Smart Table Detection", description: "We identify table borders and separate data into correct cells." },
+            { title: "Multiple Sheets", description: "Each page can be converted to a separate sheet or combined into one." }
+        ],
+        faq: [
+            { question: "Will the formulas be preserved?", answer: "No, PDFs only contain the results. You will get the values, but you can re-apply formulas in Excel." }
+        ],
+        longDescription: `
+            <h3>Stop Retyping Data</h3>
+            <p>Data trapped in a PDF is useless. Copy-pasting leads to formatting errors and merged cells. Our <strong>PDF to Excel</strong> tool intelligently extracts tabular data.</p>
+            <p>It is perfect for financial statements, invoices, and product lists. We ensure that rows and columns line up perfectly so you can start analyzing data immediately.</p>
+`
+    },
+    'jpg-to-pdf': {
+        title: "JPG to PDF Converter - Merge Images to Document",
+        description: "Convert JPG, PNG, and other images to a single PDF document. Perfect for creating portfolios or scanning documents.",
+        howTo: {
+            heading: "How to Convert Images to PDF",
+            steps: [
+                { title: "Select Images", description: "Upload one or more images (JPG, PNG, GIF, BMP)." },
+                { title: "Arrange", description: "Drag and drop to change the order of images." },
+                { title: "Create PDF", description: "Click convert to generate a single PDF file containing all your images." }
+            ]
+        },
+        features: [
+            { title: "Multiple Formats", description: "Combine different image types (e.g., a PNG logo and a JPG photo) into one PDF." },
+            { title: "No Quality Loss", description: "We preserve the original resolution of your images." }
+        ],
+        faq: [
+            { question: "Can I combine multiple photos?", answer: "Yes, you can upload multiple photos and merge them into one PDF file." }
+        ],
+        longDescription: `
+            <h3>Organize Your Photos</h3>
+            <p>Sending 20 separate image attachments in an email is unprofessional and annoying. Convert them into a single, clean PDF document instead.</p>
+            <p>This tool is essential for:</p>
+            <ul>
+                <li><strong>Portfolios:</strong> Designers and photographers can showcase their work.</li>
+                <li><strong>Paperwork:</strong> Combine photos of ID cards and forms into one file for applications.</li>
+                <li><strong>Receipts:</strong> Consolidate photos of receipts for expense reports.</li>
+            </ul>
+`
+    },
+    'html-to-pdf': {
+        title: "HTML to PDF - Save Web Pages as Documents",
+        description: "Convert HTML files or code to high-quality PDF. Perfect for reports, invoices, and documentation.",
+        howTo: {
+            heading: "How to Convert HTML to PDF",
+            steps: [
+                { title: "Upload HTML", description: "Upload your .html file." },
+                { title: "Convert", description: "Our engine renders the HTML and saves it as a PDF." },
+                { title: "Download", description: "Save your website snapshot as a portable document." }
+            ]
+        },
+        features: [
+            { title: "CSS Support", description: "We support CSS styling to ensure the PDF looks like the web page." },
+            { title: "Links Preserved", description: "Hyperlinks in the HTML remain clickable in the PDF." }
+        ],
+        faq: [
+            { question: "Can I convert a live URL?", answer: "Currently we support file uploads (HTML files). URL support is coming soon." }
+        ],
+        longDescription: `
+            <h3>Archive the Web</h3>
+            <p>Web pages change constantly. Converting HTML to PDF allows you to capture a static snapshot of a page for archiving, legal records, or offline reading.</p>
+            <p>Developers use this to generate invoices, reports, and tickets from HTML templates using a consistent rendering engine.</p>
+`
+    },
+    'rotate-pdf': {
+        title: "Rotate PDF Pages - Fix Orientation Permanently",
+        description: "Rotate PDF pages 90, 180, or 270 degrees. Save the new orientation permanently. Works on all devices.",
+        howTo: {
+            heading: "How to Rotate PDF Pages",
+            steps: [
+                { title: "Upload PDF", description: "Select the file with incorrect orientation." },
+                { title: "Rotate", description: "Use the buttons to rotate left or right until it looks correct." },
+                { title: "Apply", description: "Click 'Process' to save the changes permanently." }
+            ]
+        },
+        features: [
+            { title: "Permanent Fix", description: "Unlike the 'view' rotation in PDF readers, this change is saved to the file itself." },
+            { title: "Entire Document", description: "Rotate all pages at once for consistency." }
+        ],
+        faq: [
+            { question: "Will this affect text selection?", answer: "No, text selection and searching will still work correctly after rotation." }
+        ],
+        longDescription: `
+            <h3>Fix Upside-Down Scans</h3>
+            <p>It happens to everyone: you scan a stack of documents, but you fed them in the wrong way. Now all your pages are upside down.</p>
+            <p>Our <strong>Rotate PDF</strong> tool fixes this instantly. You don't need to re-scan. Just upload, click rotate, and download. It is a simple tool for a common problem.</p>
+`
+    },
+    'unlock-pdf': {
+        title: "Unlock PDF - Remove Passwords Instantly",
+        description: "Remove security and restrictions from PDF files. Print, copy, and edit your document without passwords.",
+        howTo: {
+            heading: "How to Remove PDF Password",
+            steps: [
+                { title: "Upload Locked PDF", description: "Select the encrypted file." },
+                { title: "Enter Password", description: "If you know the user password, enter it once to decrypt permanently." },
+                { title: "Unlock", description: "Download the unsecured version of your file." }
+            ]
+        },
+        features: [
+            { title: "Remove Restrictions", description: "Enable printing, copying, and editing on restricted files." },
+            { title: "Permanent Decryption", description: "The new file will not ask for a password when opened." }
+        ],
+        faq: [
+            { question: "Can you crack my forgotten password?", answer: "We can remove owner restrictions instantly. However, for user open passwords, you must provide the correct password once to verify ownership." }
+        ],
+        longDescription: `
+            <h3>Free Your Documents</h3>
+            <p>Password protection is important, but it can be annoying when you need to share a file with colleagues who don't have the code, or when you want to print a file that is restricted.</p>
+            <p><strong>Unlock PDF</strong> creates a copy of your file with all security layers removed. You can then archive it or share it freely. Please ensure you have the right to remove the protection before using this tool.</p>
+`
+    },
+    'protect-pdf': {
+        title: "Protect PDF - Encrypt with Strong Passwords",
+        description: "Secure your PDF documents with AES encryption. Prevent unauthorized opening, copying, or printing.",
+        howTo: {
+            heading: "How to Password Protect a PDF",
+            steps: [
+                { title: "Upload File", description: "Choose the document you want to secure." },
+                { title: "Set Password", description: "Type a strong password. You can also set restrictions for printing or copying." },
+                { title: "Encrypt", description: "Download your protected file." }
+            ]
+        },
+        features: [
+            { title: "Bank-Grade Encryption", description: "We use 128-bit or 256-bit AES encryption, making it virtually impossible to crack." },
+            { title: "Granular Control", description: "Choose to block just printing or editing, or block opening entirely." }
+        ],
+        faq: [
+            { question: "What if I forget my password?", answer: "Please remember it! Strong encryption means there is no back door. If you lose the password, the file cannot be recovered." }
+        ],
+        longDescription: `
+            <h3>Secure Sensitive Information</h3>
+            <p>Sending contracts, bank statements, or personal ID documents via email can be risky. If your account is compromised, your data is exposed.</p>
+            <p><strong>Protect PDF</strong> adds a layer of military-grade security. Even if a hacker steals the file, they cannot open it without your password.</p>
+            <ul>
+                <li><strong>User Password:</strong> Required to open the file.</li>
+                <li><strong>Owner Password:</strong> Required to change permissions (like printing or editing).</li>
+            </ul>
+`
+    },
+    'img-to-pdf': {
+        title: "JPG to PDF Converter - Convert Images to PDF Online",
+        description: "Convert JPG, PNG, BMP, GIF, and TIFF images to PDF documents for free. Merge multiple images into a single PDF file.",
+        howTo: {
+            heading: "How to Convert Images to PDF",
+            steps: [
+                {
+                    title: "Upload Images",
+                    description: "Drag and drop your image files (JPG, PNG, etc.) into the converter area."
+                },
+                {
+                    title: "Adjust Order",
+                    description: "Drag the image thumbnails to rearrange them in the desired order for your PDF."
+                },
+                {
+                    title: "Convert & Download",
+                    description: "Click 'Convert to PDF' to merge your images into a single document and download it instantly."
+                }
+            ]
+        },
+        features: [
+            {
+                title: "Support All Image Formats",
+                description: "We support JPG, JPEG, PNG, BMP, GIF, and TIFF. No need to convert your images before uploading."
+            },
+            {
+                title: "Merge Multiple Images",
+                description: "Combine dozens of photos into one organized PDF file. Perfect for creating photo albums or compiling scanned documents."
+            },
+            {
+                title: "High Quality Output",
+                description: "Your images are converted with no loss in quality. The resulting PDF will look exactly like your original photos."
+            }
+        ],
+        faq: [
+            {
+                question: "How many images can I convert at once?",
+                answer: "You can upload and convert as many images as you like in a single session. There are no strict limits."
+            },
+            {
+                question: "Does it work with PNG files?",
+                answer: "Yes! It works perfectly with PNG, JPG, BMP, and other common image formats."
+            },
+            {
+                question: "Is my data safe?",
+                answer: "Absolutely. Your files are processed securely and deleted from our servers automatically after one hour."
+            }
+        ],
+        longDescription: `
+            <h3>Turn Your Photos into Documents</h3>
+            <p>Sharing multiple image files can be cumbersome. They get attached as separate files in emails, they might display in the wrong order, and they are hard to print correctly.</p>
+            <p>Converting your images to PDF solves all these problems. By merging your photos into a single PDF file, you create a neat, professional-looking document that is easy to share, view, and print on any device.</p>
+
+            <h3>Perfect for Work and Home</h3>
+            <ul>
+                <li><strong>Scanned Documents:</strong> If you've taken photos of paper documents, convert them to PDF to make them look like professional scans.</li>
+                <li><strong>Portfolios:</strong> Photographers and designers can combine their best work into a single PDF portfolio to send to clients.</li>
+                <li><strong>Receipts & Records:</strong> organizing photos of receipts for expense reports is much easier when they are all in one PDF file.</li>
+            </ul>
+
+            <h3>No Software Needed</h3>
+            <p>Why install heavy software just to convert a few photos? PDF Saathi's <strong>Image to PDF Converter</strong> works entirely in your browser. It is fast, free, and works on your phone, tablet, or computer.</p>
+        `
+    },
+    'html-to-pdf': {
+        title: "HTML to PDF Converter - Save Web Pages as Documents",
+        description: "Convert HTML files or code to high-quality PDF. Perfect for reports, invoices, and documentation.",
+        howTo: {
+            heading: "How to Convert HTML to PDF",
+            steps: [
+                {
+                    title: "Upload HTML File",
+                    description: "Upload your .html file or paste your code directly into the converter."
+                },
+                {
+                    title: "Review Settings",
+                    description: "The default settings work great for most web pages. Click 'Convert' to start."
+                },
+                {
+                    title: "Download PDF",
+                    description: "Your HTML is transformed into a clean PDF document, ready for download."
+                }
+            ]
+        },
+        features: [
+            {
+                title: "Accurate Rendering",
+                description: "Our converter preserves your CSS styles, fonts, and layout, so your PDF looks just like the web page."
+            },
+            {
+                title: "Offline Viewing",
+                description: "Save important web articles, receipts, or documentation to read offline on any device."
+            },
+            {
+                title: "Secure & Private",
+                description: "Files are processed automatically and deleted after one hour. We do not store your data."
+            }
+        ],
+        faq: [
+            {
+                question: "Can I convert local HTML files?",
+                answer: "Yes, you can upload any .html or .htm file from your computer."
+            },
+            {
+                question: "Does it support CSS and Javascript?",
+                answer: "We support modern CSS and basic Javascript rendering to ensure your PDF matches the original design."
+            },
+            {
+                question: "Is it free?",
+                answer: "Yes, PDF Saathi is completely free to use with no hidden limits."
+            }
+        ],
+        longDescription: `
+            <h3>Archive the Web</h3>
+            <p>Web pages change or disappear all the time. Saving a page as a PDF allows you to keep a permanent, unchangeable record of the information you need. Whether it's a digital receipt, a research article, or a legal notice, HTML to PDF conversion is the best way to archive web content.</p>
+
+            <h3>Professional Reports</h3>
+            <p>Developers and businesses often generate reports in HTML format. Converting these to PDF makes them easy to distribute, print, and present to clients in a professional, standardized format.</p>
+
+            <h3>Developer Friendly</h3>
+            <p>Need to create documentation? Write it in simple HTML/CSS and convert it to PDF for a polished user manual.</p>
         `
     }
 };

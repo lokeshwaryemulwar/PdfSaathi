@@ -431,3 +431,65 @@
     line-height: 1.7;
     margin: 0;
 }
+
+/* =========================================
+   Long Description Styling
+   ========================================= */
+
+.long-description {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+}
+
+.long-description h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.long-description h3:first-child {
+    margin-top: 0;
+}
+
+.long-description p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+}
+
+.long-description ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 2rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.long-description li {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.long-description li::before {
+    content: "•";
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1;
+    top: 0.2rem;
+}
+
+.long-description strong {
+    color: var(--text-main);
+    font-weight: 600;
+}

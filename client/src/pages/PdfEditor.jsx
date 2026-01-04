@@ -549,6 +549,7 @@ export default function PdfEditor() {
 
                 {/* RICH CONTENT SECTION (Same as other tools) */}
                 <div className="tool-content-section" style={{ maxWidth: '800px', margin: '4rem auto', padding: '0 1rem' }}>
+
                     {content.howTo && (
                         <section className="seo-section how-to">
                             <h2>{content.howTo.heading}</h2>
@@ -600,6 +601,10 @@ export default function PdfEditor() {
                                 ))}
                             </div>
                         </section>
+                    )}
+
+                    {content.longDescription && (
+                        <div className="seo-section long-description" dangerouslySetInnerHTML={{ __html: content.longDescription }} />
                     )}
                 </div>
             </div>

@@ -197,6 +197,24 @@ const GenericTool = ({
                                 onFilesSelected={handleFilesSelected}
                                 accept={accept}
                                 multiple={multiple}
+                                title={
+                                    accept && accept.includes('image') ? 'Drop images here' :
+                                        accept && (accept.includes('.doc') || accept.includes('.docx')) ? 'Drop Word files here' :
+                                            accept && accept.includes('.html') ? 'Drop HTML files here' :
+                                                'Drop PDF files here'
+                                }
+                                subtitle={
+                                    accept && accept.includes('image') ? 'or click to select images' :
+                                        accept && (accept.includes('.doc') || accept.includes('.docx')) ? 'or click to select documents' :
+                                            accept && accept.includes('.html') ? 'or click to select HTML files' :
+                                                'or click to select files'
+                                }
+                                buttonText={
+                                    accept && accept.includes('image') ? 'Select Images' :
+                                        accept && (accept.includes('.doc') || accept.includes('.docx')) ? 'Select Word Files' :
+                                            accept && accept.includes('.html') ? 'Select HTML Files' :
+                                                'Select PDF Files'
+                                }
                             />
                         </div>
                     ) : (
@@ -402,7 +420,7 @@ const GenericTool = ({
 
                 {/* Long Form Publisher Content (New for AdSense) */}
                 {content.longDescription && (
-                    <section className="seo-section long-description" style={{ marginTop: '3rem', borderTop: '1px solid #e5e7eb', paddingTop: '2rem' }}>
+                    <section className="seo-section long-description">
                         <div dangerouslySetInnerHTML={{ __html: content.longDescription }} />
                     </section>
                 )}
