@@ -4,10 +4,18 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { authMiddleware, JWT_SECRET } = require('../middleware/auth');
 
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
 
+// Rate limiter for signup
+const signupLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour window
+    max: 5, // start blocking after 5 requests
+    message: { error: "Too many accounts created from this IP, please try again after an hour" }
+});
+
 // Signup
-router.post('/signup', async (req, res) => {
+router.post('/signup', signupLimiter, async (req, res) => {
     try {
         const { email, password, name } = req.body;
 
