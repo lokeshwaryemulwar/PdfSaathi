@@ -84,7 +84,7 @@ export const tools = [
         title: 'JPG to PDF',
         description: 'Convert JPG, PNG, BMP, GIF, and TIFF images to PDF.',
         icon: FileImage,
-        path: '/jpg-to-pdf',
+        path: '/image-to-pdf',
         color: '#F59E0B', // Amber
         category: 'convert-to',
         accept: 'image/*'
