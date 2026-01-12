@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SEO from '../layout/SEO';
+
 import API_BASE_URL from '../../config';
 import { ArrowLeft, Download, AlertCircle, FileText, CheckCircle, RotateCw, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -296,12 +296,7 @@ const GenericTool = ({
 
     return (
         <div className="container tool-page">
-            <SEO
-                title={pageTitle}
-                description={pageDescription}
-                url={`https://pdfsaathi.in/${endpoint}`}
-                schema={toolSchema}
-            />
+
 
             <div className="tool-main-section">
                 <div className="tool-header">
