@@ -522,59 +522,7 @@ export const toolContent = {
             <p>It is perfect for financial statements, invoices, and product lists. We ensure that rows and columns line up perfectly so you can start analyzing data immediately.</p>
 `
     },
-    'jpg-to-pdf': {
-        title: "JPG to PDF Converter - Merge Images to Document",
-        description: "Convert JPG, PNG, and other images to a single PDF document. Perfect for creating portfolios or scanning documents.",
-        howTo: {
-            heading: "How to Convert Images to PDF",
-            steps: [
-                { title: "Select Images", description: "Upload one or more images (JPG, PNG, GIF, BMP)." },
-                { title: "Arrange", description: "Drag and drop to change the order of images." },
-                { title: "Create PDF", description: "Click convert to generate a single PDF file containing all your images." }
-            ]
-        },
-        features: [
-            { title: "Multiple Formats", description: "Combine different image types (e.g., a PNG logo and a JPG photo) into one PDF." },
-            { title: "No Quality Loss", description: "We preserve the original resolution of your images." }
-        ],
-        faq: [
-            { question: "Can I combine multiple photos?", answer: "Yes, you can upload multiple photos and merge them into one PDF file." }
-        ],
-        longDescription: `
-            <h3>Organize Your Photos</h3>
-            <p>Sending 20 separate image attachments in an email is unprofessional and annoying. Convert them into a single, clean PDF document instead.</p>
-            <p>This tool is essential for:</p>
-            <ul>
-                <li><strong>Portfolios:</strong> Designers and photographers can showcase their work.</li>
-                <li><strong>Paperwork:</strong> Combine photos of ID cards and forms into one file for applications.</li>
-                <li><strong>Receipts:</strong> Consolidate photos of receipts for expense reports.</li>
-            </ul>
-`
-    },
-    'html-to-pdf': {
-        title: "HTML to PDF - Save Web Pages as Documents",
-        description: "Convert HTML files or code to high-quality PDF. Perfect for reports, invoices, and documentation.",
-        howTo: {
-            heading: "How to Convert HTML to PDF",
-            steps: [
-                { title: "Upload HTML", description: "Upload your .html file." },
-                { title: "Convert", description: "Our engine renders the HTML and saves it as a PDF." },
-                { title: "Download", description: "Save your website snapshot as a portable document." }
-            ]
-        },
-        features: [
-            { title: "CSS Support", description: "We support CSS styling to ensure the PDF looks like the web page." },
-            { title: "Links Preserved", description: "Hyperlinks in the HTML remain clickable in the PDF." }
-        ],
-        faq: [
-            { question: "Can I convert a live URL?", answer: "Currently we support file uploads (HTML files). URL support is coming soon." }
-        ],
-        longDescription: `
-            <h3>Archive the Web</h3>
-            <p>Web pages change constantly. Converting HTML to PDF allows you to capture a static snapshot of a page for archiving, legal records, or offline reading.</p>
-            <p>Developers use this to generate invoices, reports, and tickets from HTML templates using a consistent rendering engine.</p>
-`
-    },
+
     'rotate-pdf': {
         title: "Rotate PDF Pages - Fix Orientation Permanently",
         description: "Rotate PDF pages 90, 180, or 270 degrees. Save the new orientation permanently. Works on all devices.",
