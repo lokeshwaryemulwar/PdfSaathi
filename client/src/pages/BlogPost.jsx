@@ -4,6 +4,7 @@ import { Calendar, User, Clock, ArrowLeft } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { blogPosts } from '../data/blogPosts';
+import DynamicSEO from '../components/layout/DynamicSEO';
 import './ContentPage.css';
 
 const BlogPost = () => {
@@ -14,6 +15,7 @@ const BlogPost = () => {
     if (!post) {
         return (
             <div className="container content-page" style={{ textAlign: 'center', padding: '4rem 0' }}>
+                <DynamicSEO title="Post Not Found" description="The requested blog post could not be found." />
                 <h1>Blog Post Not Found</h1>
                 <p style={{ marginTop: '1rem', color: 'var(--text-muted)' }}>
                     The blog post you're looking for doesn't exist.
@@ -78,6 +80,10 @@ const BlogPost = () => {
 
     return (
         <div className="container content-page">
+            <DynamicSEO
+                title={post.title}
+                description={post.excerpt}
+            />
             {/* Back Button */}
             <Button
                 variant="outline"
