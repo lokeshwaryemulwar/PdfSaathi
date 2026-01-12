@@ -6,16 +6,13 @@ import Benefits from '../components/home/Benefits';
 import CoreValues from '../components/home/CoreValues';
 import CallToAction from '../components/home/CallToAction';
 import LatestArticles from '../components/home/LatestArticles';
-import SEO from '../components/layout/SEO';
+
 import AdUnit from '../components/ads/AdUnit';
 
 const Home = () => {
     return (
         <main className="home-page">
-            <SEO
-                title="Home"
-                description="PDF Saathi is your free, all-in-one online PDF tool. Merge, split, compress, and convert PDFs securely and easily."
-            />
+
             <Hero />
             <div className="container">
                 <div style={{ padding: '4rem 0 2rem' }}>

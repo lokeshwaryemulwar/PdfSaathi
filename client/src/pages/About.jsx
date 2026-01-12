@@ -2,7 +2,7 @@ import React from 'react';
 import AboutAnimation from '../components/about/AboutAnimation';
 import './ContentPage.css';
 
-import SEO from '../components/layout/SEO';
+
 
 const About = () => {
     const aboutSchema = {
@@ -14,12 +14,7 @@ const About = () => {
 
     return (
         <div className="container content-page">
-            <SEO
-                title="About Us - PDF Saathi"
-                description="Meet Lokeshwar Yemulwar (Lucky), the creator of PDF Saathi, and learn about our mission to make PDF tools free and accessible."
-                url="https://pdfsaathi.in/about"
-                schema={aboutSchema}
-            />
+
 
             <section className="about-hero animate-fade-in">
                 <h1 className="page-title">Making document tools accessible for everyone.</h1>

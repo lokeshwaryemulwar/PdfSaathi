@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import FileUpload from '../components/ui/FileUpload';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
-import SEO from '../components/layout/SEO';
+
 import AdUnit from '../components/ads/AdUnit';
 import PageGrid from '../components/tools/PageGrid';
 import { getToolContent } from '../data/toolContent';
@@ -136,12 +136,7 @@ const MergePdf = () => {
 
     return (
         <div className="container tool-page">
-            <SEO
-                title={pageTitle}
-                description={pageDescription}
-                url="https://pdfsaathi.in/merge-pdf"
-                schema={toolSchema}
-            />
+
 
             {downloadUrl ? (
                 <div className="success-view">

@@ -22,7 +22,7 @@ import {
 import Button from '../components/ui/Button';
 import RenameModal from '../components/ui/RenameModal';
 import FileUpload from "../components/ui/FileUpload";
-import SEO from '../components/layout/SEO';
+
 import { getToolContent } from '../data/toolContent';
 import '../components/tools/GenericTool.css';
 import './PdfEditor.css';
@@ -529,11 +529,7 @@ export default function PdfEditor() {
         // MATCH GENERIC TOOL/MERGE PDF STYLE
         return (
             <div className="container tool-page">
-                <SEO
-                    title={pageTitle}
-                    description={pageDescription}
-                    url="https://pdfsaathi.in/edit-pdf"
-                />
+
 
                 <div className="tool-main-section">
                     <div className="tool-header">
