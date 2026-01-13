@@ -523,9 +523,9 @@ exports.removeBackground = async (req, res) => {
         // Read the image file
         const imageBuffer = fs.readFileSync(file.path);
 
-        // Use Hugging Face's free inference API with RMBG-1.4 model
-        // This model is specifically designed for background removal and is lightweight
-        const HF_MODEL = 'briaai/RMBG-1.4';
+        // Use Hugging Face's free inference API with a reliable background removal model
+        // Using Xenova/modnet which is stable and typically ungated
+        const HF_MODEL = 'Xenova/modnet';
         const HF_API_URL = `https://api-inference.huggingface.co/models/${HF_MODEL}`;
 
         console.log('Removing background using Hugging Face model:', HF_MODEL);
