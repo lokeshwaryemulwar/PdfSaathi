@@ -1,0 +1,581 @@
+
+> client@0.0.0 lint
+> eslint .
+
+
+C:\PdfSaathi-main\client\public\pdf.worker.js
+     52:49   error  'process' is not defined                                                                         no-undef
+     52:89   error  'process' is not defined                                                                         no-undef
+     52:114  error  'process' is not defined                                                                         no-undef
+     52:143  error  'process' is not defined                                                                         no-undef
+     52:159  error  'process' is not defined                                                                         no-undef
+    394:15   error  Empty block statement                                                                            no-empty
+    400:10   error  'updateUrlHash' is defined but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+    790:35   error  Unexpected control character(s) in regular expression: \x1b, \x1b, \x1b                          no-control-regex
+    800:54   error  Empty block statement                                                                            no-empty
+    841:10   error  'getUuid' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+    906:10   error  'toBase64Util' is defined but never used. Allowed unused vars must match /^[A-Z_]/u              no-unused-vars
+   1080:22   error  'key' is defined but never used                                                                  no-unused-vars
+   1080:27   error  'value' is defined but never used                                                                no-unused-vars
+   1240:3    error  Expected to return a value in getter 'length'                                                    getter-return
+   1243:3    error  Expected to return a value in getter 'isEmpty'                                                   getter-return
+   1252:12   error  'length' is defined but never used                                                               no-unused-vars
+   1300:16   error  'begin' is defined but never used                                                                no-unused-vars
+   1300:23   error  'end' is defined but never used                                                                  no-unused-vars
+   1315:32   error  'dict' is assigned a value but never used                                                        no-unused-vars
+   1751:18   error  Unexpected control character(s) in regular expression: \x00                                      no-control-regex
+   1983:28   error  'imports' is defined but never used                                                              no-unused-vars
+   1983:37   error  'memory' is defined but never used                                                               no-unused-vars
+   2033:36   error  'qcms' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+   2033:83   error  Unexpected constant truthiness on the left-hand side of a `&&` expression                        no-constant-binary-expression
+   2126:14   error  'src' is defined but never used                                                                  no-unused-vars
+   2126:19   error  'srcOffset' is defined but never used                                                            no-unused-vars
+   2126:30   error  'dest' is defined but never used                                                                 no-unused-vars
+   2126:36   error  'destOffset' is defined but never used                                                           no-unused-vars
+   2129:16   error  'src' is defined but never used                                                                  no-unused-vars
+   2129:21   error  'srcOffset' is defined but never used                                                            no-unused-vars
+   2129:32   error  'count' is defined but never used                                                                no-unused-vars
+   2129:39   error  'dest' is defined but never used                                                                 no-unused-vars
+   2129:45   error  'destOffset' is defined but never used                                                           no-unused-vars
+   2129:57   error  'bits' is defined but never used                                                                 no-unused-vars
+   2129:63   error  'alpha01' is defined but never used                                                              no-unused-vars
+   2132:19   error  'inputLength' is defined but never used                                                          no-unused-vars
+   2132:32   error  'alpha01' is defined but never used                                                              no-unused-vars
+   2135:17   error  'bits' is defined but never used                                                                 no-unused-vars
+   2138:30   error  'bpc' is defined but never used                                                                  no-unused-vars
+   2266:19   error  'decodeMap' is defined but never used                                                            no-unused-vars
+   2266:30   error  'bpc' is defined but never used                                                                  no-unused-vars
+   2390:32   error  '_alpha01' is defined but never used                                                             no-unused-vars
+   2714:19   error  'decodeMap' is defined but never used                                                            no-unused-vars
+   2714:30   error  'bpc' is defined but never used                                                                  no-unused-vars
+   2766:38   error  'FinalizationRegistry' is not defined                                                            no-undef
+   3775:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4125:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4128:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4135:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4136:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4152:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4177:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4178:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4182:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4185:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4191:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4874:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4953:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4986:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4988:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   4989:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5021:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5028:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5029:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5056:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5079:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5081:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5093:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5121:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   5361:16   error  'requested' is defined but never used                                                            no-unused-vars
+   5480:18   error  'readBinary' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+   5483:7    error  'scriptDirectory' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   5484:13   error  Empty block statement                                                                            no-empty
+   5485:5    error  'readAsync' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+   5494:10   error  Empty block statement                                                                            no-empty
+   5550:7    error  'wasmBinaryFile' is defined but never used. Allowed unused vars must match /^[A-Z_]/u            no-unused-vars
+   5557:40   error  'module' is defined but never used                                                               no-unused-vars
+   5565:34   error  'reject' is defined but never used                                                               no-unused-vars
+   5610:25   error  'implicit' is defined but never used                                                             no-unused-vars
+   5698:14   error  'e' is defined but never used                                                                    no-unused-vars
+   5698:17   error  Empty block statement                                                                            no-empty
+   5736:16   error  'x' is already defined                                                                           no-redeclare
+   5815:33   error  'whence' is defined but never used                                                               no-unused-vars
+   5815:41   error  'newOffset' is defined but never used                                                            no-unused-vars
+   5816:5    error  'offset' is assigned a value but never used                                                      no-unused-vars
+   5936:29   error  'wasmBinary' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u       no-unused-vars
+   5937:28   error  'arguments_' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u       no-unused-vars
+   6369:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6370:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6371:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6380:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6381:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6434:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6435:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6436:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   6485:27   error  'i' is defined but never used                                                                    no-unused-vars
+   6719:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   7709:30   error  '_decoderOptions' is defined but never used                                                      no-unused-vars
+   8985:14   error  Unexpected constant condition                                                                    no-constant-condition
+   9257:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9258:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9301:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9304:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9344:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9345:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9356:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9359:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9381:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9384:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9403:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+   9412:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  10037:9    error  'data' is defined but never used                                                                 no-unused-vars
+  10059:16   error  'requested' is defined but never used                                                            no-unused-vars
+  10116:16   error  'requested' is defined but never used                                                            no-unused-vars
+  10117:13   error  'decoderOptions' is defined but never used                                                       no-unused-vars
+  10552:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  10565:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  11055:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  11254:15   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  11699:15   error  'low' is defined but never used                                                                  no-unused-vars
+  11699:20   error  'high' is defined but never used                                                                 no-unused-vars
+  11699:26   error  'dstLow' is defined but never used                                                               no-unused-vars
+  11702:14   error  'low' is defined but never used                                                                  no-unused-vars
+  11702:19   error  'high' is defined but never used                                                                 no-unused-vars
+  11702:25   error  'dstLow' is defined but never used                                                               no-unused-vars
+  11705:21   error  'low' is defined but never used                                                                  no-unused-vars
+  11705:26   error  'high' is defined but never used                                                                 no-unused-vars
+  11705:32   error  'array' is defined but never used                                                                no-unused-vars
+  11708:10   error  'src' is defined but never used                                                                  no-unused-vars
+  11708:15   error  'dst' is defined but never used                                                                  no-unused-vars
+  11735:3    error  Expected to return a value in getter 'isIdentityCMap'                                            getter-return
+  17681:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  17687:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  17688:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  17723:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  18234:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  18321:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  18322:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  18323:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  18331:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  19342:9    error  'map' is defined but never used                                                                  no-unused-vars
+  19469:33   error  'end' is defined but never used                                                                  no-unused-vars
+  19643:30   error  Empty block statement                                                                            no-empty
+  19884:15   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  20117:55   error  'Float16Array' is not defined                                                                    no-undef
+  23796:9    error  'x' is defined but never used                                                                    no-unused-vars
+  23796:12   error  'factor' is defined but never used                                                               no-unused-vars
+  24070:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24082:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24083:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24092:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24359:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24427:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24431:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24432:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24460:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  24510:11   error  Empty block statement                                                                            no-empty
+  24549:32   error  'suggestedLength' is defined but never used                                                      no-unused-vars
+  25429:9    error  Expected a 'break' statement before 'case'                                                       no-fallthrough
+  25432:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  26256:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  26261:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  26273:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  28219:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  29215:7    error  'name' is defined but never used                                                                 no-unused-vars
+  29215:13   error  'ref' is defined but never used                                                                  no-unused-vars
+  29215:18   error  'data' is defined but never used                                                                 no-unused-vars
+  29260:15   error  'options' is defined but never used                                                              no-unused-vars
+  29265:7    error  'name' is assigned a value but never used                                                        no-unused-vars
+  29295:15   error  'options' is defined but never used                                                              no-unused-vars
+  29300:7    error  'name' is assigned a value but never used                                                        no-unused-vars
+  29311:15   error  'options' is defined but never used                                                              no-unused-vars
+  29316:7    error  'name' is assigned a value but never used                                                        no-unused-vars
+  29327:15   error  'options' is defined but never used                                                              no-unused-vars
+  29332:7    error  'name' is assigned a value but never used                                                        no-unused-vars
+  30053:9    error  'visitor' is defined but never used                                                              no-unused-vars
+  30933:7    error  Expected a 'break' statement before 'case'                                                       no-fallthrough
+  30935:7    error  Expected a 'break' statement before 'case'                                                       no-fallthrough
+  31039:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  31590:13   error  Expected a 'break' statement before 'case'                                                       no-fallthrough
+  32542:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  32836:17   error  Empty block statement                                                                            no-empty
+  32985:37   error  'argument' is defined but never used                                                             no-unused-vars
+  33081:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  33088:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  33119:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  33255:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  33275:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  33995:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  34046:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  34047:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  35217:28   error  'reason' is defined but never used                                                               no-unused-vars
+  35270:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  35271:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  35300:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  35933:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  36011:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  36030:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  36710:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  36760:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  36765:13   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  36789:8    error  'name' is defined but never used                                                                 no-unused-vars
+  36789:14   error  'value' is defined but never used                                                                no-unused-vars
+  36790:13   error  'text' is defined but never used                                                                 no-unused-vars
+  36791:11   error  'text' is defined but never used                                                                 no-unused-vars
+  36792:13   error  'doctypeContent' is defined but never used                                                       no-unused-vars
+  36793:10   error  'text' is defined but never used                                                                 no-unused-vars
+  36794:18   error  'name' is defined but never used                                                                 no-unused-vars
+  36794:24   error  'attributes' is defined but never used                                                           no-unused-vars
+  36794:36   error  'isEmpty' is defined but never used                                                              no-unused-vars
+  36795:16   error  'name' is defined but never used                                                                 no-unused-vars
+  36796:11   error  'code' is defined but never used                                                                 no-unused-vars
+  36966:16   error  'name' is defined but never used                                                                 no-unused-vars
+  38481:14   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  38589:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  38590:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  38592:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  38593:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  38594:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39188:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39189:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39190:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39191:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39216:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39226:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39230:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39236:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39237:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39256:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39262:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39263:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39267:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39290:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39291:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39297:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  39303:9    error  Expected a 'break' statement before 'default'                                                    no-fallthrough
+  40026:11   error  'xfaFont' is defined but never used                                                              no-unused-vars
+  40152:45   error  'current' is defined but never used                                                              no-unused-vars
+  40152:120  error  'current' is defined but never used                                                              no-unused-vars
+  40152:218  error  'current' is defined but never used                                                              no-unused-vars
+  40152:272  error  'current' is defined but never used                                                              no-unused-vars
+  40152:322  error  'current' is defined but never used                                                              no-unused-vars
+  40152:365  error  'current' is defined but never used                                                              no-unused-vars
+  40152:408  error  'current' is defined but never used                                                              no-unused-vars
+  40152:455  error  'current' is defined but never used                                                              no-unused-vars
+  40152:503  error  'current' is defined but never used                                                              no-unused-vars
+  40152:541  error  'current' is defined but never used                                                              no-unused-vars
+  40152:585  error  'current' is defined but never used                                                              no-unused-vars
+  40152:619  error  'current' is defined but never used                                                              no-unused-vars
+  40460:17   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  40508:17   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  40510:15   error  '_' is defined but never used                                                                    no-unused-vars
+  40511:13   error  '_' is defined but never used                                                                    no-unused-vars
+  40625:20   error  'bbox' is defined but never used                                                                 no-unused-vars
+  40946:22   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  41483:20   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  41801:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  41937:7    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  42208:17   error  'x' is defined but never used                                                                    no-unused-vars
+  42213:17   error  'x' is defined but never used                                                                    no-unused-vars
+  42485:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  42631:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  42645:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  42842:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  42918:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  43049:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  43110:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  43126:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  43143:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  43177:17   error  'x' is defined but never used                                                                    no-unused-vars
+  43183:17   error  'x' is defined but never used                                                                    no-unused-vars
+  43193:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  44209:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  44448:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  44471:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  44731:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  44766:17   error  'x' is defined but never used                                                                    no-unused-vars
+  44771:17   error  'x' is defined but never used                                                                    no-unused-vars
+  44776:17   error  'x' is defined but never used                                                                    no-unused-vars
+  44858:17   error  'x' is defined but never used                                                                    no-unused-vars
+  44864:17   error  'x' is defined but never used                                                                    no-unused-vars
+  45086:35   error  Empty block statement                                                                            no-empty
+  45148:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  46182:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  46240:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  46458:27   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  46840:30   error  'picture' is defined but never used                                                              no-unused-vars
+  46895:19   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  46947:23   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  46957:19   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  46957:56   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  47284:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47295:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47301:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47306:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47311:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47316:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47321:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47326:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47338:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47343:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47359:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47364:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47369:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47380:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47388:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47394:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47399:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47419:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47424:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47429:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47438:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47447:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47452:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47457:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47462:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47467:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47472:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47489:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47501:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47506:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47519:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47524:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47529:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47534:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47539:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47547:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47552:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47596:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47604:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47609:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47614:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47625:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47630:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47635:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47640:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47645:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47650:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47655:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47660:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47675:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47680:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47685:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47690:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47695:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47700:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47709:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47716:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47722:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47729:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47735:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47740:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47745:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47750:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47755:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47760:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47765:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47771:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47779:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47784:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47790:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47795:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47811:17   error  'n' is defined but never used                                                                    no-unused-vars
+  47816:17   error  'n' is defined but never used                                                                    no-unused-vars
+  47821:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47834:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47839:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47844:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47845:36   error  'n' is defined but never used                                                                    no-unused-vars
+  47888:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47897:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47911:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47916:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47921:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47926:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47931:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47958:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47963:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47968:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47973:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47978:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  47996:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48009:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48021:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48029:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48040:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48045:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48050:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48058:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48063:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48068:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48081:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48086:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48087:41   error  'n' is defined but never used                                                                    no-unused-vars
+  48091:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48096:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48101:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48106:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48111:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48116:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48126:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48131:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48146:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48152:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48164:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48169:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48174:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48179:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48187:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48192:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48205:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48227:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48232:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48248:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48255:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48261:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48279:25   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  48708:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48821:32   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  48878:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48893:27   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  48912:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48928:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48940:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48946:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48951:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48967:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48972:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48993:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  48999:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49004:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49010:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49032:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49044:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49056:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49068:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49075:28   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  49159:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49165:28   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  49180:15   error  'attributes' is defined but never used                                                           no-unused-vars
+  49186:29   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  49220:22   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  49353:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  49408:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  49479:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  49489:13   error  'availableSpace' is defined but never used                                                       no-unused-vars
+  49583:24   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  49694:14   error  '_' is defined but never used                                                                    no-unused-vars
+  49727:20   error  Do not access Object.prototype method 'hasOwnProperty' from target object                        no-prototype-builtins
+  49937:16   error  'name' is defined but never used                                                                 no-unused-vars
+  50169:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  50319:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  50389:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  50586:35   error  '_renderForms' is defined but never used                                                         no-unused-vars
+  50780:50   error  'annotationStorage' is defined but never used                                                    no-unused-vars
+  50839:14   error  'evaluator' is defined but never used                                                            no-unused-vars
+  50839:25   error  'task' is defined but never used                                                                 no-unused-vars
+  50839:31   error  'annotationStorage' is defined but never used                                                    no-unused-vars
+  50839:50   error  'changes' is defined but never used                                                              no-unused-vars
+  50859:22   error  'size' is defined but never used                                                                 no-unused-vars
+  51313:15   error  'flags' is defined but never used                                                                no-unused-vars
+  51409:18   error  'annotationStorage' is defined but never used                                                    no-unused-vars
+  51409:37   error  'dict' is defined but never used                                                                 no-unused-vars
+  51450:12   error  Empty block statement                                                                            no-empty
+  52655:42   error  '_params' is defined but never used                                                              no-unused-vars
+  52669:42   error  'annotation' is defined but never used                                                           no-unused-vars
+  52669:54   error  'xref' is defined but never used                                                                 no-unused-vars
+  52669:60   error  'params' is defined but never used                                                               no-unused-vars
+  53238:72   error  'params' is defined but never used                                                               no-unused-vars
+  53355:60   error  'params' is defined but never used                                                               no-unused-vars
+  53826:15   error  Empty block statement                                                                            no-empty
+  54480:14   error  'cipherKey' is defined but never used                                                            no-unused-vars
+  54814:9    error  'password' is defined but never used                                                             no-unused-vars
+  54814:19   error  'input' is defined but never used                                                                no-unused-vars
+  54814:26   error  'userBytes' is defined but never used                                                            no-unused-vars
+  54851:26   error  'userBytes' is defined but never used                                                            no-unused-vars
+  54929:184  error  'perms' is defined but never used                                                                no-unused-vars
+  55541:18   error  Expected a conditional expression and instead saw an assignment                                  no-cond-assign
+  55852:35   error  'suppressEncryption' is assigned a value but never used                                          no-unused-vars
+  57011:11   error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  57423:16   error  'obj' is defined but never used                                                                  no-unused-vars
+  57423:21   error  'prop' is defined but never used                                                                 no-unused-vars
+  57423:27   error  'args' is defined but never used                                                                 no-unused-vars
+  57426:16   error  'begin' is defined but never used                                                                no-unused-vars
+  57426:23   error  'end' is defined but never used                                                                  no-unused-vars
+  57429:23   error  'noFetch' is assigned a value but never used                                                     no-unused-vars
+  57432:23   error  'chunk' is defined but never used                                                                no-unused-vars
+  57438:13   error  'reason' is defined but never used                                                               no-unused-vars
+  57456:16   error  'begin' is defined but never used                                                                no-unused-vars
+  57456:23   error  'end' is defined but never used                                                                  no-unused-vars
+  57459:23   error  'noFetch' is assigned a value but never used                                                     no-unused-vars
+  57462:13   error  'reason' is defined but never used                                                               no-unused-vars
+  57873:9    error  Unexpected lexical declaration in case block                                                     no-case-declarations
+  58078:3    error  'xref' is defined but never used                                                                 no-unused-vars
+  60009:45   error  'data' is defined but never used                                                                 no-unused-vars
+  60015:43   error  'data' is defined but never used                                                                 no-unused-vars
+  60018:43   error  'data' is defined but never used                                                                 no-unused-vars
+  60021:41   error  'data' is defined but never used                                                                 no-unused-vars
+  60024:50   error  'data' is defined but never used                                                                 no-unused-vars
+  60027:43   error  'data' is defined but never used                                                                 no-unused-vars
+  60030:44   error  'data' is defined but never used                                                                 no-unused-vars
+  60033:45   error  'data' is defined but never used                                                                 no-unused-vars
+  60077:40   error  'data' is defined but never used                                                                 no-unused-vars
+  60080:54   error  'data' is defined but never used                                                                 no-unused-vars
+  60083:44   error  'data' is defined but never used                                                                 no-unused-vars
+  60086:41   error  'data' is defined but never used                                                                 no-unused-vars
+  60089:41   error  'data' is defined but never used                                                                 no-unused-vars
+  60092:37   error  'data' is defined but never used                                                                 no-unused-vars
+  60111:45   error  'data' is defined but never used                                                                 no-unused-vars
+  60114:42   error  'data' is defined but never used                                                                 no-unused-vars
+  60117:52   error  'data' is defined but never used                                                                 no-unused-vars
+  60410:37   error  'data' is defined but never used                                                                 no-unused-vars
+  60413:39   error  'data' is defined but never used                                                                 no-unused-vars
+  60434:35   error  'data' is defined but never used                                                                 no-unused-vars
+
+C:\PdfSaathi-main\client\src\components\layout\Navbar.jsx
+  15:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  13 |     const storedUser = localStorage.getItem('user');
+  14 |     if (storedUser) {
+> 15 |       setUser(JSON.parse(storedUser));
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  16 |     }
+  17 |   }, []);
+  18 |  react-hooks/set-state-in-effect
+
+C:\PdfSaathi-main\client\src\components\tools\GenericTool.jsx
+   28:11  error  'Icon' is defined but never used                                                            no-unused-vars
+   90:11  error  'toolSchema' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  254:26  error  'e' is defined but never used                                                               no-unused-vars
+
+C:\PdfSaathi-main\client\src\components\ui\RenameModal.jsx
+  10:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   8 |     useEffect(() => {
+   9 |         if (isOpen) {
+> 10 |             setFileName(initialName);
+     |             ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  11 |         }
+  12 |     }, [isOpen, initialName]);
+  13 |  react-hooks/set-state-in-effect
+
+C:\PdfSaathi-main\client\src\pages\About.jsx
+  8:11  error  'aboutSchema' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\PdfSaathi-main\client\src\pages\AdminDashboard.jsx
+  27:8  warning  React Hook useEffect has a missing dependency: 'fetchContacts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\PdfSaathi-main\client\src\pages\Contact.jsx
+  19:11  error  'contactSchema' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\PdfSaathi-main\client\src\pages\MergePdf.jsx
+  64:11  error  'toolSchema' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\PdfSaathi-main\client\src\pages\PdfEditor.jsx
+    5:23  error    'rgb' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                      no-unused-vars
+  175:8   warning  React Hook useEffect has a missing dependency: 'saveHistory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\PdfSaathi-main\client\src\pages\RemoveBackground.jsx
+  25:8  warning  React Hook useEffect has missing dependencies: 'originalImage' and 'processedImage'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+✖ 526 problems (523 errors, 3 warnings)
+

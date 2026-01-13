@@ -512,3 +512,51 @@ exports.pdfToExcel = async (req, res) => {
         res.status(500).json({ error: 'Conversion failed: ' + error.message });
     }
 };
+
+// 16. REMOVE BACKGROUND (via Python/rembg)
+exports.removeBackground = async (req, res) => {
+    try {
+        const file = req.files[0];
+        const outputFilename = 'no-bg.png';
+        const outputPath = path.join(path.dirname(file.path), outputFilename);
+
+        // Spawn Python process
+        const scriptPath = path.resolve(__dirname, '../remove_bg.py');
+        const pythonProcess = spawn('python', [scriptPath, file.path, outputPath]);
+
+        pythonProcess.stdout.on('data', (data) => console.log(`Python Output (RemBG): ${data}`));
+        pythonProcess.stderr.on('data', (data) => console.error(`Python Error (RemBG): ${data}`));
+
+        pythonProcess.on('error', (err) => {
+            console.error('Failed to start Python process:', err);
+            res.status(500).json({ error: 'Failed to launch background removal engine.' });
+        });
+
+        pythonProcess.on('close', (code) => {
+            if (code !== 0) {
+                cleanup(req.files);
+                return res.status(500).json({ error: 'Background removal failed.' });
+            }
+
+            if (!fs.existsSync(outputPath)) {
+                cleanup(req.files);
+                return res.status(500).json({ error: 'Output generation failed.' });
+            }
+
+            const fileBuffer = fs.readFileSync(outputPath);
+
+            res.setHeader('Content-Type', 'image/png');
+            res.setHeader('Content-Disposition', 'attachment; filename=no-bg.png');
+            res.send(fileBuffer);
+
+            cleanup(req.files);
+            try { fs.unlinkSync(outputPath); } catch (e) { }
+        });
+
+    } catch (error) {
+        console.error('Remove Background Stack:', error);
+        if (req.files) cleanup(req.files);
+        res.status(500).json({ error: 'Background removal failed: ' + error.message });
+    }
+};
+
