@@ -513,7 +513,7 @@ exports.pdfToExcel = async (req, res) => {
     }
 };
 
-// 16. REMOVE BACKGROUND (via remove.bg API)
+// 16. REMOVE BACKGROUND (via Clipdrop API - more reliable free tier)
 exports.removeBackground = async (req, res) => {
     const FormData = require('form-data');
     const axios = require('axios');
@@ -521,26 +521,61 @@ exports.removeBackground = async (req, res) => {
     try {
         const file = req.files[0];
 
-        // Get API key from environment variable
-        const apiKey = process.env.REMOVEBG_API_KEY || 'demo'; // 'demo' for testing, limited to 50 calls
+        // Try Clipdrop API first (more reliable), fallback to remove.bg
+        const clipdropKey = process.env.CLIPDROP_API_KEY;
+        const removebgKey = process.env.REMOVEBG_API_KEY;
 
-        // Create form data
-        const formData = new FormData();
-        formData.append('image_file', fs.createReadStream(file.path));
-        formData.append('size', 'auto'); // auto, preview, full, etc.
+        let response;
 
-        // Call remove.bg API
-        const response = await axios({
-            method: 'post',
-            url: 'https://api.remove.bg/v1.0/removebg',
-            data: formData,
-            responseType: 'arraybuffer',
-            headers: {
-                ...formData.getHeaders(),
-                'X-Api-Key': apiKey,
-            },
-            timeout: 60000 // 60 second timeout
-        });
+        // Try Clipdrop first if key is available
+        if (clipdropKey) {
+            try {
+                const formData = new FormData();
+                formData.append('image_file', fs.createReadStream(file.path));
+
+                response = await axios({
+                    method: 'post',
+                    url: 'https://clipdrop-api.co/remove-background/v1',
+                    data: formData,
+                    responseType: 'arraybuffer',
+                    headers: {
+                        ...formData.getHeaders(),
+                        'x-api-key': clipdropKey,
+                    },
+                    timeout: 60000
+                });
+
+                console.log('Background removed using Clipdrop API');
+            } catch (clipdropError) {
+                console.log('Clipdrop failed, trying remove.bg...', clipdropError.message);
+                throw clipdropError; // Will be caught by outer catch
+            }
+        } else if (removebgKey) {
+            // Fallback to remove.bg
+            const formData = new FormData();
+            formData.append('image_file', fs.createReadStream(file.path));
+            formData.append('size', 'auto');
+
+            response = await axios({
+                method: 'post',
+                url: 'https://api.remove.bg/v1.0/removebg',
+                data: formData,
+                responseType: 'arraybuffer',
+                headers: {
+                    ...formData.getHeaders(),
+                    'X-Api-Key': removebgKey,
+                },
+                timeout: 60000
+            });
+
+            console.log('Background removed using remove.bg API');
+        } else {
+            // No API key available
+            cleanup(req.files);
+            return res.status(500).json({
+                error: 'No background removal API key configured. Please add CLIPDROP_API_KEY or REMOVEBG_API_KEY to environment variables.'
+            });
+        }
 
         // Clean up uploaded file
         cleanup(req.files);
@@ -551,13 +586,19 @@ exports.removeBackground = async (req, res) => {
         res.send(Buffer.from(response.data));
 
     } catch (error) {
-        console.error('Remove Background Error:', error.response?.data || error.message);
+        console.error('Remove Background Error:', error.response?.data?.toString() || error.message);
         if (req.files) cleanup(req.files);
 
         // Handle specific API errors
-        if (error.response?.status === 403) {
+        if (error.response?.status === 403 || error.response?.status === 401) {
             return res.status(403).json({
-                error: 'API key invalid or quota exceeded. Please try again later.'
+                error: 'API key invalid or quota exceeded. Please check your API key configuration.'
+            });
+        }
+
+        if (error.response?.status === 402) {
+            return res.status(402).json({
+                error: 'API quota exceeded. Please upgrade your plan or try again later.'
             });
         }
 
