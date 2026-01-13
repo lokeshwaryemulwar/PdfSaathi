@@ -513,69 +513,36 @@ exports.pdfToExcel = async (req, res) => {
     }
 };
 
-// 16. REMOVE BACKGROUND (via Clipdrop API - more reliable free tier)
+// 16. REMOVE BACKGROUND (via Hugging Face Inference API - FREE!)
 exports.removeBackground = async (req, res) => {
-    const FormData = require('form-data');
     const axios = require('axios');
 
     try {
         const file = req.files[0];
 
-        // Try Clipdrop API first (more reliable), fallback to remove.bg
-        const clipdropKey = process.env.CLIPDROP_API_KEY;
-        const removebgKey = process.env.REMOVEBG_API_KEY;
+        // Read the image file
+        const imageBuffer = fs.readFileSync(file.path);
 
-        let response;
+        // Use Hugging Face's free inference API with RMBG-1.4 model
+        // This model is specifically designed for background removal and is lightweight
+        const HF_MODEL = 'briaai/RMBG-1.4';
+        const HF_API_URL = `https://api-inference.huggingface.co/models/${HF_MODEL}`;
 
-        // Try Clipdrop first if key is available
-        if (clipdropKey) {
-            try {
-                const formData = new FormData();
-                formData.append('image_file', fs.createReadStream(file.path));
+        console.log('Removing background using Hugging Face model:', HF_MODEL);
 
-                response = await axios({
-                    method: 'post',
-                    url: 'https://clipdrop-api.co/remove-background/v1',
-                    data: formData,
-                    responseType: 'arraybuffer',
-                    headers: {
-                        ...formData.getHeaders(),
-                        'x-api-key': clipdropKey,
-                    },
-                    timeout: 60000
-                });
-
-                console.log('Background removed using Clipdrop API');
-            } catch (clipdropError) {
-                console.log('Clipdrop failed, trying remove.bg...', clipdropError.message);
-                throw clipdropError; // Will be caught by outer catch
-            }
-        } else if (removebgKey) {
-            // Fallback to remove.bg
-            const formData = new FormData();
-            formData.append('image_file', fs.createReadStream(file.path));
-            formData.append('size', 'auto');
-
-            response = await axios({
-                method: 'post',
-                url: 'https://api.remove.bg/v1.0/removebg',
-                data: formData,
-                responseType: 'arraybuffer',
-                headers: {
-                    ...formData.getHeaders(),
-                    'X-Api-Key': removebgKey,
-                },
-                timeout: 60000
-            });
-
-            console.log('Background removed using remove.bg API');
-        } else {
-            // No API key available
-            cleanup(req.files);
-            return res.status(500).json({
-                error: 'No background removal API key configured. Please add CLIPDROP_API_KEY or REMOVEBG_API_KEY to environment variables.'
-            });
-        }
+        // Call Hugging Face inference API
+        const response = await axios({
+            method: 'post',
+            url: HF_API_URL,
+            data: imageBuffer,
+            responseType: 'arraybuffer',
+            headers: {
+                'Content-Type': 'application/octet-stream',
+            },
+            timeout: 120000, // 2 minute timeout for model loading
+            maxContentLength: Infinity,
+            maxBodyLength: Infinity
+        });
 
         // Clean up uploaded file
         cleanup(req.files);
@@ -585,20 +552,22 @@ exports.removeBackground = async (req, res) => {
         res.setHeader('Content-Disposition', 'attachment; filename=no-bg.png');
         res.send(Buffer.from(response.data));
 
+        console.log('Background removal successful!');
+
     } catch (error) {
         console.error('Remove Background Error:', error.response?.data?.toString() || error.message);
         if (req.files) cleanup(req.files);
 
-        // Handle specific API errors
-        if (error.response?.status === 403 || error.response?.status === 401) {
-            return res.status(403).json({
-                error: 'API key invalid or quota exceeded. Please check your API key configuration.'
+        // Handle specific errors
+        if (error.response?.status === 503) {
+            return res.status(503).json({
+                error: 'Model is loading. Please try again in 20-30 seconds.'
             });
         }
 
-        if (error.response?.status === 402) {
-            return res.status(402).json({
-                error: 'API quota exceeded. Please upgrade your plan or try again later.'
+        if (error.response?.status === 429) {
+            return res.status(429).json({
+                error: 'Too many requests. Please wait a moment and try again.'
             });
         }
 
