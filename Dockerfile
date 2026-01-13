@@ -33,8 +33,5 @@ ENV NODE_ENV=production
 # Expose port
 EXPOSE 3000
 
-# Preload rembg models to avoid timeout on first request
-RUN python3 server/preload_model.py
-
 # Start server
 CMD ["node", "server/index.js"]

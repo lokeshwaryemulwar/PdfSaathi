@@ -513,50 +513,58 @@ exports.pdfToExcel = async (req, res) => {
     }
 };
 
-// 16. REMOVE BACKGROUND (via Python/rembg)
+// 16. REMOVE BACKGROUND (via remove.bg API)
 exports.removeBackground = async (req, res) => {
+    const FormData = require('form-data');
+    const axios = require('axios');
+
     try {
         const file = req.files[0];
-        const outputFilename = 'no-bg.png';
-        const outputPath = path.join(path.dirname(file.path), outputFilename);
 
-        // Spawn Python process
-        const scriptPath = path.resolve(__dirname, '../remove_bg.py');
-        const pythonProcess = spawn('python', [scriptPath, file.path, outputPath]);
+        // Get API key from environment variable
+        const apiKey = process.env.REMOVEBG_API_KEY || 'demo'; // 'demo' for testing, limited to 50 calls
 
-        pythonProcess.stdout.on('data', (data) => console.log(`Python Output (RemBG): ${data}`));
-        pythonProcess.stderr.on('data', (data) => console.error(`Python Error (RemBG): ${data}`));
+        // Create form data
+        const formData = new FormData();
+        formData.append('image_file', fs.createReadStream(file.path));
+        formData.append('size', 'auto'); // auto, preview, full, etc.
 
-        pythonProcess.on('error', (err) => {
-            console.error('Failed to start Python process:', err);
-            res.status(500).json({ error: 'Failed to launch background removal engine.' });
+        // Call remove.bg API
+        const response = await axios({
+            method: 'post',
+            url: 'https://api.remove.bg/v1.0/removebg',
+            data: formData,
+            responseType: 'arraybuffer',
+            headers: {
+                ...formData.getHeaders(),
+                'X-Api-Key': apiKey,
+            },
+            timeout: 60000 // 60 second timeout
         });
 
-        pythonProcess.on('close', (code) => {
-            if (code !== 0) {
-                cleanup(req.files);
-                return res.status(500).json({ error: 'Background removal failed.' });
-            }
+        // Clean up uploaded file
+        cleanup(req.files);
 
-            if (!fs.existsSync(outputPath)) {
-                cleanup(req.files);
-                return res.status(500).json({ error: 'Output generation failed.' });
-            }
-
-            const fileBuffer = fs.readFileSync(outputPath);
-
-            res.setHeader('Content-Type', 'image/png');
-            res.setHeader('Content-Disposition', 'attachment; filename=no-bg.png');
-            res.send(fileBuffer);
-
-            cleanup(req.files);
-            try { fs.unlinkSync(outputPath); } catch (e) { }
-        });
+        // Send the result
+        res.setHeader('Content-Type', 'image/png');
+        res.setHeader('Content-Disposition', 'attachment; filename=no-bg.png');
+        res.send(Buffer.from(response.data));
 
     } catch (error) {
-        console.error('Remove Background Stack:', error);
+        console.error('Remove Background Error:', error.response?.data || error.message);
         if (req.files) cleanup(req.files);
-        res.status(500).json({ error: 'Background removal failed: ' + error.message });
+
+        // Handle specific API errors
+        if (error.response?.status === 403) {
+            return res.status(403).json({
+                error: 'API key invalid or quota exceeded. Please try again later.'
+            });
+        }
+
+        res.status(500).json({
+            error: 'Background removal failed: ' + (error.message || 'Unknown error')
+        });
     }
 };
+
 
