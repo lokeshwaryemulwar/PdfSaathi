@@ -11,23 +11,39 @@ def remove_background(input_path, output_path, model_name="u2net"):
             print(f"Error: Input file not found at {input_path}")
             sys.exit(1)
 
-        # Open the image file
-        with open(input_path, 'rb') as i:
-            input_data = i.read()
+        # Open and resize image if too large (memory optimization for free tier)
+        with Image.open(input_path) as img:
+            # Get original size
+            original_size = img.size
+            max_dimension = 1500  # Limit to 1500px on longest side
+            
+            # Resize if needed
+            if max(img.size) > max_dimension:
+                ratio = max_dimension / max(img.size)
+                new_size = tuple(int(dim * ratio) for dim in img.size)
+                img = img.resize(new_size, Image.Resampling.LANCZOS)
+                print(f"Resized image from {original_size} to {new_size} for memory optimization")
+            
+            # Convert to RGB if needed (some formats like RGBA can cause issues)
+            if img.mode not in ('RGB', 'RGBA'):
+                img = img.convert('RGB')
+            
+            # Save to bytes
+            img_byte_arr = io.BytesIO()
+            img.save(img_byte_arr, format='PNG')
+            input_data = img_byte_arr.getvalue()
             
         print(f"Processing image with model: {model_name}...")
         
         # Initialize session with specific model
         session = new_session(model_name)
         
-        # Remove background with alpha matting for better edge detection
+        # Remove background WITHOUT alpha matting to save memory
+        # Alpha matting is memory-intensive and not critical for free tier
         output_data = remove(
             input_data,
             session=session,
-            alpha_matting=True,
-            alpha_matting_foreground_threshold=240,
-            alpha_matting_background_threshold=10,
-            alpha_matting_erode_size=10
+            alpha_matting=False  # Disabled for memory optimization
         )
         
         # Save the result
