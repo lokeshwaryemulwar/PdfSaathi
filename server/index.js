@@ -15,6 +15,18 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Middleware to normalize trailing slashes
+app.use((req, res, next) => {
+    if (req.path.substr(-1) === '/' && req.path.length > 1) {
+        const query = req.url.slice(req.path.length);
+        const safepath = req.path.slice(0, -1).replace(/\/+/g, '/');
+        // 301 Permanent Redirect is best for SEO consistency
+        res.redirect(301, safepath + query);
+    } else {
+        next();
+    }
+});
+
 // Ensure uploads directory exists
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
