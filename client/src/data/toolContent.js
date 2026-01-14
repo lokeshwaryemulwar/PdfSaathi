@@ -370,25 +370,6 @@ export const toolContent = {
             </ul>
 
             <h3>Common Use Cases</h3>
-            <p><strong>For Business:</strong> Fill out non-interactive PDF forms, sign agreements, and redact confidential data.</p>
-            <p><strong>For Education:</strong> Grade assignments digitally, add feedback notes, and highlight study material.</p>
-            <p><strong>For Personal Use:</strong> Fill out government forms, sign leases, or add photos to your CV.</p>
-        `
-    },
-    'remove-background': {
-        title: "Remove Background From Any Photo for Free",
-        description: "Upload an image to automatically remove its background with AI precision.",
-        howTo: {
-            heading: "How to remove background",
-            steps: [
-                {
-                    title: "Upload Image",
-                    description: "Click 'Select Image' or drag and drop your photo into the upload box."
-                },
-                {
-                    title: "Automatic Removal",
-                    description: "Our AI instantly analyzes and removes the background in just a few seconds."
-                },
                 {
                     title: "Download or Edit",
                     description: "Download your transparent image as a PNG, or add a solid color background before saving."
@@ -432,7 +413,7 @@ export const toolContent = {
             }
         ],
         longDescription: `
-            <h3>Why Remove Backgrounds?</h3>
+            < h3 > Why Remove Backgrounds?</h3>
             <p>Removing the background from an image opens up endless creative possibilities. For e-commerce, it allows you to place products on a clean white background, which is a requirement for marketplaces like Amazon. For personal use, it lets you create stickers, memes, or custom collages.</p>
             
             <h3>How Our AI Works</h3>
@@ -497,7 +478,7 @@ export const toolContent = {
             }
         ],
         longDescription: `
-            <h3>Universal Image Converter</h3>
+    < h3 > Universal Image Converter</h3>
             <p>Images come in dozens of formats, and unfortunately, not every device or website accepts them all. You might have a high-efficiency WEBP file that your website CMS rejects, or a high-quality TIFF that you need to email as a small JPG.</p>
             <p>PDF Saathi's Image Converter creates a bridge between formats. We support a massive array of conversions including <strong>JPG, PNG, WEBP, BMP, GIF, TIFF, ICO, and SVG</strong>.</p>
 
@@ -510,7 +491,7 @@ export const toolContent = {
 
             <h3>Quality Commitment</h3>
             <p>We don't just change the file extension. Our backend properly re-encodes your image data, handling alpha channels (transparency) and color profiles to ensure your converted image looks just as good as the original.</p>
-        `
+`
     },
     'pdf-to-ppt': {
         title: "PDF to PowerPoint Converter - Editable Slides",
@@ -553,7 +534,7 @@ export const toolContent = {
             }
         ],
         longDescription: `
-            <h3>Turn PDFs into Presentations</h3>
+    < h3 > Turn PDFs into Presentations</h3 >
             <p>Recreating a presentation from a PDF file is a tedious task. You have to copy text, take screenshots of images, and manually align everything. Our <strong>PDF to PowerPoint Converter</strong> does the heavy lifting for you.</p>
             <p>We analyze the PDF structure and map it directly to PowerPoint slides, converting static pages into editable elements.</p>
             <h3>Why Use This Tool?</h3>
@@ -582,7 +563,7 @@ export const toolContent = {
             { question: "Will the formulas be preserved?", answer: "No, PDFs only contain the results. You will get the values, but you can re-apply formulas in Excel." }
         ],
         longDescription: `
-            <h3>Stop Retyping Data</h3>
+    < h3 > Stop Retyping Data</h3 >
             <p>Data trapped in a PDF is useless. Copy-pasting leads to formatting errors and merged cells. Our <strong>PDF to Excel</strong> tool intelligently extracts tabular data.</p>
             <p>It is perfect for financial statements, invoices, and product lists. We ensure that rows and columns line up perfectly so you can start analyzing data immediately.</p>
 `
@@ -607,7 +588,7 @@ export const toolContent = {
             { question: "Will this affect text selection?", answer: "No, text selection and searching will still work correctly after rotation." }
         ],
         longDescription: `
-            <h3>Fix Upside-Down Scans</h3>
+    < h3 > Fix Upside - Down Scans</h3 >
             <p>It happens to everyone: you scan a stack of documents, but you fed them in the wrong way. Now all your pages are upside down.</p>
             <p>Our <strong>Rotate PDF</strong> tool fixes this instantly. You don't need to re-scan. Just upload, click rotate, and download. It is a simple tool for a common problem.</p>
 `
@@ -631,7 +612,7 @@ export const toolContent = {
             { question: "Can you crack my forgotten password?", answer: "We can remove owner restrictions instantly. However, for user open passwords, you must provide the correct password once to verify ownership." }
         ],
         longDescription: `
-            <h3>Free Your Documents</h3>
+    < h3 > Free Your Documents</h3 >
             <p>Password protection is important, but it can be annoying when you need to share a file with colleagues who don't have the code, or when you want to print a file that is restricted.</p>
             <p><strong>Unlock PDF</strong> creates a copy of your file with all security layers removed. You can then archive it or share it freely. Please ensure you have the right to remove the protection before using this tool.</p>
 `
@@ -655,7 +636,7 @@ export const toolContent = {
             { question: "What if I forget my password?", answer: "Please remember it! Strong encryption means there is no back door. If you lose the password, the file cannot be recovered." }
         ],
         longDescription: `
-            <h3>Secure Sensitive Information</h3>
+    < h3 > Secure Sensitive Information</h3 >
             <p>Sending contracts, bank statements, or personal ID documents via email can be risky. If your account is compromised, your data is exposed.</p>
             <p><strong>Protect PDF</strong> adds a layer of military-grade security. Even if a hacker steals the file, they cannot open it without your password.</p>
             <ul>
@@ -713,7 +694,7 @@ export const toolContent = {
             }
         ],
         longDescription: `
-            <h3>Turn Your Photos into Documents</h3>
+    < h3 > Turn Your Photos into Documents</h3 >
             <p>Sharing multiple image files can be cumbersome. They get attached as separate files in emails, they might display in the wrong order, and they are hard to print correctly.</p>
             <p>Converting your images to PDF solves all these problems. By merging your photos into a single PDF file, you create a neat, professional-looking document that is easy to share, view, and print on any device.</p>
 
@@ -726,7 +707,7 @@ export const toolContent = {
 
             <h3>No Software Needed</h3>
             <p>Why install heavy software just to convert a few photos? PDF Saathi's <strong>Image to PDF Converter</strong> works entirely in your browser. It is fast, free, and works on your phone, tablet, or computer.</p>
-        `
+`
     },
     'html-to-pdf': {
         title: "HTML to PDF Converter - Save Web Pages as Documents",
@@ -777,7 +758,7 @@ export const toolContent = {
             }
         ],
         longDescription: `
-            <h3>Archive the Web</h3>
+    < h3 > Archive the Web</h3 >
             <p>Web pages change or disappear all the time. Saving a page as a PDF allows you to keep a permanent, unchangeable record of the information you need. Whether it's a digital receipt, a research article, or a legal notice, HTML to PDF conversion is the best way to archive web content.</p>
 
             <h3>Professional Reports</h3>
@@ -785,7 +766,7 @@ export const toolContent = {
 
             <h3>Developer Friendly</h3>
             <p>Need to create documentation? Write it in simple HTML/CSS and convert it to PDF for a polished user manual.</p>
-        `
+`
     }
 };
 

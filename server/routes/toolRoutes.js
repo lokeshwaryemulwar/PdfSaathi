@@ -39,7 +39,7 @@ router.post('/html-to-pdf', upload.any(), toolController.htmlToPdf);
 router.post('/pdf-to-ppt', upload.array('files'), toolController.pdfToPpt);
 router.post('/pdf-to-excel', upload.any(), toolController.pdfToExcel);
 router.post('/convert-image', upload.any(), toolController.convertImage);
-router.post('/remove-background', upload.any(), toolController.removeBackground);
+
 router.post('/jpg-to-pdf', upload.array('files'), toolController.imgToPdf); // Alias
 
 module.exports = router;

@@ -165,14 +165,5 @@ export const tools = [
         color: '#06B6D4', // Cyan
         category: 'utility',
         comingSoon: true
-    },
-    {
-        id: 'remove-background',
-        title: 'Remove Background',
-        description: 'Remove background from any photo for free.',
-        icon: FileImage,
-        path: '/remove-background',
-        color: '#A855F7', // Purple
-        category: 'utility'
     }
 ];

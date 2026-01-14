@@ -24,4 +24,10 @@ export default defineConfig({
       'top-level-await': true //browsers can handle top-level-await features
     },
   },
+  server: {
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+    },
+  },
 })

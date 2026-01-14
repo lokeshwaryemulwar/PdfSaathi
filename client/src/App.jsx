@@ -22,7 +22,7 @@ import { tools } from './data/tools';
 const NotFound = () => <div className="container" style={{ padding: '2rem', textAlign: 'center' }}><h1>404 - Page Not Found</h1></div>;
 
 import ScrollToTop from './components/layout/ScrollToTop'; import PdfEditor from './pages/PdfEditor';
-import RemoveBackground from './pages/RemoveBackground';
+
 
 function App() {
   return (
@@ -35,9 +35,9 @@ function App() {
           <Route path="tools" element={<AllTools />} />
           <Route path="merge-pdf" element={<MergePdf />} />
           <Route path="edit-pdf" element={<PdfEditor />} />
-          <Route path="remove-background" element={<RemoveBackground />} />
 
-          {tools.filter(t => t.id !== 'merge-pdf' && t.id !== 'edit-pdf' && t.id !== 'remove-background').map(tool => {
+
+          {tools.filter(t => t.id !== 'merge-pdf' && t.id !== 'edit-pdf').map(tool => {
             // Define specific inputs for tools
             let specificInputs = tool.inputs || [];
             if (specificInputs.length === 0) {

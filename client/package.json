@@ -13,6 +13,7 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
+    "@imgly/background-removal": "^1.7.0",
     "fabric": "^6.9.1",
     "lucide-react": "^0.561.0",
     "pdf-lib": "^1.17.1",
