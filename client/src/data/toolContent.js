@@ -370,54 +370,11 @@ export const toolContent = {
             </ul>
 
             <h3>Common Use Cases</h3>
-                {
-                    title: "Download or Edit",
-                    description: "Download your transparent image as a PNG, or add a solid color background before saving."
-                }
-            ]
-        },
-        features: [
-            {
-                title: "AI Precision",
-                description: "Our advanced machine learning model detects subjects with pixel-perfect accuracy, handling even complex details like hair and transparent objects."
-            },
-            {
-                title: "Boost Productivity",
-                description: "Save hours of manual editing time. Whether you have one photo or a dozen, PDF Saathi automates the tedious part of design."
-            },
-            {
-                title: "No Sign-up Required",
-                description: "Start editing immediately. accurate background removal without creating an account or installing software."
-            },
-            {
-                title: "High Resolution",
-                description: "We maintain the original quality of your image (up to 25 megapixels) while making the background transparent."
-            }
-        ],
-        faq: [
-            {
-                question: "Is this background remover free?",
-                answer: "Yes, PDF Saathi is 100% free to use. You can process unlimited images without any hidden costs."
-            },
-            {
-                question: "What image formats do you support?",
-                answer: "We support all common image formats including JPG, JPEG, PNG, and WEBP."
-            },
-            {
-                question: "How do I add a white background?",
-                answer: "After the background is removed, you can use our editor tools to add a white or colored background before downloading."
-            },
-            {
-                question: "Is my data secure?",
-                answer: "Absolutely. Your images are processed securely and are automatically deleted from our servers after 1 hour."
-            }
-        ],
-        longDescription: `
-            < h3 > Why Remove Backgrounds?</h3>
-            <p>Removing the background from an image opens up endless creative possibilities. For e-commerce, it allows you to place products on a clean white background, which is a requirement for marketplaces like Amazon. For personal use, it lets you create stickers, memes, or custom collages.</p>
-            
-            <h3>How Our AI Works</h3>
-            <p>PDF Saathi uses a state-of-the-art neural network trained on millions of images. It learns to distinguish between the foreground subject (people, animals, cars, products) and the background. This allows it to perform a "masking" operation automatically, something that used to take skilled designers minutes or hours to do manually with Photoshop.</p>
+            <ul>
+                <li><strong>Fill Forms:</strong> complete application forms, tax documents, or surveys digitally.</li>
+                <li><strong>Sign Documents:</strong> Draw your signature on contracts and agreements in seconds.</li>
+                <li><strong>Annotate for Study:</strong> Highlight key concepts in textbooks or lecture notes for better retention.</li>
+            </ul>
         `
     },
 
