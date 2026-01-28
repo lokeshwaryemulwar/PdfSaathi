@@ -1,0 +1,156 @@
+.tool-page {
+    padding: 3rem 0;
+    max-width: 900px;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.back-btn {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+}
+
+.tool-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tool-header p {
+    color: var(--text-muted);
+}
+
+.files-list {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.file-item {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file-icon-sm {
+    color: var(--primary);
+}
+
+.file-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.file-size {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.file-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-icon-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.action-icon-btn:hover:not(:disabled) {
+    background-color: var(--surface-alt);
+    color: var(--text-main);
+}
+
+.action-icon-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.action-icon-btn.danger:hover {
+    background-color: #FEF2F2;
+    color: #EF4444;
+    border-color: #FECACA;
+}
+
+.workspace-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.add-more-label {
+    color: var(--primary);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.add-more-label:hover {
+    text-decoration: underline;
+}
+
+.error-msg {
+    color: #EF4444;
+    background-color: #FEF2F2;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+}
+
+.success-card {
+    text-align: center;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.success-icon {
+    width: 64px;
+    height: 64px;
+    background-color: #10B981;
+    color: white;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .back-btn {
+        position: static;
+        margin-bottom: 1rem;
+        display: flex;
+    }
+}

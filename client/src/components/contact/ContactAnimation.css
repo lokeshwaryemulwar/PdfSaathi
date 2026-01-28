@@ -1,0 +1,255 @@
+.contact-anim-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Background gradient glow */
+.contact-bg-glow {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(139, 92, 246, 0) 70%);
+    border-radius: 50%;
+    animation: contactPulse 5s ease-in-out infinite;
+    filter: blur(50px);
+}
+
+@keyframes contactPulse {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+}
+
+/* Main envelope */
+.contact-envelope {
+    position: relative;
+    width: 120px;
+    height: 90px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    animation: envelopeFloat 6s ease-in-out infinite;
+    z-index: 10;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    clip-path: polygon(0 0, 50% 60%, 100% 0);
+    transform-origin: top;
+    animation: flapWave 3s ease-in-out infinite;
+}
+
+.envelope-letter {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 50px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: letterSlide 3s ease-in-out infinite;
+}
+
+.letter-line {
+    width: 50px;
+    height: 3px;
+    background: #e2e8f0;
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+.letter-line.short {
+    width: 30px;
+}
+
+@keyframes envelopeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
+@keyframes flapWave {
+
+    0%,
+    100% {
+        transform: rotateX(0deg);
+    }
+
+    50% {
+        transform: rotateX(-15deg);
+    }
+}
+
+@keyframes letterSlide {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Floating chat bubbles */
+.chat-bubble {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    padding: 12px 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    animation: bubbleFloat 7s ease-in-out infinite;
+}
+
+.chat-bubble.bubble-1 {
+    top: 15%;
+    left: 5%;
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    animation-delay: 0s;
+}
+
+.chat-bubble.bubble-2 {
+    bottom: 20%;
+    right: 8%;
+    width: 70px;
+    height: 45px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    animation-delay: 1.5s;
+}
+
+.chat-bubble.bubble-3 {
+    top: 60%;
+    left: 10%;
+    width: 50px;
+    height: 35px;
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    animation-delay: 3s;
+}
+
+@keyframes bubbleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-15px) scale(1.05);
+        opacity: 1;
+    }
+}
+
+/* Notification dots */
+.notification-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #f59e0b;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+.notification-dot.dot-1 {
+    top: 20%;
+    right: 15%;
+    animation-delay: 0s;
+}
+
+.notification-dot.dot-2 {
+    bottom: 25%;
+    left: 12%;
+    animation-delay: 0.7s;
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+}
+
+/* Headset icon */
+.contact-headset {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: headsetBounce 4s ease-in-out infinite;
+}
+
+@keyframes headsetBounce {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-10px) rotate(-5deg);
+    }
+
+    75% {
+        transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-anim-wrapper {
+        min-height: 300px;
+    }
+
+    .contact-envelope {
+        width: 100px;
+        height: 75px;
+    }
+
+    .chat-bubble {
+        transform: scale(0.8);
+    }
+}

@@ -1,0 +1,69 @@
+.cta-section {
+    background: linear-gradient(270deg, var(--primary), #6366F1, #8B5CF6, var(--primary));
+    background-size: 400% 400%;
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+    animation: gradientFlow 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+.cta-container {
+    max-width: 800px;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-heading);
+}
+
+.cta-desc {
+    font-size: 1.125rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+}
+
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.cta-btn-outline {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.cta-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Override secondary button style for this dark context if needed, 
+   but 'secondary' usually means surface-alt background.
+   Here we want a white button. */
+.cta-actions .btn-secondary {
+    background-color: white;
+    color: var(--primary);
+    border: none;
+}
+
+.cta-actions .btn-secondary:hover {
+    background-color: var(--surface-alt);
+}
