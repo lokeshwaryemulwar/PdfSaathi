@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const DynamicSEO = ({ title, description }) => {
+const DynamicSEO = ({ title, description, image }) => {
     const location = useLocation();
 
     useEffect(() => {
@@ -63,7 +63,19 @@ const DynamicSEO = ({ title, description }) => {
             ogDesc.content = description;
         }
 
-        // 7. Update Twitter Card URL
+        // 7. Update Open Graph Image
+        if (image) {
+            let ogImage = document.querySelector("meta[property='og:image']");
+            if (!ogImage) {
+                ogImage = document.createElement('meta');
+                ogImage.setAttribute('property', 'og:image');
+                document.head.appendChild(ogImage);
+            }
+            // Ensure absolute URL
+            ogImage.content = image.startsWith('http') ? image : `https://www.pdfsaathi.in${image}`;
+        }
+
+        // 8. Update Twitter Card URL
         let twitterUrl = document.querySelector("meta[property='twitter:url']");
         if (!twitterUrl) {
             twitterUrl = document.createElement('meta');
@@ -72,7 +84,18 @@ const DynamicSEO = ({ title, description }) => {
         }
         twitterUrl.content = canonicalUrl;
 
-    }, [location.pathname, title, description]);
+        // 9. Update Twitter Card Image
+        if (image) {
+            let twitterImage = document.querySelector("meta[property='twitter:image']");
+            if (!twitterImage) {
+                twitterImage = document.createElement('meta');
+                twitterImage.setAttribute('property', 'twitter:image');
+                document.head.appendChild(twitterImage);
+            }
+            twitterImage.content = image.startsWith('http') ? image : `https://www.pdfsaathi.in${image}`;
+        }
+
+    }, [location.pathname, title, description, image]);
 
     return null; // This component doesn't render anything visible
 };

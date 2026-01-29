@@ -83,6 +83,7 @@ const BlogPost = () => {
             <DynamicSEO
                 title={post.title}
                 description={post.excerpt}
+                image={post.image}
             />
             {/* Back Button */}
             <Button
