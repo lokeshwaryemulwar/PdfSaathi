@@ -3,6 +3,7 @@ import API_BASE_URL from '../config';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import Modal from '../components/ui/Modal';
 import { LogOut, Trash2, Mail, User, MessageSquare, Calendar, Users } from 'lucide-react';
 import './ContentPage.css';
 
@@ -13,6 +14,7 @@ const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState('contacts'); // 'contacts' or 'users'
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [selectedMessage, setSelectedMessage] = useState(null);
 
     useEffect(() => {
         // Check if user is logged in
@@ -255,11 +257,36 @@ const AdminDashboard = () => {
                                             </td>
                                             <td style={{ padding: '1rem 0.5rem', maxWidth: '300px' }}>
                                                 <div style={{
-                                                    overflow: 'hidden',
-                                                    textOverflow: 'ellipsis',
-                                                    whiteSpace: 'nowrap'
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    gap: '0.25rem'
                                                 }}>
-                                                    {contact.message}
+                                                    <div style={{
+                                                        overflow: 'hidden',
+                                                        textOverflow: 'ellipsis',
+                                                        whiteSpace: 'nowrap',
+                                                        maxWidth: '100%'
+                                                    }}>
+                                                        {contact.message}
+                                                    </div>
+                                                    {contact.message.length > 50 && (
+                                                        <button
+                                                            onClick={() => setSelectedMessage(contact)}
+                                                            style={{
+                                                                background: 'none',
+                                                                border: 'none',
+                                                                color: 'var(--primary)',
+                                                                padding: 0,
+                                                                textAlign: 'left',
+                                                                cursor: 'pointer',
+                                                                fontSize: '0.8rem',
+                                                                fontWeight: '500',
+                                                                width: 'fit-content'
+                                                            }}
+                                                        >
+                                                            Read More
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 0.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
@@ -293,6 +320,7 @@ const AdminDashboard = () => {
             {/* Users Tab */}
             {activeTab === 'users' && (
                 <Card style={{ padding: '2rem' }}>
+                    {/* ... (existing user table content) ... */}
                     <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h2 style={{ fontSize: '1.5rem', margin: 0 }}>Registered Users</h2>
                         <div style={{
@@ -336,9 +364,9 @@ const AdminDashboard = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {users.map((user) => (
+                                    {users.map((user, index) => (
                                         <tr key={user.id} style={{ borderBottom: '1px solid var(--border)' }}>
-                                            <td style={{ padding: '1rem 0.5rem' }}>#{user.id}</td>
+                                            <td style={{ padding: '1rem 0.5rem', fontWeight: 'bold' }}>{index + 1}</td>
                                             <td style={{ padding: '1rem 0.5rem' }}>
                                                 <a href={`mailto:${user.email}`} style={{ color: 'var(--primary)' }}>
                                                     {user.email}
@@ -374,6 +402,29 @@ const AdminDashboard = () => {
                     )}
                 </Card>
             )}
+
+            <Modal
+                isOpen={!!selectedMessage}
+                onClose={() => setSelectedMessage(null)}
+                title={selectedMessage ? `Message from ${selectedMessage.name}` : ''}
+                footer={
+                    <Button onClick={() => setSelectedMessage(null)}>Close</Button>
+                }
+            >
+                {selectedMessage && (
+                    <div>
+                        <div style={{ marginBottom: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem', display: 'flex', gap: '1.5rem' }}>
+                            <span><strong>Email:</strong> {selectedMessage.email}</span>
+                            <span><strong>Topic:</strong> {selectedMessage.topic}</span>
+                            <span><strong>Date:</strong> {formatDate(selectedMessage.created_at)}</span>
+                        </div>
+                        <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '1rem 0' }} />
+                        <div style={{ whiteSpace: 'pre-wrap' }}>
+                            {selectedMessage.message}
+                        </div>
+                    </div>
+                )}
+            </Modal>
         </div>
     );
 };

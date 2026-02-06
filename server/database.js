@@ -5,7 +5,8 @@ require('dotenv').config();
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pdfsaathi');
+    console.log('Connecting to MongoDB URI:', process.env.MONGO_URI ? 'URI Provided' : 'URI Missing');
+    const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/pdfsaathi');
     console.log(`MongoDB Connected: ${conn.connection.host}`);
 
     // Create default admin if not exists

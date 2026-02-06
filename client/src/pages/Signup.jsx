@@ -58,19 +58,40 @@ const Signup = () => {
                 throw new Error(data.error || 'Signup failed');
             }
 
-            // Store token
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            // Signup successful - show check email message
+            setLoading(false);
+            // We can replace the form with a success message or redirect to login with state
+            // Let's replace the form content for better UX
+            setFormData({ ...formData, success: true, message: data.message });
 
-            // Redirect to home
-            navigate('/');
-            window.location.reload(); // Reload to update auth state
         } catch (err) {
             setError(err.message);
-        } finally {
             setLoading(false);
         }
     };
+
+    if (formData.success) {
+        return (
+            <div className="container content-page">
+                <div style={{
+                    maxWidth: '500px',
+                    margin: '4rem auto',
+                    minHeight: '60vh',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}>
+                    <Card style={{ width: '100%', padding: '3rem 2rem', textAlign: 'center' }}>
+                        <Mail size={48} style={{ color: 'var(--primary)', marginBottom: '1rem', margin: '0 auto' }} />
+                        <h2>Check your inbox!</h2>
+                        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>{formData.message}</p>
+                        <p style={{ fontSize: '0.9rem' }}>
+                            Once verified, you can <Link to="/login" style={{ color: 'var(--primary)', fontWeight: '600' }}>log in here</Link>.
+                        </p>
+                    </Card>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="container content-page">
@@ -88,7 +109,7 @@ const Signup = () => {
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
+                        <div className="form-group" style={{ marginBottom: '1rem' }}>
                             <label>
                                 <UserIcon size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
                                 Name (Optional)
@@ -102,7 +123,7 @@ const Signup = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group" style={{ marginBottom: '1rem' }}>
                             <label>
                                 <Mail size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
                                 Email Address
@@ -117,7 +138,7 @@ const Signup = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group" style={{ marginBottom: '1rem' }}>
                             <label>
                                 <Lock size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
                                 Password
@@ -135,7 +156,7 @@ const Signup = () => {
                             </small>
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group" style={{ marginBottom: '1.5rem' }}>
                             <label>
                                 <Lock size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
                                 Confirm Password

@@ -86,7 +86,7 @@ const Login = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group" style={{ marginBottom: '1rem' }}>
                             <label>
                                 <Lock size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
                                 Password
@@ -99,6 +99,12 @@ const Login = () => {
                                 placeholder="Enter your password"
                                 required
                             />
+                        </div>
+
+                        <div style={{ textAlign: 'right', marginBottom: '1.5rem', marginTop: '-0.25rem' }}>
+                            <Link to="/forgot-password" style={{ color: 'var(--primary)', fontSize: '0.875rem' }}>
+                                Forgot Password?
+                            </Link>
                         </div>
 
                         {error && (

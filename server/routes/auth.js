@@ -1,8 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const User = require('../models/User');
 const { authMiddleware, JWT_SECRET } = require('../middleware/auth');
+const sendEmail = require('../utils/sendEmail');
+const { getEmailTemplate } = require('../utils/emailTemplates');
 
 const rateLimit = require('express-rate-limit');
 const router = express.Router();
@@ -44,33 +47,47 @@ router.post('/signup', signupLimiter, async (req, res) => {
         // Hash password
         const hashedPassword = bcrypt.hashSync(password, 10);
 
+        // Generate verification token
+        const verificationToken = crypto.randomBytes(20).toString('hex');
+
         // Insert user
         const newUser = await User.create({
             email,
             password_hash: hashedPassword,
-            name: name || null
+            name: name || null,
+            verificationToken,
+            verificationTokenExpires: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
+            isVerified: false
         });
 
-        // Create token
-        const token = jwt.sign(
-            { id: newUser._id, email },
-            JWT_SECRET,
-            { expiresIn: '7d' }
-        );
+        // Send verification email
+        const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+        const verifyUrl = `${clientUrl}/verify-email?token=${verificationToken}`;
+
+        try {
+            await sendEmail({
+                email: newUser.email,
+                subject: 'Verify your email - PDF Saathi',
+                message: `Please verify your email by clicking on the following link: ${verifyUrl}`,
+                html: getEmailTemplate(
+                    'Verify Your Email',
+                    'Welcome to PDF Saathi! Please verify your email address to get started.',
+                    'Verify Email',
+                    verifyUrl
+                )
+            });
+        } catch (err) {
+            console.error('Error sending verification email:', err);
+            // Consider handling this better in prod (clean up user?)
+        }
 
         res.json({
             success: true,
-            message: 'Account created successfully',
-            token,
-            user: {
-                id: newUser._id,
-                email,
-                name: newUser.name
-            }
+            message: 'Account created. Please check your email to verify your account.',
         });
     } catch (error) {
         console.error('Signup error:', error);
-        res.status(500).json({ error: 'Signup failed' });
+        res.status(500).json({ error: 'Signup failed: ' + error.message });
     }
 });
 
@@ -97,6 +114,10 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
 
+        if (!user.isVerified) {
+            return res.status(401).json({ error: 'Please verify your email before logging in.' });
+        }
+
         // Create token
         const token = jwt.sign(
             { id: user._id, email: user.email },
@@ -117,6 +138,101 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Login failed' });
+    }
+});
+
+// Verify Email
+router.post('/verify-email', async (req, res) => {
+    try {
+        const { token } = req.body;
+        const user = await User.findOne({
+            verificationToken: token,
+            verificationTokenExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({ error: 'Invalid or expired verification token' });
+        }
+
+        user.isVerified = true;
+        user.verificationToken = undefined;
+        user.verificationTokenExpires = undefined;
+        await user.save();
+
+        res.json({ success: true, message: 'Email verified successfully. You can now login.' });
+    } catch (error) {
+        console.error('Verify email error:', error);
+        res.status(500).json({ error: 'Email verification failed' });
+    }
+});
+
+// Forgot Password
+router.post('/forgot-password', async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.json({ success: true, message: 'If an account exists with this email, a reset link has been sent.' });
+        }
+
+        const resetToken = crypto.randomBytes(20).toString('hex');
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpires = Date.now() + 1 * 60 * 60 * 1000; // 1 hour
+        await user.save();
+
+        const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+        const resetUrl = `${clientUrl}/reset-password?token=${resetToken}`;
+
+        try {
+            await sendEmail({
+                email: user.email,
+                subject: 'Reset your password - PDF Saathi',
+                message: `You requested a password reset. Please click on the following link to reset your password: ${resetUrl}`,
+                html: getEmailTemplate(
+                    'Reset Your Password',
+                    'We received a request to reset your password. Click the button below to choose a new one.',
+                    'Reset Password',
+                    resetUrl
+                )
+            });
+        } catch (err) {
+            console.error('Error sending reset email:', err);
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+            await user.save();
+            return res.status(500).json({ error: 'Email could not be sent' });
+        }
+
+        res.json({ success: true, message: 'If an account exists with this email, a reset link has been sent.' });
+    } catch (error) {
+        console.error('Forgot password error:', error);
+        res.status(500).json({ error: 'Something went wrong' });
+    }
+});
+
+// Reset Password
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { token, password } = req.body;
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({ error: 'Invalid or expired password reset token' });
+        }
+
+        user.password_hash = bcrypt.hashSync(password, 10);
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        await user.save();
+
+        res.json({ success: true, message: 'Password reset successfully. You can now login.' });
+    } catch (error) {
+        console.error('Reset password error:', error);
+        res.status(500).json({ error: 'Password reset failed' });
     }
 });
 
