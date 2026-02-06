@@ -15,12 +15,14 @@ const sendEmail = async (options) => {
     }
 
     const transporter = nodemailer.createTransport({
-        service: process.env.EMAIL_SERVICE, // e.g., 'gmail'
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // Use STARTTLS
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         },
-        family: 4 // Force IPv4 to avoid ENETUNREACH errors on Render with IPv6
+        family: 4 // Force IPv4
     });
 
     const message = {
