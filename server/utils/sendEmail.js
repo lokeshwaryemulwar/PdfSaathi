@@ -1,4 +1,8 @@
 const nodemailer = require('nodemailer');
+const dns = require('dns');
+const util = require('util');
+
+const resolve4 = util.promisify(dns.resolve4);
 
 const sendEmail = async (options) => {
     // production: use secure SMTP
@@ -14,7 +18,7 @@ const sendEmail = async (options) => {
         return;
     }
 
-    const transporter = nodemailer.createTransport({
+    let transporterOptions = {
         host: 'smtp.gmail.com',
         port: 587,
         secure: false, // Use STARTTLS
@@ -22,8 +26,24 @@ const sendEmail = async (options) => {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         },
-        family: 4 // Force IPv4
-    });
+        family: 4 // Hint for nodemailer, though manual resolution helps more
+    };
+
+    try {
+        // Explicitly resolve IPv4 address for smtp.gmail.com to avoid IPv6 issues on Render
+        const addresses = await resolve4('smtp.gmail.com');
+        if (addresses && addresses.length > 0) {
+            console.log(`Resolved smtp.gmail.com to IPv4: ${addresses[0]}`);
+            transporterOptions.host = addresses[0]; // Use the IP address
+            transporterOptions.tls = {
+                servername: 'smtp.gmail.com' // verified against the certificate
+            };
+        }
+    } catch (dnsError) {
+        console.error('DNS Resolution failed, falling back to hostname:', dnsError);
+    }
+
+    const transporter = nodemailer.createTransport(transporterOptions);
 
     const message = {
         from: `${process.env.FROM_NAME || 'PDF Saathi'} <${process.env.FROM_EMAIL || process.env.EMAIL_USER}>`,
