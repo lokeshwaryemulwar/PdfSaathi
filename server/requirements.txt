@@ -5,3 +5,4 @@ pypdf
 pdf2docx
 Pillow
 docx2pdf
+opencv-python-headless
