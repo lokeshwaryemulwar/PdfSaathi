@@ -6,6 +6,7 @@ const mergeRoutes = require('./routes/mergeRoutes');
 
 const app = express();
 app.disable('x-powered-by'); // Hide X-Powered-By header for security
+app.set('trust proxy', 1); // Trust first proxy (Render) - Fixes express-rate-limit error
 const PORT = process.env.PORT || 3000;
 
 // Middleware
