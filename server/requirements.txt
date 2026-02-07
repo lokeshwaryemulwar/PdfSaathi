@@ -3,8 +3,5 @@ pandas
 openpyxl
 pypdf
 pdf2docx
-opencv-python-headless
 Pillow
-rembg
-onnxruntime
-numpy
+docx2pdf
