@@ -77,6 +77,9 @@ if (fs.existsSync(clientBuildPath)) {
     app.get('/robots.txt', (req, res) => {
         res.sendFile(path.join(clientBuildPath, 'robots.txt'));
     });
+    app.get('/ads.txt', (req, res) => {
+        res.sendFile(path.join(clientBuildPath, 'ads.txt'));
+    });
     app.get(/(.*)/, (req, res) => {
         // Don't intercept API routes (though they should be handled above)
         if (req.url.startsWith('/api')) return res.status(404).json({ error: 'API route not found' });
