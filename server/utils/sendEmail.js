@@ -1,8 +1,4 @@
 const nodemailer = require('nodemailer');
-const dns = require('dns');
-const util = require('util');
-
-const resolve4 = util.promisify(dns.resolve4);
 
 const sendEmail = async (options) => {
     // production: use secure SMTP
@@ -18,32 +14,18 @@ const sendEmail = async (options) => {
         return;
     }
 
-    let transporterOptions = {
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, // Use SSL
+    // Standard Gmail Configuration for Cloud Environments
+    // Using Port 465 (SSL) is generally more reliable than 587 (STARTTLS) on restrictive networks
+    const transporter = nodemailer.createTransport({
+        service: 'gmail', // Built-in service presets
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         },
-        family: 4 // Hint for nodemailer, though manual resolution helps more
-    };
-
-    try {
-        // Explicitly resolve IPv4 address for smtp.gmail.com to avoid IPv6 issues on Render
-        const addresses = await resolve4('smtp.gmail.com');
-        if (addresses && addresses.length > 0) {
-            console.log(`Resolved smtp.gmail.com to IPv4: ${addresses[0]}`);
-            transporterOptions.host = addresses[0]; // Use the IP address
-            transporterOptions.tls = {
-                servername: 'smtp.gmail.com' // verified against the certificate
-            };
-        }
-    } catch (dnsError) {
-        console.error('DNS Resolution failed, falling back to hostname:', dnsError);
-    }
-
-    const transporter = nodemailer.createTransport(transporterOptions);
+        // Debug settings to help potential troubleshooting in logs
+        debug: true,
+        logger: true
+    });
 
     const message = {
         from: `${process.env.FROM_NAME || 'PDF Saathi'} <${process.env.FROM_EMAIL || process.env.EMAIL_USER}>`,

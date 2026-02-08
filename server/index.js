@@ -2,6 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const dns = require('dns');
+
+// Force IPv4 for DNS resolution to fix Render/Gmail issues
+if (dns.setDefaultResultOrder) {
+    dns.setDefaultResultOrder('ipv4first');
+}
+
 const mergeRoutes = require('./routes/mergeRoutes');
 
 const app = express();
