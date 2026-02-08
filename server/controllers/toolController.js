@@ -327,19 +327,61 @@ exports.wordToPdf = async (req, res) => {
 
 // 7. PDF to WORD (Basic text extraction)
 const PptxGenJS = require("pptxgenjs");
+res.setHeader('Content-Disposition', 'attachment; filename=converted.pdf');
+res.send(fileBuffer);
 
-// 7. PDF to WORD (Improved to HTML-Doc)
-const { Document, Packer, Paragraph, TextRun } = require("docx");
+cleanup(req.files);
+try { fs.unlinkSync(outputPath); } catch (e) { }
+    });
+
+} catch (error) {
+    console.error('Word to PDF Stack:', error);
+    res.status(500).json({ error: 'Conversion failed: ' + error.message });
+}
+};
 
 // 7. PDF to WORD (High-Fidelity via Python)
-// 7. PDF to WORD (Disabled for Memory Stability)
 exports.pdfToWord = async (req, res) => {
-    // The 'pdf2docx' library requires OpenCV + Pandas (Huge Memory).
-    // Disabled to ensure the server stays online for Login/Signup.
-    if (req.files) cleanup(req.files);
-    return res.status(503).json({
-        error: 'High-fidelity PDF to Word conversion is temporarily disabled to prevent server crash (Memory Limit). Basic text extraction will be enabled soon.'
-    });
+    try {
+        const file = req.files[0];
+        const outputFilename = 'converted.docx';
+        const outputPath = path.join(path.dirname(file.path), outputFilename);
+
+        // Spawn Python process for high-fidelity conversion
+        // Note: process.cwd() is likely d:\PDFSaathi\server, so the script is in current dir
+        const scriptPath = path.resolve(__dirname, '../convert_word.py');
+        const pythonProcess = spawn('python', [scriptPath, file.path, outputPath]);
+
+        pythonProcess.stdout.on('data', (data) => console.log(`Python Output: ${data}`));
+        pythonProcess.stderr.on('data', (data) => console.error(`Python Error: ${data}`));
+
+        pythonProcess.on('error', (err) => {
+            console.error('Failed to start Python process:', err);
+            res.status(500).json({ error: 'Failed to launch conversion engine.' });
+        });
+
+        pythonProcess.on('close', (code) => {
+            if (code !== 0) {
+                cleanup(req.files);
+                return res.status(500).json({ error: 'Conversion failed during layout analysis.' });
+            }
+
+            // Send the generated DOCX
+            const fileBuffer = fs.readFileSync(outputPath);
+
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+            res.setHeader('Content-Disposition', 'attachment; filename=converted.docx');
+            res.send(fileBuffer);
+
+            // Clean up both input and output
+            cleanup(req.files);
+            try { fs.unlinkSync(outputPath); } catch (e) { }
+        });
+
+    } catch (error) {
+        console.error('PDF to Word Stack:', error);
+        res.status(500).json({ error: 'Conversion failed: ' + (error.message || 'Unknown error') });
+    }
 };
 
 // 9. PDF to PPT
