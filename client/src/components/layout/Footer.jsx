@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Linkedin } from 'lucide-react';
+import { FileText, Linkedin, Mail } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
@@ -49,6 +49,7 @@ const Footer = () => {
                         {/* Hide temporary profiles until ready */}
                         {/* <a href="#" aria-label="Twitter"><Twitter size={20} /></a> */}
                         {/* <a href="#" aria-label="GitHub"><Github size={20} /></a> */}
+                        <a href="mailto:pdfsaathi.official@gmail.com" aria-label="Email"><Mail size={20} /></a>
                         <a href="https://www.linkedin.com/in/lokeshwar-yemulwar-97924a257" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={20} /></a>
                     </div>
                 </div>
