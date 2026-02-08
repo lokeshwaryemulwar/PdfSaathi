@@ -75,6 +75,17 @@ const Contact = () => {
                 <div className="contact-info">
                     <Card className="contact-info-card">
                         <ContactAnimation />
+                        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+                            <p style={{ color: '#666', marginBottom: '0.5rem' }}>Or email us directly at:</p>
+                            <a href="mailto:pdfsaathi.official@gmail.com" style={{
+                                color: '#4f46e5',
+                                fontWeight: '600',
+                                textDecoration: 'none',
+                                fontSize: '1.1rem'
+                            }}>
+                                pdfsaathi.official@gmail.com
+                            </a>
+                        </div>
                     </Card>
                 </div>
 
