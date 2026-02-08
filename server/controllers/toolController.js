@@ -6,6 +6,7 @@ const pdfParse = require('pdf-parse');
 const WordExtractor = require("word-extractor");
 const Jimp = require('jimp');
 // const puppeteer = require('puppeteer'); // Disabled to save memory on Render Free Tier
+const PptxGenJS = require("pptxgenjs");
 
 // Helper to cleanup files
 const cleanup = (files) => {
@@ -323,21 +324,6 @@ exports.wordToPdf = async (req, res) => {
         console.error('Word to PDF Stack:', error);
         res.status(500).json({ error: 'Conversion failed: ' + error.message });
     }
-};
-
-// 7. PDF to WORD (Basic text extraction)
-const PptxGenJS = require("pptxgenjs");
-res.setHeader('Content-Disposition', 'attachment; filename=converted.pdf');
-res.send(fileBuffer);
-
-cleanup(req.files);
-try { fs.unlinkSync(outputPath); } catch (e) { }
-    });
-
-} catch (error) {
-    console.error('Word to PDF Stack:', error);
-    res.status(500).json({ error: 'Conversion failed: ' + error.message });
-}
 };
 
 // 7. PDF to WORD (High-Fidelity via Python)
