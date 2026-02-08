@@ -5,7 +5,7 @@ const { spawn } = require('child_process');
 const pdfParse = require('pdf-parse');
 const WordExtractor = require("word-extractor");
 const Jimp = require('jimp');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer'); // Disabled to save memory on Render Free Tier
 
 // Helper to cleanup files
 const cleanup = (files) => {
@@ -332,47 +332,14 @@ const PptxGenJS = require("pptxgenjs");
 const { Document, Packer, Paragraph, TextRun } = require("docx");
 
 // 7. PDF to WORD (High-Fidelity via Python)
+// 7. PDF to WORD (Disabled for Memory Stability)
 exports.pdfToWord = async (req, res) => {
-    try {
-        const file = req.files[0];
-        const outputFilename = 'converted.docx';
-        const outputPath = path.join(path.dirname(file.path), outputFilename);
-
-        // Spawn Python process for high-fidelity conversion
-        // Note: process.cwd() is likely d:\PDFSaathi\server, so the script is in current dir
-        const scriptPath = path.resolve(__dirname, '../convert_word.py');
-        const pythonProcess = spawn('python', [scriptPath, file.path, outputPath]);
-
-        pythonProcess.stdout.on('data', (data) => console.log(`Python Output: ${data}`));
-        pythonProcess.stderr.on('data', (data) => console.error(`Python Error: ${data}`));
-
-        pythonProcess.on('error', (err) => {
-            console.error('Failed to start Python process:', err);
-            res.status(500).json({ error: 'Failed to launch conversion engine.' });
-        });
-
-        pythonProcess.on('close', (code) => {
-            if (code !== 0) {
-                cleanup(req.files);
-                return res.status(500).json({ error: 'Conversion failed during layout analysis.' });
-            }
-
-            // Send the generated DOCX
-            const fileBuffer = fs.readFileSync(outputPath);
-
-            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-            res.setHeader('Content-Disposition', 'attachment; filename=converted.docx');
-            res.send(fileBuffer);
-
-            // Clean up both input and output
-            cleanup(req.files);
-            try { fs.unlinkSync(outputPath); } catch (e) { }
-        });
-
-    } catch (error) {
-        console.error('PDF to Word Stack:', error);
-        res.status(500).json({ error: 'Conversion failed: ' + (error.message || 'Unknown error') });
-    }
+    // The 'pdf2docx' library requires OpenCV + Pandas (Huge Memory).
+    // Disabled to ensure the server stays online for Login/Signup.
+    if (req.files) cleanup(req.files);
+    return res.status(503).json({
+        error: 'High-fidelity PDF to Word conversion is temporarily disabled to prevent server crash (Memory Limit). Basic text extraction will be enabled soon.'
+    });
 };
 
 // 9. PDF to PPT
@@ -418,53 +385,14 @@ exports.pdfToPpt = async (req, res) => {
 
 // Placeholders for others
 // 10. HTML to PDF (High-Fidelity via Puppeteer)
+// 10. HTML to PDF (Disabled for Memory Stability)
 exports.htmlToPdf = async (req, res) => {
-    let browser = null;
-    try {
-        const file = req.files[0];
-        const outputFilename = 'converted.pdf';
-        // HTML often needs loaded assets (images/css). 
-        // We render it as a file URL or content. 
-        // For local files with relative paths, Puppeteer needs to access the folder.
-
-        browser = await puppeteer.launch({
-            headless: 'new',
-            args: ['--no-sandbox', '--disable-setuid-sandbox'] // Safer for some envs
-        });
-        const page = await browser.newPage();
-
-        // Load the HTML content
-        // 'networkidle0' is good to wait for external resources (fonts/images)
-        const fileUrl = `file://${file.path.replace(/\\/g, '/')}`;
-        await page.goto(fileUrl, { waitUntil: 'networkidle0', timeout: 30000 });
-
-        // Generate PDF
-        const pdfBuffer = await page.pdf({
-            format: 'A4',
-            printBackground: true, // Crucial for graphics/colors
-            margin: {
-                top: '20px',
-                bottom: '20px',
-                left: '20px',
-                right: '20px'
-            }
-        });
-
-        await browser.close();
-        browser = null;
-
-        cleanup(req.files);
-
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename=converted.pdf');
-        res.send(pdfBuffer);
-
-    } catch (error) {
-        console.error('HTML to PDF Stack:', error);
-        if (browser) await browser.close();
-        if (req.files) cleanup(req.files);
-        res.status(500).json({ error: 'Conversion failed: ' + error.message });
-    }
+    // Puppeteer uses too much RAM for Render Free Tier (512MB).
+    // We disabled it to ensure Login/Signup works reliably.
+    if (req.files) cleanup(req.files);
+    return res.status(503).json({
+        error: 'This tool is temporarily disabled to optimize server performance for Authentication features. Please upgrade hosting to enable.'
+    });
 };
 // 11. PDF to EXCEL (via Python/pdfplumber)
 exports.pdfToExcel = async (req, res) => {
