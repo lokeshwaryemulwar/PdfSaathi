@@ -1,9 +1,9 @@
-import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Calendar, User, Clock, ArrowLeft } from 'lucide-react';
+import { Calendar, User, Clock, ArrowLeft, Share2, Twitter, Linkedin, MessageCircle, ArrowRight } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { blogPosts } from '../data/blogPosts';
+import { tools } from '../data/tools';
 import DynamicSEO from '../components/layout/DynamicSEO';
 import './ContentPage.css';
 
@@ -171,10 +171,91 @@ const BlogPost = () => {
                     {formatContent(post.content)}
                 </div>
 
+                {/* Social Share Section */}
+                <div style={{
+                    marginTop: '4rem',
+                    padding: '2rem 0',
+                    borderTop: '1px solid var(--border)',
+                    borderBottom: '1px solid var(--border)'
+                }}>
+                    <h3 style={{ marginBottom: '1.5rem', fontSize: '1.25rem' }}>Share this guide</h3>
+                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                        <Button
+                            variant="outline"
+                            onClick={() => window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + ' ' + window.location.href)}`, '_blank')}
+                            style={{ gap: '0.5rem', color: '#25D366', borderColor: '#25D366' }}
+                        >
+                            <MessageCircle size={18} /> WhatsApp
+                        </Button>
+                        <Button
+                            variant="outline"
+                            onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                            style={{ gap: '0.5rem', color: '#0077b5', borderColor: '#0077b5' }}
+                        >
+                            <Linkedin size={18} /> LinkedIn
+                        </Button>
+                        <Button
+                            variant="outline"
+                            onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                            style={{ gap: '0.5rem', color: '#1DA1F2', borderColor: '#1DA1F2' }}
+                        >
+                            <Twitter size={18} /> Twitter
+                        </Button>
+                    </div>
+                </div>
+
+                {/* Related Tools Section */}
+                <div style={{ marginTop: '4rem' }}>
+                    <h3 style={{ marginBottom: '1.5rem', fontSize: '1.25rem' }}>Try Our Free Tools</h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+                        {tools.filter(t => !t.comingSoon && ['merge-pdf', 'compress-pdf', 'pdf-to-word'].includes(t.id)).map(tool => (
+                            <div key={tool.id}
+                                onClick={() => navigate(tool.path)}
+                                style={{
+                                    padding: '1.5rem',
+                                    border: '1px solid var(--border)',
+                                    borderRadius: '12px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s',
+                                    backgroundColor: 'var(--bg-card)'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-4px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+                                    e.currentTarget.style.borderColor = tool.color;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'none';
+                                    e.currentTarget.style.boxShadow = 'none';
+                                    e.currentTarget.style.borderColor = 'var(--border)';
+                                }}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                                    <div style={{
+                                        padding: '0.75rem',
+                                        borderRadius: '10px',
+                                        backgroundColor: `${tool.color}15`,
+                                        color: tool.color
+                                    }}>
+                                        <tool.icon size={24} />
+                                    </div>
+                                    <h4 style={{ fontSize: '1.1rem', fontWeight: '600', margin: 0 }}>{tool.title}</h4>
+                                </div>
+                                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1rem', lineHeight: '1.5' }}>
+                                    {tool.description}
+                                </p>
+                                <div style={{ display: 'flex', alignItems: 'center', color: tool.color, fontSize: '0.9rem', fontWeight: '500' }}>
+                                    Try Now <ArrowRight size={16} style={{ marginLeft: '0.5rem' }} />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Divider */}
                 <div style={{
                     borderTop: '1px solid var(--border)',
-                    marginTop: '3rem',
+                    marginTop: '4rem',
                     paddingTop: '2rem'
                 }}>
                     <Button onClick={() => navigate('/blog')}>
