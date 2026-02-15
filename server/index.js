@@ -86,6 +86,7 @@ if (fs.existsSync(clientBuildPath)) {
         res.sendFile(path.join(clientBuildPath, 'robots.txt'));
     });
     app.get('/ads.txt', (req, res) => {
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.sendFile(path.join(clientBuildPath, 'ads.txt'));
     });
     app.get(/(.*)/, (req, res) => {
