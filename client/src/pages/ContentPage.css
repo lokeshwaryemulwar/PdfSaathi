@@ -15,7 +15,7 @@
     color: var(--text-muted);
     text-align: center;
     max-width: 600px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 1.5rem;
     line-height: 1.6;
 }
 
@@ -24,7 +24,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 5rem;
 }
 
@@ -179,7 +179,7 @@
 /* Enhanced About Styles */
 .about-hero {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem;
 }
 
 .bio-card {
@@ -303,4 +303,87 @@
     .bio-card {
         padding: 1.5rem;
     }
+
+    /* Fix About page enhancements for mobile */
+    .about-image-wrapper {
+        position: static !important;
+        margin-bottom: 2rem;
+    }
+
+    .about-stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 !important;
+    }
+
+    .commitments-section {
+        padding: 3rem 1rem !important;
+        border-radius: 16px !important;
+    }
+
+    .commitments-header h2 {
+        font-size: 1.75rem !important;
+    }
+}
+
+/* Enhanced About page layout classes */
+.about-image-wrapper {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.about-stat-box {
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.about-stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+    font-family: var(--font-heading);
+}
+
+.about-stat-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.commitments-section {
+    margin-top: 3rem;
+    padding: 5rem 2rem;
+    background: linear-gradient(to bottom, transparent, #f8fafc);
+    border-radius: 32px;
+}
+
+.commitments-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.commitments-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: #e0e7ff;
+    color: #4338ca;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }

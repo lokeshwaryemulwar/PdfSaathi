@@ -45,6 +45,7 @@ const Home = () => {
             </div>
             <Benefits />
             <CoreValues />
+
             <LatestArticles />
             <CallToAction />
         </main>

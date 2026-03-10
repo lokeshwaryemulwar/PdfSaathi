@@ -12,15 +12,18 @@ const CoreValues = () => {
 
     return (
         <section className="core-values-section">
-            <div className="container">
+            <div className="container" style={{ textAlign: 'center' }}>
+                <div style={{ display: 'inline-block', padding: '0.4rem 1rem', background: '#f1f5f9', color: '#475569', borderRadius: '9999px', fontSize: '0.85rem', fontWeight: '600', marginBottom: '1rem', letterSpacing: '0.05em' }}>WHY CHOOSE US</div>
+                <br />
                 <h2 className="values-title">Our Core Values</h2>
+
                 <div className="values-grid">
                     {values.map((value, index) => {
                         const Icon = value.icon;
                         return (
-                            <div key={index} className="value-item">
+                            <div key={index} className="value-item" style={{ animationDelay: `${index * 150}ms` }}>
                                 <div className="value-icon">
-                                    <Icon size={24} color="#0F172A" />
+                                    <Icon size={26} className="icon-svg" />
                                 </div>
                                 <span className="value-text">{value.title}</span>
                             </div>

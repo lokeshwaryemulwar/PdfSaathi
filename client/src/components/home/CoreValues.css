@@ -1,20 +1,36 @@
 .core-values-section {
-    padding: 4rem 0;
+    padding: 3rem 0;
     text-align: center;
     background-color: var(--surface);
     border-top: 1px solid var(--border);
+    overflow: hidden;
 }
 
 .values-title {
-    margin-bottom: 3rem;
-    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 1.75rem;
+    font-weight: 700;
     color: var(--text-main);
+    position: relative;
+    display: inline-block;
+}
+
+.values-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
 }
 
 .values-grid {
     display: flex;
     justify-content: center;
-    gap: 4rem;
+    gap: 6rem;
     flex-wrap: wrap;
 }
 
@@ -22,27 +38,105 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
+    animation: fadeInUp 0.8s ease backwards;
+    cursor: pointer;
 }
 
 .value-icon {
-    width: 64px;
-    height: 64px;
-    background-color: var(--surface-alt);
+    width: 72px;
+    height: 72px;
+    background-color: #f8fafc;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 1);
+    border: 1px solid #e2e8f0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.icon-svg {
+    color: #475569;
+    transition: all 0.3s ease;
+}
+
+.value-icon::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(0.8);
 }
 
 .value-item:hover .value-icon {
-    transform: scale(1.1);
-    background-color: var(--border);
+    transform: translateY(-8px) scale(1.05);
+    background-color: #ffffff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: #cbd5e1;
+}
+
+.value-item:hover .value-icon::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.value-item:hover .icon-svg {
+    transform: rotate(10deg);
+    color: #3b82f6;
 }
 
 .value-text {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--text-main);
+    transition: color 0.3s ease;
+}
+
+.value-item:hover .value-text {
+    color: #3b82f6;
+}
+
+@media (max-width: 768px) {
+    .core-values-section {
+        padding: 2.5rem 1rem;
+    }
+
+    .values-grid {
+        gap: 3rem;
+    }
+
+    .values-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .value-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .value-text {
+        font-size: 0.95rem;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
