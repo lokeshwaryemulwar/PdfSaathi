@@ -89,10 +89,13 @@ if (fs.existsSync(clientBuildPath)) {
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.sendFile(path.join(clientBuildPath, 'ads.txt'));
     });
+    const seoMiddleware = require('./middleware/seoMiddleware');
     app.get(/(.*)/, (req, res) => {
         // Don't intercept API routes (though they should be handled above)
         if (req.url.startsWith('/api')) return res.status(404).json({ error: 'API route not found' });
-        res.sendFile(path.join(clientBuildPath, 'index.html'));
+        
+        // Pass to custom SEO dynamic renderer
+        seoMiddleware(req, res, clientBuildPath);
     });
 } else {
     // Development base route

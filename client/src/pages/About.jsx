@@ -34,7 +34,7 @@ const About = () => {
 
                     <div className="about-stats-grid">
                         <div className="about-stat-box" style={{ background: 'linear-gradient(135deg, #eff6ff, #dbeafe)', border: '1px solid #bfdbfe' }}>
-                            <div className="about-stat-number" style={{ color: '#1d4ed8' }}>1M+</div>
+                            <div className="about-stat-number" style={{ color: '#1d4ed8' }}>200k+</div>
                             <div className="about-stat-label" style={{ color: '#3b82f6' }}>Tasks Processed</div>
                         </div>
                         <div className="about-stat-box" style={{ background: 'linear-gradient(135deg, #f0fdf4, #dcfce7)', border: '1px solid #bbf7d0' }}>
